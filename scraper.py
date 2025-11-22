@@ -2,80 +2,96 @@ import re
 from datetime import datetime, timedelta
 from playwright.sync_api import sync_playwright
 from icalendar import Calendar, Event
-import sys
 
 def run():
     fights_data = []
     
     with sync_playwright() as p:
-        # Launch browser
-        browser = p.chromium.launch(headless=True)
+        # STEALTH MODE: Arguments to hide that we are a bot
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                '--disable-blink-features=AutomationControlled',
+                '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36'
+            ]
+        )
         page = browser.new_page()
         
         print("Loading The Ring schedule...")
-        # We use a generous timeout because the site can be slow
         try:
             page.goto("https://ringmagazine.com/en/schedule/fights", timeout=60000)
-            
-            # Wait for the specific fight rows to load
-            page.wait_for_selector('.schedule-row, .fight-row, tr', timeout=20000)
+            page.wait_for_timeout(5000) # Wait 5 seconds for initial load
         except Exception as e:
-            print(f"Warning: Initial load might have timed out or selector changed: {e}")
+            print(f"Error loading page: {e}")
+
+        # DEBUG: Check what the bot actually sees
+        page_title = page.title()
+        print(f"DEBUG: Page Title is '{page_title}'")
+        
+        if "Cloudflare" in page_title or "Just a moment" in page_title:
+            print("BLOCKED: The site blocked the scraper.")
+            browser.close()
+            return []
 
         # CLICK LOAD MORE
-        # Attempt to load 3 months of fights
         print("Checking for 'Load More' buttons...")
-        for _ in range(4): 
+        for _ in range(3): 
             try:
-                load_more = page.locator('a.load-more, button.load-more, span:has-text("Load More")')
+                # Try multiple button styles
+                load_more = page.locator('button:has-text("Load More"), a:has-text("Load More"), span:has-text("Load More")')
                 if load_more.count() > 0 and load_more.first.is_visible():
+                    print("Clicking 'Load More'...")
                     load_more.first.click()
-                    page.wait_for_timeout(3000) # Wait for data to fill
+                    page.wait_for_timeout(3000)
                 else:
                     break
             except:
                 break
 
-        # PRECISION SCRAPING
+        # SCRAPING
         print("Extracting fight data...")
         fights_data = page.evaluate("""() => {
             const fights = [];
-            // The Ring uses rows for schedule items
-            const rows = document.querySelectorAll('.schedule-row, .fight-row, tr');
+            // Grab ALL table rows or card-like divs
+            const rows = document.querySelectorAll('tr, .schedule-row, .fight-row, div[class*="row"]');
             
             rows.forEach(row => {
-                // 1. Get Date
-                let dateEl = row.querySelector('.date, .fight-date, td:nth-child(1)');
+                const text = row.innerText;
+                // Basic validation: A fight row usually has a date and 'vs' or fighter names
+                if (text.length < 10) return;
+
+                // 1. Try to find date
+                // Look for element with class 'date' or first cell
+                let dateEl = row.querySelector('[class*="date"], td:first-child');
                 let dateText = dateEl ? dateEl.innerText.trim() : '';
-                
-                // 2. Get Fighters (Matchup)
-                let fightEl = row.querySelector('.fighters, .fight-title, .event, td:nth-child(2)');
+
+                // 2. Try to find fighters
+                // Look for element with 'vs' or class 'fighters'
+                let fightEl = row.querySelector('[class*="fight"], [class*="event"], td:nth-child(2)');
                 let fightText = fightEl ? fightEl.innerText.trim() : '';
-
-                // 3. Get Location
-                let locEl = row.querySelector('.location, .venue, td:nth-child(3)');
-                let locText = locEl ? locEl.innerText.trim() : '';
-
-                // 4. Get Network/Broadcaster
-                let netEl = row.querySelector('.network, .broadcaster, td:nth-child(4)');
-                let netText = '';
-                if (netEl) {
-                    // Sometimes network is an image logo, check alt text
-                    const img = netEl.querySelector('img');
-                    if (img) {
-                        netText = img.getAttribute('alt') || 'Check Listings';
-                    } else {
-                        netText = netEl.innerText.trim();
-                    }
+                
+                // Fallback: if we can't find specific elements, try to parse the raw text
+                if (!fightText && text.includes('vs')) {
+                     fightText = text.split('\\n')[0]; // Take the first line
                 }
 
-                // Only add if we found both a fight title and a date
+                // 3. Network/Location (Optional)
+                let locEl = row.querySelector('[class*="venue"], [class*="loc"], td:nth-child(3)');
+                let netEl = row.querySelector('[class*="net"], [class*="broad"], td:nth-child(4)');
+                
+                // Network logo check
+                let netText = '';
+                if (netEl) {
+                    const img = netEl.querySelector('img');
+                    netText = img ? img.alt : netEl.innerText;
+                }
+
                 if (fightText && dateText) {
                     fights.push({
                         date_raw: dateText,
                         title: fightText,
-                        location: locText,
-                        network: netText
+                        location: locEl ? locEl.innerText.trim() : '',
+                        network: netText.trim()
                     });
                 }
             });
@@ -86,89 +102,57 @@ def run():
     
     return fights_data
 
-def parse_ring_date(date_str):
-    """
-    The Ring usually formats dates like 'Saturday, November 22'
-    We need to add the current year (or next year if the month is early)
-    """
+def parse_date(date_str):
+    # Simple parser for "Saturday, November 22" format
     try:
-        # Remove day names like "Saturday," to just get "November 22"
-        clean_date = re.sub(r'^[A-Za-z]+,\s*', '', date_str).strip()
-        
-        # Helper to try parsing with a year
-        def try_parse(d_str, year):
-            full_str = f"{d_str} {year}"
-            return datetime.strptime(full_str, "%B %d %Y")
-
-        current_year = datetime.now().year
-        
-        # Try parsing with current year
+        # Clean up
+        clean = re.sub(r'^[A-Za-z]+,\s*', '', date_str).strip()
+        now = datetime.now()
         try:
-            dt = try_parse(clean_date, current_year)
-            # If the date is more than 2 months in the past, it's probably for next year
-            if dt < datetime.now() - timedelta(days=60):
-                dt = try_parse(clean_date, current_year + 1)
+            dt = datetime.strptime(f"{clean} {now.year}", "%B %d %Y")
+            if dt < now - timedelta(days=60):
+                dt = dt.replace(year=now.year + 1)
         except:
-            # Fallback: sometimes they might include the year, try parsing as is
-            dt = datetime.now() 
-
-        # Set specific time to 8:00 PM (20:00) as a default for boxing
-        return dt.replace(hour=20, minute=0, second=0)
+            dt = now
+        return dt.replace(hour=20, minute=0) # Default 8 PM
     except:
         return datetime.now()
 
-def create_calendar(fights):
+def create_ics(fights):
     cal = Calendar()
     cal.add('prodid', '-//Boxing Schedule//ringscraper//')
     cal.add('version', '2.0')
     cal.add('x-wr-calname', 'The Ring Boxing Schedule')
-    cal.add('refresh-interval;value=DURATION:PT12H')
 
     for fight in fights:
         try:
             event = Event()
-            
-            # Clean up title
             summary = fight['title'].replace('\n', ' vs ')
             event.add('summary', f"🥊 {summary}")
             
-            # Parse Date
-            start_dt = parse_ring_date(fight['date_raw'])
-            event.add('dtstart', start_dt)
-            event.add('dtend', start_dt + timedelta(hours=4)) # Fight usually lasts ~4 hours
+            start = parse_date(fight['date_raw'])
+            event.add('dtstart', start)
+            event.add('dtend', start + timedelta(hours=4))
+            event.add('location', fight['location'])
+            event.add('description', f"Network: {fight['network']}\n\n{summary}")
             
-            # Location
-            loc = fight['location'] if fight['location'] else "See Details"
-            event.add('location', loc)
+            uid = re.sub(r'[^a-zA-Z0-9]', '', summary[:15] + str(start.year))
+            event.add('uid', uid + "@boxingcal")
             
-            # Description
-            net = fight['network'] or 'TBA'
-            desc = f"Network: {net}\n\n"
-            desc += f"Matchup: {summary}\n"
-            desc += f"Venue: {loc}\n"
-            desc += "Source: The Ring Magazine"
-            event.add('description', desc)
-            
-            # Unique ID
-            uid_str = f"{summary[:10].strip()}-{start_dt.strftime('%Y%m%d')}@boxing-cal"
-            uid = re.sub(r'[^a-zA-Z0-9\-]', '', uid_str)
-            event.add('uid', uid)
-
             cal.add_component(event)
-        except Exception as e:
-            print(f"Skipping event due to error: {e}")
-
+        except:
+            pass
     return cal
 
 if __name__ == "__main__":
-    print("Starting scraper...")
     data = run()
     print(f"Scraped {len(data)} fights.")
     
-    if data:
-        cal = create_calendar(data)
+    if len(data) > 0:
+        cal = create_ics(data)
         with open('boxing_schedule.ics', 'wb') as f:
             f.write(cal.to_ical())
-        print("Success! 'boxing_schedule.ics' created.")
+        print("File created successfully.")
     else:
-        print("No data found. The site structure might have changed.")
+        # If we get here, check the DEBUG log above to see if we were blocked
+        print("No fights found. Please check the 'DEBUG: Page Title' log above.")
