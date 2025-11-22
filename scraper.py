@@ -14,34 +14,33 @@ def run():
         
         print("Loading The Ring schedule...")
         # We use a generous timeout because the site can be slow
-        page.goto("https://ringmagazine.com/en/schedule/fights", timeout=60000)
-        
-        # Wait for the specific fight rows to load
         try:
-            page.wait_for_selector('.schedule-row, .fight-row', timeout=20000)
-        except:
-            print("Warning: Page took too long or selector changed.")
+            page.goto("https://ringmagazine.com/en/schedule/fights", timeout=60000)
+            
+            # Wait for the specific fight rows to load
+            page.wait_for_selector('.schedule-row, .fight-row, tr', timeout=20000)
+        except Exception as e:
+            print(f"Warning: Initial load might have timed out or selector changed: {e}")
 
-        # CLICK LOAD MORE: Attempt to load 3 months of fights
+        # CLICK LOAD MORE
+        # Attempt to load 3 months of fights
         print("Checking for 'Load More' buttons...")
         for _ in range(4): 
             try:
-                # The Ring specific load more button usually looks like this
                 load_more = page.locator('a.load-more, button.load-more, span:has-text("Load More")')
                 if load_more.count() > 0 and load_more.first.is_visible():
                     load_more.first.click()
-                    page.wait_for_timeout(2500) # Wait for data to fill
+                    page.wait_for_timeout(3000) # Wait for data to fill
                 else:
                     break
             except:
                 break
 
         # PRECISION SCRAPING
-        # We pull the data directly from The Ring's specific CSS classes
         print("Extracting fight data...")
         fights_data = page.evaluate("""() => {
             const fights = [];
-            # The Ring uses rows for schedule items
+            // The Ring uses rows for schedule items
             const rows = document.querySelectorAll('.schedule-row, .fight-row, tr');
             
             rows.forEach(row => {
@@ -70,6 +69,7 @@ def run():
                     }
                 }
 
+                // Only add if we found both a fight title and a date
                 if (fightText && dateText) {
                     fights.push({
                         date_raw: dateText,
@@ -125,33 +125,38 @@ def create_calendar(fights):
     cal.add('refresh-interval;value=DURATION:PT12H')
 
     for fight in fights:
-        event = Event()
-        
-        # Clean up title
-        summary = fight['title'].replace('\n', ' vs ')
-        event.add('summary', f"🥊 {summary}")
-        
-        # Parse Date
-        start_dt = parse_ring_date(fight['date_raw'])
-        event.add('dtstart', start_dt)
-        event.add('dtend', start_dt + timedelta(hours=4)) # Fight usually lasts ~4 hours
-        
-        # Location
-        event.add('location', fight['location'])
-        
-        # Description
-        desc = f"Network: {fight['network'] or 'TBA'}\n\n"
-        desc += f"Matchup: {summary}\n"
-        desc += f"Venue: {fight['location']}\n"
-        desc += "Source: The Ring Magazine"
-        event.add('description', desc)
-        
-        # Unique ID
-        uid = f"{summary[:10].strip()}-{start_dt.strftime('%Y%m%d')}@boxing-cal"
-        uid = re.sub(r'[^a-zA-Z0-9\-]', '', uid)
-        event.add('uid', uid)
+        try:
+            event = Event()
+            
+            # Clean up title
+            summary = fight['title'].replace('\n', ' vs ')
+            event.add('summary', f"🥊 {summary}")
+            
+            # Parse Date
+            start_dt = parse_ring_date(fight['date_raw'])
+            event.add('dtstart', start_dt)
+            event.add('dtend', start_dt + timedelta(hours=4)) # Fight usually lasts ~4 hours
+            
+            # Location
+            loc = fight['location'] if fight['location'] else "See Details"
+            event.add('location', loc)
+            
+            # Description
+            net = fight['network'] or 'TBA'
+            desc = f"Network: {net}\n\n"
+            desc += f"Matchup: {summary}\n"
+            desc += f"Venue: {loc}\n"
+            desc += "Source: The Ring Magazine"
+            event.add('description', desc)
+            
+            # Unique ID
+            uid_str = f"{summary[:10].strip()}-{start_dt.strftime('%Y%m%d')}@boxing-cal"
+            uid = re.sub(r'[^a-zA-Z0-9\-]', '', uid_str)
+            event.add('uid', uid)
 
-        cal.add_component(event)
+            cal.add_component(event)
+        except Exception as e:
+            print(f"Skipping event due to error: {e}")
 
     return cal
 
