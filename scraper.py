@@ -7,7 +7,8 @@ def run():
     fights_data = []
     
     with sync_playwright() as p:
-        # STEALTH MODE: Arguments to hide that we are a bot
+        # 1. STEALTH BROWSER SETUP
+        print("Launching Stealth Browser...")
         browser = p.chromium.launch(
             headless=True,
             args=[
@@ -17,84 +18,94 @@ def run():
         )
         page = browser.new_page()
         
+        # Hook up browser console logs to our terminal (Crucial for debugging)
+        page.on("console", lambda msg: print(f"BROWSER LOG: {msg.text}"))
+
         print("Loading The Ring schedule...")
         try:
             page.goto("https://ringmagazine.com/en/schedule/fights", timeout=60000)
-            page.wait_for_timeout(5000) # Wait 5 seconds for initial load
+            page.wait_for_timeout(5000) 
         except Exception as e:
-            print(f"Error loading page: {e}")
+            print(f"Page load warning: {e}")
 
-        # DEBUG: Check what the bot actually sees
-        page_title = page.title()
-        print(f"DEBUG: Page Title is '{page_title}'")
-        
-        if "Cloudflare" in page_title or "Just a moment" in page_title:
-            print("BLOCKED: The site blocked the scraper.")
-            browser.close()
-            return []
-
-        # CLICK LOAD MORE
-        print("Checking for 'Load More' buttons...")
-        for _ in range(3): 
+        # 2. CLICK LOAD MORE
+        print("Expanding schedule...")
+        for i in range(3): 
             try:
-                # Try multiple button styles
-                load_more = page.locator('button:has-text("Load More"), a:has-text("Load More"), span:has-text("Load More")')
+                load_more = page.locator('button:has-text("Load More"), a:has-text("Load More"), .load-more')
                 if load_more.count() > 0 and load_more.first.is_visible():
-                    print("Clicking 'Load More'...")
                     load_more.first.click()
-                    page.wait_for_timeout(3000)
+                    page.wait_for_timeout(2000)
                 else:
                     break
             except:
                 break
 
-        # SCRAPING
+        # 3. EXTRACT DATA (Running inside the browser)
         print("Extracting fight data...")
         fights_data = page.evaluate("""() => {
             const fights = [];
-            // Grab ALL table rows or card-like divs
-            const rows = document.querySelectorAll('tr, .schedule-row, .fight-row, div[class*="row"]');
             
+            // Strategy A: Look for the specific "schedule-row" class (The Ring's standard)
+            let rows = Array.from(document.querySelectorAll('.schedule-row, .fight-row, tr.fight'));
+            
+            console.log('Found ' + rows.length + ' rows using Strategy A (Class Name)');
+
+            // Strategy B: If A failed, find ANY element containing " vs "
+            if (rows.length === 0) {
+                console.log('Switching to Strategy B (Text Search)...');
+                const allDivs = document.querySelectorAll('div, article');
+                rows = Array.from(allDivs).filter(el => 
+                    el.innerText.includes(' vs ') && 
+                    el.innerText.length < 200 && 
+                    el.children.length < 5
+                );
+            }
+
             rows.forEach(row => {
                 const text = row.innerText;
-                // Basic validation: A fight row usually has a date and 'vs' or fighter names
-                if (text.length < 10) return;
-
-                // 1. Try to find date
-                // Look for element with class 'date' or first cell
-                let dateEl = row.querySelector('[class*="date"], td:first-child');
-                let dateText = dateEl ? dateEl.innerText.trim() : '';
-
-                // 2. Try to find fighters
-                // Look for element with 'vs' or class 'fighters'
-                let fightEl = row.querySelector('[class*="fight"], [class*="event"], td:nth-child(2)');
-                let fightText = fightEl ? fightEl.innerText.trim() : '';
                 
-                // Fallback: if we can't find specific elements, try to parse the raw text
-                if (!fightText && text.includes('vs')) {
-                     fightText = text.split('\\n')[0]; // Take the first line
+                // PARSE DATE
+                // Look for a date-like structure (e.g., "Nov 22" or class="date")
+                let dateText = '';
+                const dateEl = row.querySelector('[class*="date"], time');
+                if (dateEl) {
+                    dateText = dateEl.innerText;
+                } else {
+                    // Regex hunt for date
+                    const dateMatch = text.match(/([A-Z][a-z]{2,8}\\s\\d{1,2})/);
+                    if (dateMatch) dateText = dateMatch[0];
                 }
 
-                // 3. Network/Location (Optional)
-                let locEl = row.querySelector('[class*="venue"], [class*="loc"], td:nth-child(3)');
-                let netEl = row.querySelector('[class*="net"], [class*="broad"], td:nth-child(4)');
-                
-                // Network logo check
-                let netText = '';
+                // PARSE TITLE (Fighters)
+                let titleText = '';
+                const titleEl = row.querySelector('[class*="fighter"], [class*="matchup"], h2, h3');
+                if (titleEl) {
+                    titleText = titleEl.innerText;
+                } else {
+                    // Fallback: grab the line with "vs"
+                    const lines = text.split('\\n');
+                    titleText = lines.find(l => l.includes('vs')) || '';
+                }
+
+                // PARSE NETWORK
+                let netText = 'TBA';
+                const netEl = row.querySelector('[class*="network"], [class*="broadcaster"]');
                 if (netEl) {
                     const img = netEl.querySelector('img');
-                    netText = img ? img.alt : netEl.innerText;
+                    netText = img ? (img.alt || 'TV') : netEl.innerText;
                 }
 
-                if (fightText && dateText) {
+                if (titleText && titleText.includes('vs')) {
                     fights.push({
-                        date_raw: dateText,
-                        title: fightText,
-                        location: locEl ? locEl.innerText.trim() : '',
-                        network: netText.trim()
+                        date_raw: dateText.trim(),
+                        title: titleText.trim(),
+                        network: netText.trim(),
+                        location: "Check Details"
                     });
                 }
             });
+            
             return fights;
         }""")
 
@@ -103,18 +114,30 @@ def run():
     return fights_data
 
 def parse_date(date_str):
-    # Simple parser for "Saturday, November 22" format
+    """Robust date parser handling multiple formats"""
     try:
-        # Clean up
-        clean = re.sub(r'^[A-Za-z]+,\s*', '', date_str).strip()
+        # Remove day names (Saturday, Mon, etc)
+        clean = re.sub(r'(?i)(monday|tuesday|wednesday|thursday|friday|saturday|sunday),?\s*', '', date_str).strip()
+        clean = re.sub(r'\s+', ' ', clean) # Remove extra spaces
+        
         now = datetime.now()
-        try:
-            dt = datetime.strptime(f"{clean} {now.year}", "%B %d %Y")
-            if dt < now - timedelta(days=60):
-                dt = dt.replace(year=now.year + 1)
-        except:
-            dt = now
-        return dt.replace(hour=20, minute=0) # Default 8 PM
+        current_year = now.year
+        
+        # Try formats like "November 22" or "Nov 22"
+        for fmt in ["%B %d", "%b %d", "%Y-%m-%d"]:
+            try:
+                dt = datetime.strptime(clean, fmt)
+                # If format didn't have year, add it
+                if dt.year == 1900:
+                    dt = dt.replace(year=current_year)
+                    # If date is way in the past, assume next year
+                    if dt < now - timedelta(days=60):
+                        dt = dt.replace(year=current_year + 1)
+                return dt.replace(hour=20, minute=0)
+            except:
+                continue
+                
+        return now # Fail safe
     except:
         return datetime.now()
 
@@ -127,32 +150,37 @@ def create_ics(fights):
     for fight in fights:
         try:
             event = Event()
-            summary = fight['title'].replace('\n', ' vs ')
+            summary = fight['title'].replace('\n', ' ').replace('  ', ' ')
             event.add('summary', f"🥊 {summary}")
             
             start = parse_date(fight['date_raw'])
             event.add('dtstart', start)
             event.add('dtend', start + timedelta(hours=4))
             event.add('location', fight['location'])
-            event.add('description', f"Network: {fight['network']}\n\n{summary}")
             
-            uid = re.sub(r'[^a-zA-Z0-9]', '', summary[:15] + str(start.year))
+            desc = f"Network: {fight['network']}\n"
+            desc += f"Date Info: {fight['date_raw']}\n"
+            desc += "Source: The Ring Magazine"
+            event.add('description', desc)
+            
+            uid = re.sub(r'[^a-zA-Z0-9]', '', summary[:15] + str(start.strftime('%Y%m%d')))
             event.add('uid', uid + "@boxingcal")
             
             cal.add_component(event)
-        except:
+        except Exception as e:
+            print(f"Skipping event: {e}")
             pass
     return cal
 
 if __name__ == "__main__":
+    print("--- STARTING SCRAPER ---")
     data = run()
-    print(f"Scraped {len(data)} fights.")
+    print(f"--- SCRAPED {len(data)} FIGHTS ---")
     
     if len(data) > 0:
         cal = create_ics(data)
         with open('boxing_schedule.ics', 'wb') as f:
             f.write(cal.to_ical())
-        print("File created successfully.")
+        print("SUCCESS: 'boxing_schedule.ics' created.")
     else:
-        # If we get here, check the DEBUG log above to see if we were blocked
-        print("No fights found. Please check the 'DEBUG: Page Title' log above.")
+        print("FAILURE: No fights found. Check BROWSER LOGS above.")
