@@ -1,4 +1,5 @@
 import re
+import sys
 from datetime import datetime, timedelta
 from playwright.sync_api import sync_playwright
 from icalendar import Calendar, Event
@@ -7,180 +8,144 @@ def run():
     fights_data = []
     
     with sync_playwright() as p:
-        # 1. STEALTH BROWSER SETUP
-        print("Launching Stealth Browser...")
+        print("--- LAUNCHING BROWSER ---")
         browser = p.chromium.launch(
             headless=True,
             args=[
                 '--disable-blink-features=AutomationControlled',
-                '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36'
+                '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
             ]
         )
         page = browser.new_page()
         
-        # Hook up browser console logs to our terminal (Crucial for debugging)
-        page.on("console", lambda msg: print(f"BROWSER LOG: {msg.text}"))
-
-        print("Loading The Ring schedule...")
         try:
+            print("Loading URL...")
             page.goto("https://ringmagazine.com/en/schedule/fights", timeout=60000)
-            page.wait_for_timeout(5000) 
-        except Exception as e:
-            print(f"Page load warning: {e}")
-
-        # 2. CLICK LOAD MORE
-        print("Expanding schedule...")
-        for i in range(3): 
-            try:
-                load_more = page.locator('button:has-text("Load More"), a:has-text("Load More"), .load-more')
-                if load_more.count() > 0 and load_more.first.is_visible():
-                    load_more.first.click()
-                    page.wait_for_timeout(2000)
-                else:
-                    break
-            except:
-                break
-
-        # 3. EXTRACT DATA (Running inside the browser)
-        print("Extracting fight data...")
-        fights_data = page.evaluate("""() => {
-            const fights = [];
+            page.wait_for_timeout(5000)
             
-            // Strategy A: Look for the specific "schedule-row" class (The Ring's standard)
-            let rows = Array.from(document.querySelectorAll('.schedule-row, .fight-row, tr.fight'));
+            # DEBUG: Print what the bot sees
+            page_text = page.inner_text('body')
+            print(f"DEBUG: Page loaded. First 300 chars:\n{page_text[:300]}...\n")
             
-            console.log('Found ' + rows.length + ' rows using Strategy A (Class Name)');
+            if "vs" not in page_text.lower() and "fighter" not in page_text.lower():
+                print("CRITICAL: The page seems to lack fight data (no 'vs' or 'fighter' found in text).")
+            
+            # Click Load More a few times
+            for i in range(3):
+                try:
+                    btn = page.locator('text=Load More')
+                    if btn.count() > 0 and btn.first.is_visible():
+                        print(f"Clicking Load More ({i+1})...")
+                        btn.first.click()
+                        page.wait_for_timeout(2000)
+                    else:
+                        break
+                except:
+                    pass
 
-            // Strategy B: If A failed, find ANY element containing " vs "
-            if (rows.length === 0) {
-                console.log('Switching to Strategy B (Text Search)...');
-                const allDivs = document.querySelectorAll('div, article');
-                rows = Array.from(allDivs).filter(el => 
-                    el.innerText.includes(' vs ') && 
-                    el.innerText.length < 200 && 
-                    el.children.length < 5
-                );
-            }
-
-            rows.forEach(row => {
-                const text = row.innerText;
+            print("Starting Brute Force Search...")
+            fights_data = page.evaluate("""() => {
+                const fights = [];
+                const seen = new Set();
                 
-                // PARSE DATE
-                // Look for a date-like structure (e.g., "Nov 22" or class="date")
-                let dateText = '';
-                const dateEl = row.querySelector('[class*="date"], time');
-                if (dateEl) {
-                    dateText = dateEl.innerText;
-                } else {
-                    // Regex hunt for date
-                    const dateMatch = text.match(/([A-Z][a-z]{2,8}\\s\\d{1,2})/);
-                    if (dateMatch) dateText = dateMatch[0];
-                }
+                // Grab EVERYTHING that could be a container
+                const candidates = document.querySelectorAll('tr, li, div, p, article, span');
+                
+                candidates.forEach(el => {
+                    const text = el.innerText;
+                    // Filter for text that looks like a matchup
+                    if (text.includes(' vs ') && text.length < 150 && text.length > 10) {
+                        
+                        // Avoid duplicates (e.g. text found in child AND parent)
+                        if (seen.has(text)) return;
+                        seen.add(text);
 
-                // PARSE TITLE (Fighters)
-                let titleText = '';
-                const titleEl = row.querySelector('[class*="fighter"], [class*="matchup"], h2, h3');
-                if (titleEl) {
-                    titleText = titleEl.innerText;
-                } else {
-                    // Fallback: grab the line with "vs"
-                    const lines = text.split('\\n');
-                    titleText = lines.find(l => l.includes('vs')) || '';
-                }
+                        // Basic Parsing Strategy
+                        let dateVal = "Check Details";
+                        let titleVal = text.split('\\n')[0].trim(); // Assume first line is title
+                        
+                        // Try to find a date in the parent element or nearby
+                        // This regex looks for "Nov 22" or "2025-11-22" styles
+                        const dateMatch = text.match(/([A-Z][a-z]{2,8}\\s\\d{1,2})|(\\d{4}-\\d{2}-\\d{2})/);
+                        if (dateMatch) {
+                            dateVal = dateMatch[0];
+                        } else {
+                            // Look at previous sibling for date? (Common in lists)
+                            if (el.previousElementSibling) {
+                                const prevText = el.previousElementSibling.innerText;
+                                const prevDate = prevText.match(/([A-Z][a-z]{2,8}\\s\\d{1,2})/);
+                                if (prevDate) dateVal = prevDate[0];
+                            }
+                        }
 
-                // PARSE NETWORK
-                let netText = 'TBA';
-                const netEl = row.querySelector('[class*="network"], [class*="broadcaster"]');
-                if (netEl) {
-                    const img = netEl.querySelector('img');
-                    netText = img ? (img.alt || 'TV') : netEl.innerText;
-                }
-
-                if (titleText && titleText.includes('vs')) {
-                    fights.push({
-                        date_raw: dateText.trim(),
-                        title: titleText.trim(),
-                        network: netText.trim(),
-                        location: "Check Details"
-                    });
-                }
-            });
+                        fights.push({
+                            title: titleVal,
+                            date_raw: dateVal,
+                            full_text: text
+                        });
+                    }
+                });
+                return fights;
+            }""")
             
-            return fights;
-        }""")
-
+        except Exception as e:
+            print(f"Browser Error: {e}")
+        
         browser.close()
     
     return fights_data
 
-def parse_date(date_str):
-    """Robust date parser handling multiple formats"""
-    try:
-        # Remove day names (Saturday, Mon, etc)
-        clean = re.sub(r'(?i)(monday|tuesday|wednesday|thursday|friday|saturday|sunday),?\s*', '', date_str).strip()
-        clean = re.sub(r'\s+', ' ', clean) # Remove extra spaces
-        
-        now = datetime.now()
-        current_year = now.year
-        
-        # Try formats like "November 22" or "Nov 22"
-        for fmt in ["%B %d", "%b %d", "%Y-%m-%d"]:
-            try:
-                dt = datetime.strptime(clean, fmt)
-                # If format didn't have year, add it
-                if dt.year == 1900:
-                    dt = dt.replace(year=current_year)
-                    # If date is way in the past, assume next year
-                    if dt < now - timedelta(days=60):
-                        dt = dt.replace(year=current_year + 1)
-                return dt.replace(hour=20, minute=0)
-            except:
-                continue
-                
-        return now # Fail safe
-    except:
-        return datetime.now()
-
-def create_ics(fights):
+def create_calendar(fights):
     cal = Calendar()
-    cal.add('prodid', '-//Boxing Schedule//ringscraper//')
+    cal.add('prodid', '-//Boxing Schedule//github-action//')
     cal.add('version', '2.0')
-    cal.add('x-wr-calname', 'The Ring Boxing Schedule')
+    cal.add('x-wr-calname', 'Boxing Schedule')
 
     for fight in fights:
         try:
+            # Skip garbage entries
+            if len(fight['title']) < 5: continue
+
             event = Event()
-            summary = fight['title'].replace('\n', ' ').replace('  ', ' ')
-            event.add('summary', f"🥊 {summary}")
+            event.add('summary', f"🥊 {fight['title']}")
             
-            start = parse_date(fight['date_raw'])
-            event.add('dtstart', start)
-            event.add('dtend', start + timedelta(hours=4))
-            event.add('location', fight['location'])
+            # Simple Date Parser
+            dt = datetime.now()
+            try:
+                clean_date = re.sub(r'(?i)(monday|tuesday|wednesday|thursday|friday|saturday|sunday),?\s*', '', fight['date_raw']).strip()
+                dt = datetime.strptime(f"{clean_date} {dt.year}", "%B %d %Y")
+                # Fix year rollover
+                if dt < datetime.now() - timedelta(days=60):
+                    dt = dt.replace(year=dt.year + 1)
+            except:
+                pass # Keep default today+time if parse fails
             
-            desc = f"Network: {fight['network']}\n"
-            desc += f"Date Info: {fight['date_raw']}\n"
-            desc += "Source: The Ring Magazine"
-            event.add('description', desc)
+            # Set to 8 PM
+            dt = dt.replace(hour=20, minute=0, second=0)
             
-            uid = re.sub(r'[^a-zA-Z0-9]', '', summary[:15] + str(start.strftime('%Y%m%d')))
-            event.add('uid', uid + "@boxingcal")
+            event.add('dtstart', dt)
+            event.add('dtend', dt + timedelta(hours=4))
+            event.add('description', f"Matchup: {fight['title']}\nFull Info: {fight['full_text']}")
+            
+            # Create UID
+            uid = re.sub(r'[^a-zA-Z0-9]', '', fight['title']) + str(dt.year)
+            event.add('uid', uid + "@boxingbot")
             
             cal.add_component(event)
-        except Exception as e:
-            print(f"Skipping event: {e}")
-            pass
+        except:
+            continue
+            
     return cal
 
 if __name__ == "__main__":
-    print("--- STARTING SCRAPER ---")
     data = run()
-    print(f"--- SCRAPED {len(data)} FIGHTS ---")
+    print(f"--- FOUND {len(data)} POTENTIAL FIGHTS ---")
     
     if len(data) > 0:
-        cal = create_ics(data)
+        cal = create_calendar(data)
         with open('boxing_schedule.ics', 'wb') as f:
             f.write(cal.to_ical())
-        print("SUCCESS: 'boxing_schedule.ics' created.")
+        print("SUCCESS: .ics file created")
     else:
-        print("FAILURE: No fights found. Check BROWSER LOGS above.")
+        print("FAILURE: Still 0 fights. Check the DEBUG logs above.")
+        sys.exit(1) # Force failure so we see red X in GitHub
