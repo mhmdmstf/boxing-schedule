@@ -1,101 +1,84 @@
-# Automated Boxing Event Calendar (The Ring Edition)
+# Boxing Schedule Calendar
 
-**An automated, self-updating iCal feed for upcoming boxing matches, scraped directly from The Ring Magazine.**
+An automated, self-updating iCal feed for upcoming boxing matches, scraped from The Ring Magazine.
 
-> **Why:** This project replaces the dormant "Sunday Puncher" calendar. It automatically scrapes schedule data from The Ring Magazine, converts it into a calendar format, and hosts it for free using GitHub, so you never miss a big fight.
+---
 
------
+## Quick Subscribe
+
+You can subscribe to the calendar directly without setting anything up:
+
+```
+https://mhmdmstf.github.io/boxing-schedule/boxing_schedule.ics
+```
+
+**Apple Calendar (iOS/Mac):** File > New Calendar Subscription > paste the URL > set Auto-refresh to "Every Day"
+
+**Google Calendar:** Other calendars > + > From URL > paste the URL
+
+**Outlook:** Add calendar > Subscribe from web > paste the URL
+
+If you want your own copy or want to modify it, see the setup guide below.
+
+---
 
 ## How It Works
 
-1.  **Scrapes:** A Python script uses **Playwright** to visit [The Ring Magazine's schedule page](https://ringmagazine.com/en/schedule/fights). It renders the full page, clicks "Load More" automatically to gather future fights, and extracts data using specific CSS selectors.
-2.  **Converts:** The fight data (Date, Matchup, Location, Network) is parsed and converted into a standard `.ics` (iCalendar) file.
-3.  **Automates:** **GitHub Actions** runs the script every day at 06:00 UTC automatically.
-4.  **Hosts:** **GitHub Pages** serves the calendar file so you can subscribe to it in Apple Calendar, Google Calendar, or Outlook.
+1. A Python script uses Playwright to load [The Ring Magazine schedule page](https://ringmagazine.com/en/schedule/fights)
+2. It clicks "Load More" to expand the full schedule
+3. Parses the page text line-by-line, looking for "VS" patterns to identify fights
+4. Extracts fighter names, dates, locations, times, and broadcast info
+5. Converts everything into a standard .ics calendar file
+6. GitHub Actions runs this daily at 06:00 UTC
+7. GitHub Pages hosts the file at a public URL
 
------
+---
 
-## Setup Guide (Do It Yourself)
+## Setup Your Own Version
 
-Follow these steps to create your own self-updating calendar.
+### 1. Create Repository
 
-### 1\. Create the Repository (Crucial Step)
+1. Fork this repo or create a new public repository
+2. The repository must be **Public** for GitHub Pages to work for free
 
-1.  Create a new repository on GitHub (e.g., named `boxing-schedule`).
-2.  **IMPORTANT:** You must set the repository visibility to **Public**.
-      * *Why?* GitHub Pages (the hosting feature) only works for free on Public repositories. If it is Private, the calendar link will return a 404 error.
+### 2. Add Files
 
-### 2\. Add the Files
+Copy these files to your repository:
+- `requirements.txt` - Python dependencies
+- `scraper.py` - The scraper script
+- `.github/workflows/main.yml` - GitHub Actions workflow
 
-Create these three files in your repository.
+### 3. Configure GitHub Pages
 
-**File 1: `requirements.txt`** (Dependencies)
+1. Go to repository Settings > Pages
+2. Under Source, select "Deploy from a branch"
+3. Select the `main` branch and `/ (root)` folder
+4. Save
 
-```text
-playwright
-icalendar
+### 4. Run It
+
+1. Go to the Actions tab
+2. Select "Update Boxing Calendar"
+3. Click "Run workflow"
+
+Your calendar will be available at:
+```
+https://<YOUR-USERNAME>.github.io/<REPO-NAME>/boxing_schedule.ics
 ```
 
-**File 2: `scraper.py`** (The Logic)
-*Copy the Python script from the repo.*
+---
 
-**File 3: `.github/workflows/main.yml`** (The Automation)
-*Copy the YAML configuration from the repo into the directory `.github/workflows/`.*
+## Troubleshooting
 
-### 3\. Configure GitHub Pages
+This scraper depends on The Ring Magazine website structure. If they redesign their site, the scraper may break.
 
-This is how the calendar gets a public URL.
+Common issues:
+- **No fights found:** The page structure may have changed. Check if the "VS" text pattern still exists on the page.
+- **Timeout errors:** The page may be slow to load. Try increasing the timeout values in the script.
+- **Missing dates:** Some fights may not have dates listed yet on the source page.
 
-1.  Go to your repository on GitHub.
-2.  Click **Settings** (top right tab).
-3.  In the left sidebar, click **Pages**.
-4.  Under **Build and deployment** -\> **Source**, select **Deploy from a branch**.
-5.  Under **Branch**, select `main` (or `master`) and keep the folder as `/ (root)`.
-6.  Click **Save**.
-
-### 4\. Trigger the First Run
-
-1.  Go to the **Actions** tab.
-2.  Click **Update Boxing Calendar** on the left.
-3.  Click **Run workflow**.
-4.  Wait for the green checkmark.
-
------
-
-## How to Subscribe
-
-Once the Action finishes successfully, your calendar URL will be:
-
-```text
-https://<YOUR-GITHUB-USERNAME>.github.io/<REPO-NAME>/boxing_schedule.ics
-```
-
-**Example:** `https://mhmdmstf.github.io/boxing-schedule/boxing_schedule.ics`
-
-### For Apple Calendar (iOS/Mac)
-
-1.  Open Calendar -\> **File** -\> **New Calendar Subscription**.
-2.  Paste your URL.
-3.  **Crucial:** Set "Auto-refresh" to **Every Day**.
-
-### For Google Calendar
-
-1.  Open Google Calendar (Desktop).
-2.  On the left, find "Other calendars" -\> **+** -\> **From URL**.
-3.  Paste your URL and click **Add calendar**.
-
------
-
-## Maintenance & Troubleshooting
-
-**If the calendar stops updating:**
-This scraper relies on The Ring Magazine's website layout. If they redesign their site, the script might fail.
-
-  * **Error:** "Timeout" or "No data found".
-  * **Fix:** The CSS class names in `scraper.py` (specifically `.schedule-row`, `.date`, `.fight-title`) likely need to be updated to match the new website HTML.
-
------
+---
 
 ## License
 
-This project is open source. Feel free to fork, modify, and improve\!
+Open source. Fork and modify as needed.
