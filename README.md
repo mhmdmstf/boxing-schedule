@@ -9,7 +9,7 @@ An automated, self-updating iCal feed for upcoming boxing matches, scraped from 
 You can subscribe to the calendar directly without setting anything up:
 
 ```
-https://mhmdmstf.github.io/boxing-schedule/boxing_schedule.ics
+https://raw.githubusercontent.com/mhmdmstf/boxing-schedule/refs/heads/main/boxing_schedule.ics
 ```
 
 **Apple Calendar (iOS/Mac):** File > New Calendar Subscription > paste the URL > set Auto-refresh to "Every Day"
@@ -63,7 +63,7 @@ Copy these files to your repository:
 
 Your calendar will be available at:
 ```
-https://<YOUR-USERNAME>.github.io/<REPO-NAME>/boxing_schedule.ics
+https://raw.githubusercontent.com/<YOUR-USERNAME>/<REPO-NAME>/refs/heads/main/boxing_schedule.ics
 ```
 
 ---
