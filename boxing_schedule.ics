@@ -1,0 +1,63 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Boxing Schedule//github-action//
+X-WR-CALNAME:Boxing Schedule
+BEGIN:VEVENT
+SUMMARY:🥊 ISAAC CRUZ vs LAMONT ROACH
+DTSTART:20251207T020000
+DTEND:20251207T060000
+UID:ISAACCRUZvsLAMONTROACH20251207@boxingbot
+DESCRIPTION:Matchup: ISAAC CRUZ vs LAMONT ROACH\nLocation: Frost Bank Cent
+ er\, San Antonio\, US\nBroadcast: LIVE ON PRIME VIDEO PPV\nTime: 2:00 AM
+LOCATION:Frost Bank Center\, San Antonio\, US
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 Gabriel Flores vs Joe Cordina
+DTSTART:20251207T020000
+DTEND:20251207T060000
+UID:GabrielFloresvsJoeCordina20251207@boxingbot
+DESCRIPTION:Matchup: Gabriel Flores vs Joe Cordina\nLocation: Frost Bank C
+ enter\, San Antonio\, US\nBroadcast: LIVE ON PRIME VIDEO PPV\nTime: 2:00 A
+ M
+LOCATION:Frost Bank Center\, San Antonio\, US
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 Skye Nicolson vs Yuliahn Luna
+DTSTART:20251207T020000
+DTEND:20251207T060000
+UID:SkyeNicolsonvsYuliahnLuna20251207@boxingbot
+DESCRIPTION:Matchup: Skye Nicolson vs Yuliahn Luna\nLocation: Frost Bank C
+ enter\, San Antonio\, US\nBroadcast: LIVE ON PRIME VIDEO PPV\nTime: 2:00 A
+ M
+LOCATION:Frost Bank Center\, San Antonio\, US
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 Tim Tszyu vs Anthony Velazquez
+DTSTART:20251216T090000
+DTEND:20251216T130000
+UID:TimTszyuvsAnthonyVelazquez20251216@boxingbot
+DESCRIPTION:Matchup: Tim Tszyu vs Anthony Velazquez\nLocation: ICC Sydney 
+ Theatre\, Sydney\, AU\nBroadcast: LIVE ON PRIME VIDEO PPV\nTime: 9:00 AM
+LOCATION:ICC Sydney Theatre\, Sydney\, AU
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 Masamichi Yabuki vs Felix Alvarado
+DTSTART:20251227T090000
+DTEND:20251227T130000
+UID:MasamichiYabukivsFelixAlvarado20251227@boxingbot
+DESCRIPTION:Matchup: Masamichi Yabuki vs Felix Alvarado\nLocation: Aichi S
+ ky Expo\, Japan\, Nagoya\, JP\nBroadcast: LIVE ON PRIME VIDEO PPV\nTime: 9
+ :00 AM
+LOCATION:Aichi Sky Expo\, Japan\, Nagoya\, JP
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 Xander Zayas vs Abass Baraou
+DTSTART:20260201T020000
+DTEND:20260201T060000
+UID:XanderZayasvsAbassBaraou20260201@boxingbot
+DESCRIPTION:Matchup: Xander Zayas vs Abass Baraou\nLocation: Coliseo De Pu
+ erto Rico\, San Juan\, PR\nBroadcast: LIVE ON PRIME VIDEO PPV\nTime: 2:00 
+ AM
+LOCATION:Coliseo De Puerto Rico\, San Juan\, PR
+END:VEVENT
+END:VCALENDAR
