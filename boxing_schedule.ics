@@ -6,44 +6,44 @@ BEGIN:VEVENT
 SUMMARY:🥊 ISAAC CRUZ VS LAMONT ROACH: Gabriel Flores vs Joe Cordina\, S
  kye Nicolson vs Yuliahn Luna\, Foster vs Stephen Fulton\, Alimkhanuly vs E
  rislandy Lara
-DTSTART:20251207T020000
-DTEND:20251207T060000
+DTSTART:20251207T010000
+DTEND:20251207T050000
 UID:ISAACCRUZvsLAMONTROACH20251207@boxingbot
 DESCRIPTION:Main Event: ISAAC CRUZ VS LAMONT ROACH\n\nUndercard:\n  • Ga
  briel Flores vs Joe Cordina\n  • Skye Nicolson vs Yuliahn Luna\n  • Fo
  ster vs Stephen Fulton\n  • Alimkhanuly vs Erislandy Lara\n\nLocation: F
  rost Bank Center\, San Antonio\, US\nBroadcast: LIVE ON PRIME VIDEO PPV\nT
- ime: 2:00 AM
+ ime: 1:00 AM
 LOCATION:Frost Bank Center\, San Antonio\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 TIM TSZYU VS ANTHONY VELAZQUEZ: Sam Goodman vs Tyler Blizzard
-DTSTART:20251216T090000
-DTEND:20251216T130000
+DTSTART:20251216T080000
+DTEND:20251216T120000
 UID:TimTszyuvsAnthonyVelazquez20251216@boxingbot
 DESCRIPTION:Main Event: TIM TSZYU VS ANTHONY VELAZQUEZ\n\nUndercard:\n  
  • Sam Goodman vs Tyler Blizzard\n\nLocation: ICC Sydney Theatre\, Sydney
- \, AU\nBroadcast: LIVE ON PRIME VIDEO PPV\nTime: 9:00 AM
+ \, AU\nBroadcast: LIVE ON PRIME VIDEO PPV\nTime: 8:00 AM
 LOCATION:ICC Sydney Theatre\, Sydney\, AU
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 AMANDA SERRANO VS ERIKA CRUZ
-DTSTART:20260104T030000
-DTEND:20260104T070000
+DTSTART:20260104T020000
+DTEND:20260104T060000
 UID:AmandaSerranovsErikaCruz20260104@boxingbot
 DESCRIPTION:Main Event: AMANDA SERRANO VS ERIKA CRUZ\n\nLocation: Coliseo 
  Robert Clemente\, San Juan\, PR\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\n
- Time: 3:00 AM
+ Time: 2:00 AM
 LOCATION:Coliseo Robert Clemente\, San Juan\, PR
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 XANDER ZAYAS VS ABASS BARAOU
-DTSTART:20260201T020000
-DTEND:20260201T060000
+DTSTART:20260201T010000
+DTEND:20260201T050000
 UID:XanderZayasvsAbassBaraou20260201@boxingbot
 DESCRIPTION:Main Event: XANDER ZAYAS VS ABASS BARAOU\n\nLocation: Coliseo 
  De Puerto Rico\, San Juan\, PR\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nT
- ime: 2:00 AM
+ ime: 1:00 AM
 LOCATION:Coliseo De Puerto Rico\, San Juan\, PR
 END:VEVENT
 BEGIN:VEVENT
@@ -127,23 +127,17 @@ DESCRIPTION:Main Event: OLIVIA CURRY VS KAYE SCOTT\n\nLocation: FOX Theatr
 LOCATION:FOX Theatre\, Detroit\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 FERREIRA VS NUR: Justis Huni vs Toa\, Shabaz Masoud vs Peter 
- McGrail\, Sean McComb vs Hugo Micallef\, Pat McCormack vs Conah Walker
+SUMMARY:🥊 FERREIRA VS NUR: Johnny Fisher vs Herbert Matovu\, Shabaz Mas
+ oud vs Peter McGrail\, Sean McComb vs Hugo Micallef\, Pat McCormack vs Con
+ ah Walker
 DTSTART:20251206T180000
 DTEND:20251206T220000
 UID:FerreiravsNur20251206@boxingbot
-DESCRIPTION:Main Event: FERREIRA VS NUR\n\nUndercard:\n  • Justis Huni v
- s Toa\n  • Shabaz Masoud vs Peter McGrail\n  • Sean McComb vs Hugo Mic
- allef\n  • Pat McCormack vs Conah Walker\n\nTime: 6:00 PM
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 JOHNNY FISHER VS HERBERT MATOVU
-DTSTART:20251206T000000
-DTEND:20251206T040000
-UID:JohnnyFishervsHerbertMatovu20251206@boxingbot
-DESCRIPTION:Main Event: JOHNNY FISHER VS HERBERT MATOVU\n\nLocation: Shaba
- z Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, Dec. 6\nTime: 1
- 2:00 AM
+DESCRIPTION:Main Event: FERREIRA VS NUR\n\nUndercard:\n  • Johnny Fisher
+  vs Herbert Matovu\n  • Shabaz Masoud vs Peter McGrail\n  • Sean McCom
+ b vs Hugo Micallef\n  • Pat McCormack vs Conah Walker\n\nLocation: Shaba
+ z Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, Dec. 6\nTime: 6
+ :00 PM
 LOCATION:Shabaz Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, D
  ec. 6
 END:VEVENT
@@ -183,6 +177,13 @@ DESCRIPTION:Main Event: JOHN HEDGES VS ELLIS ZORRO\n\nUndercard:\n  • Vi
  sioli vs Joe Howarth\n\nLocation: Indigo at The O2\, London\, GB\nTime: 7:
  00 PM
 LOCATION:Indigo at The O2\, London\, GB
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 JUSTIS HUNI VS TOA
+DTSTART:20251206T080000
+DTEND:20251206T120000
+UID:JustisHunivsToa20251206@boxingbot
+DESCRIPTION:Main Event: JUSTIS HUNI VS TOA\n\nTime: 8:00 AM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 HUTCHINSON VS EZRA TAYLOR: Moses Itauma vs Franklin\, Zak Mil
