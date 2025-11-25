@@ -3,17 +3,17 @@ VERSION:2.0
 PRODID:-//Boxing Schedule//github-action//
 X-WR-CALNAME:Boxing Schedule
 BEGIN:VEVENT
-SUMMARY:🥊 ISAAC CRUZ VS LAMONT ROACH: Gabriel Flores vs Joe Cordina\, S
- kye Nicolson vs Yuliahn Luna\, Foster vs Stephen Fulton\, Alimkhanuly vs E
- rislandy Lara
+SUMMARY:🥊 ISAAC CRUZ VS LAMONT ROACH: Skye Nicolson vs Yuliahn Luna\, E
+ rnesto Mercado vs Antonio Moran\, Foster vs Stephen Fulton\, Alimkhanuly v
+ s Erislandy Lara
 DTSTART:20251207T010000
 DTEND:20251207T050000
 UID:ISAACCRUZvsLAMONTROACH20251207@boxingbot
-DESCRIPTION:Main Event: ISAAC CRUZ VS LAMONT ROACH\n\nUndercard:\n  • Ga
- briel Flores vs Joe Cordina\n  • Skye Nicolson vs Yuliahn Luna\n  • Fo
- ster vs Stephen Fulton\n  • Alimkhanuly vs Erislandy Lara\n\nLocation: F
- rost Bank Center\, San Antonio\, US\nBroadcast: LIVE ON PRIME VIDEO PPV\nT
- ime: 1:00 AM
+DESCRIPTION:Main Event: ISAAC CRUZ VS LAMONT ROACH\n\nUndercard:\n  • Sk
+ ye Nicolson vs Yuliahn Luna\n  • Ernesto Mercado vs Antonio Moran\n  •
+  Foster vs Stephen Fulton\n  • Alimkhanuly vs Erislandy Lara\n\nLocation
+ : Frost Bank Center\, San Antonio\, US\nBroadcast: LIVE ON PRIME VIDEO PPV
+ \nTime: 1:00 AM
 LOCATION:Frost Bank Center\, San Antonio\, US
 END:VEVENT
 BEGIN:VEVENT
@@ -127,19 +127,14 @@ DESCRIPTION:Main Event: OLIVIA CURRY VS KAYE SCOTT\n\nLocation: FOX Theatr
 LOCATION:FOX Theatre\, Detroit\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 FERREIRA VS NUR: Johnny Fisher vs Herbert Matovu\, Shabaz Mas
- oud vs Peter McGrail\, Sean McComb vs Hugo Micallef\, Pat McCormack vs Con
- ah Walker
+SUMMARY:🥊 FERREIRA VS NUR: Johnny Fisher vs Herbert Matovu\, Justis Hun
+ i vs Toa\, Sean McComb vs Hugo Micallef\, Pat McCormack vs Conah Walker
 DTSTART:20251206T180000
 DTEND:20251206T220000
 UID:FerreiravsNur20251206@boxingbot
 DESCRIPTION:Main Event: FERREIRA VS NUR\n\nUndercard:\n  • Johnny Fisher
-  vs Herbert Matovu\n  • Shabaz Masoud vs Peter McGrail\n  • Sean McCom
- b vs Hugo Micallef\n  • Pat McCormack vs Conah Walker\n\nLocation: Shaba
- z Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, Dec. 6\nTime: 6
- :00 PM
-LOCATION:Shabaz Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, D
- ec. 6
+  vs Herbert Matovu\n  • Justis Huni vs Toa\n  • Sean McComb vs Hugo Mi
+ callef\n  • Pat McCormack vs Conah Walker\n\nTime: 6:00 PM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 MANUEL FLORES VS JORGE CHAVEZ: Ramirez vs Sirwan\, Alexis Roc
@@ -151,6 +146,16 @@ DESCRIPTION:Main Event: MANUEL FLORES VS JORGE CHAVEZ\n\nUndercard:\n  •
   Ramirez vs Sirwan\n  • Alexis Rocha vs Raul Curiel\n\nLocation: Acrisur
  e Arena\, California\, US\nTime: 2:00 AM
 LOCATION:Acrisure Arena\, California\, US
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 FLORES VS JOE CORDINA: Diego Pacheco vs Lele
+DTSTART:20251214T020000
+DTEND:20251214T060000
+UID:FloresvsJoeCordina20251214@boxingbot
+DESCRIPTION:Main Event: FLORES VS JOE CORDINA\n\nUndercard:\n  • Diego P
+ acheco vs Lele\n\nLocation: Adventist Health Arena\, Stockton\, US\nTime: 
+ 2:00 AM
+LOCATION:Adventist Health Arena\, Stockton\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 GAUMONT VS RAMADAN HISENI
@@ -179,13 +184,6 @@ DESCRIPTION:Main Event: JOHN HEDGES VS ELLIS ZORRO\n\nUndercard:\n  • Vi
 LOCATION:Indigo at The O2\, London\, GB
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 JUSTIS HUNI VS TOA
-DTSTART:20251206T080000
-DTEND:20251206T120000
-UID:JustisHunivsToa20251206@boxingbot
-DESCRIPTION:Main Event: JUSTIS HUNI VS TOA\n\nTime: 8:00 AM
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:🥊 HUTCHINSON VS EZRA TAYLOR: Moses Itauma vs Franklin\, Zak Mil
  ler vs Liam Davies
 DTSTART:20260124T210000
@@ -195,6 +193,15 @@ DESCRIPTION:Main Event: HUTCHINSON VS EZRA TAYLOR\n\nUndercard:\n  • Mos
  es Itauma vs Franklin\n  • Zak Miller vs Liam Davies\n\nLocation: Co-Op 
  Live Arena\, Manchester\, GB\nTime: 9:00 PM
 LOCATION:Co-Op Live Arena\, Manchester\, GB
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 BADOU JACK VS NOEL MIKAELIAN
+DTSTART:20251214T010000
+DTEND:20251214T050000
+UID:BadouJackvsNoelMikaelian20251214@boxingbot
+DESCRIPTION:Main Event: BADOU JACK VS NOEL MIKAELIAN\n\nLocation: Los Ange
+ les\, California\, US\nTime: 1:00 AM
+LOCATION:Los Angeles\, California\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 AGIT KABAYEL VS DAMIAN KNYBA
@@ -224,6 +231,17 @@ DESCRIPTION:Main Event: ANGELO LEO VS LERATO DLAMINI\n\nLocation: New Mexi
 LOCATION:New Mexico\, Albuquerque\, US
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:🥊 SHABAZ MASOUD VS PETER MCGRAIL
+DTSTART:20251206T180000
+DTEND:20251206T220000
+UID:ShabazMasoudvsPeterMcGrail20251206@boxingbot
+DESCRIPTION:Main Event: SHABAZ MASOUD VS PETER MCGRAIL\n\nLocation: Shabaz
+  Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, Dec. 6\nTime: 6:
+ 00 PM
+LOCATION:Shabaz Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, D
+ ec. 6
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:🥊 SUBRIEL MATIAS VS DALTON SMITH
 DTSTART:20260111T020000
 DTEND:20260111T060000
@@ -231,16 +249,6 @@ UID:SubrielMatiasvsDaltonSmith20260111@boxingbot
 DESCRIPTION:Main Event: SUBRIEL MATIAS VS DALTON SMITH\n\nLocation: Barcla
  ys Center\, New York City\, US\nTime: 2:00 AM
 LOCATION:Barclays Center\, New York City\, US
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 MERCADO VS ANTONIO MORAN: Diego Pacheco vs Lele
-DTSTART:20251214T020000
-DTEND:20251214T060000
-UID:MercadovsAntonioMoran20251214@boxingbot
-DESCRIPTION:Main Event: MERCADO VS ANTONIO MORAN\n\nUndercard:\n  • Dieg
- o Pacheco vs Lele\n\nLocation: Adventist Health Arena\, Stockton\, US\nTim
- e: 2:00 AM
-LOCATION:Adventist Health Arena\, Stockton\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 JASON MOLONEY VS HERLAN GOMEZ: Jai Opetaia vs Cinkara
@@ -262,15 +270,13 @@ DESCRIPTION:Main Event: MURATALLA VS ANDY CRUZ\n\nLocation: Fontainebleau
 LOCATION:Fontainebleau Las Vegas\, Las Vegas\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 MIKITO NAKANO VS RAEESE ALEEM: Nasukawa vs Takuma Inoue\, Tom
- oya Tsuboi vs Carlos Cuadras
-DTSTART:20251124T080000
-DTEND:20251124T120000
-UID:MikitoNakanovsRaeeseAleem20251124@boxingbot
-DESCRIPTION:Main Event: MIKITO NAKANO VS RAEESE ALEEM\n\nUndercard:\n  •
-  Nasukawa vs Takuma Inoue\n  • Tomoya Tsuboi vs Carlos Cuadras\n\nLocati
- on: Toyota Arena\, Tokyo\, JP\nTime: 8:00 AM
-LOCATION:Toyota Arena\, Tokyo\, JP
+SUMMARY:🥊 MURTAZALIEV VS JOSH KELLY
+DTSTART:20260131T170000
+DTEND:20260131T210000
+UID:MurtazalievvsJoshKelly20260131@boxingbot
+DESCRIPTION:Main Event: MURTAZALIEV VS JOSH KELLY\n\nLocation: Utilita Are
+ na\, Newcastle\, GB\nTime: 5:00 PM
+LOCATION:Utilita Arena\, Newcastle\, GB
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 NAVARRETE VS EDUARDO NUNEZ
