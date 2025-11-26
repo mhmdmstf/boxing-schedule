@@ -17,13 +17,17 @@ DESCRIPTION:Main Event: ISAAC CRUZ VS LAMONT ROACH\n\nUndercard:\n  • Sk
 LOCATION:Frost Bank Center\, San Antonio\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 TIM TSZYU VS ANTHONY VELAZQUEZ: Sam Goodman vs Tyler Blizzard
+SUMMARY:🥊 TIM TSZYU VS ANTHONY VELAZQUEZ: Junto Nakatani vs Sebastian H
+ ernandez\, Hayato Tsutsumi vs Jazza Dickens\, Reito Tsutsumi vs Leobardo Q
+ uintana\, Sam Goodman vs Tyler Blizzard
 DTSTART:20251216T080000
 DTEND:20251216T120000
 UID:TimTszyuvsAnthonyVelazquez20251216@boxingbot
 DESCRIPTION:Main Event: TIM TSZYU VS ANTHONY VELAZQUEZ\n\nUndercard:\n  
- • Sam Goodman vs Tyler Blizzard\n\nLocation: ICC Sydney Theatre\, Sydney
- \, AU\nBroadcast: LIVE ON PRIME VIDEO PPV\nTime: 8:00 AM
+ • Junto Nakatani vs Sebastian Hernandez\n  • Hayato Tsutsumi vs Jazza 
+ Dickens\n  • Reito Tsutsumi vs Leobardo Quintana\n  • Sam Goodman vs T
+ yler Blizzard\n\nLocation: ICC Sydney Theatre\, Sydney\, AU\nBroadcast: LI
+ VE ON PRIME VIDEO PPV\nTime: 8:00 AM
 LOCATION:ICC Sydney Theatre\, Sydney\, AU
 END:VEVENT
 BEGIN:VEVENT
@@ -37,14 +41,14 @@ DESCRIPTION:Main Event: AMANDA SERRANO VS ERIKA CRUZ\n\nLocation: Coliseo
 LOCATION:Coliseo Robert Clemente\, San Juan\, PR
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 XANDER ZAYAS VS ABASS BARAOU
-DTSTART:20260201T010000
-DTEND:20260201T050000
-UID:XanderZayasvsAbassBaraou20260201@boxingbot
-DESCRIPTION:Main Event: XANDER ZAYAS VS ABASS BARAOU\n\nLocation: Coliseo 
- De Puerto Rico\, San Juan\, PR\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nT
- ime: 1:00 AM
-LOCATION:Coliseo De Puerto Rico\, San Juan\, PR
+SUMMARY:🥊 LEIGH WOOD VS JOSH WARRINGTON
+DTSTART:20260221T170000
+DTEND:20260221T210000
+UID:LeighWoodvsJoshWarrington20260221@boxingbot
+DESCRIPTION:Main Event: LEIGH WOOD VS JOSH WARRINGTON\n\nLocation: Motorpo
+ int Arena \, Nottingham\, GB\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTim
+ e: 5:00 PM
+LOCATION:Motorpoint Arena \, Nottingham\, GB
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 ERICK BADILLO VS ELWIN SOTO: Magdaleno vs Yaqubov
@@ -127,14 +131,17 @@ DESCRIPTION:Main Event: OLIVIA CURRY VS KAYE SCOTT\n\nLocation: FOX Theatr
 LOCATION:FOX Theatre\, Detroit\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 FERREIRA VS NUR: Johnny Fisher vs Herbert Matovu\, Justis Hun
- i vs Toa\, Sean McComb vs Hugo Micallef\, Pat McCormack vs Conah Walker
+SUMMARY:🥊 FERREIRA VS NUR: Johnny Fisher vs Herbert Matovu\, Shabaz Mas
+ oud vs Peter McGrail\, Pat McCormack vs Conah Walker
 DTSTART:20251206T180000
 DTEND:20251206T220000
 UID:FerreiravsNur20251206@boxingbot
 DESCRIPTION:Main Event: FERREIRA VS NUR\n\nUndercard:\n  • Johnny Fisher
-  vs Herbert Matovu\n  • Justis Huni vs Toa\n  • Sean McComb vs Hugo Mi
- callef\n  • Pat McCormack vs Conah Walker\n\nTime: 6:00 PM
+  vs Herbert Matovu\n  • Shabaz Masoud vs Peter McGrail\n  • Pat McCorm
+ ack vs Conah Walker\n\nLocation: Shabaz Masoud-Peter McGrail Tops Matchroo
+ m's Monte-Carlo Show\, Dec. 6\nTime: 6:00 PM
+LOCATION:Shabaz Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, D
+ ec. 6
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 MANUEL FLORES VS JORGE CHAVEZ: Ramirez vs Sirwan\, Alexis Roc
@@ -184,6 +191,14 @@ DESCRIPTION:Main Event: JOHN HEDGES VS ELLIS ZORRO\n\nUndercard:\n  • Vi
 LOCATION:Indigo at The O2\, London\, GB
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:🥊 JUSTIS HUNI VS TOA: Sean McComb vs Hugo Micallef
+DTSTART:20251206T080000
+DTEND:20251206T120000
+UID:JustisHunivsToa20251206@boxingbot
+DESCRIPTION:Main Event: JUSTIS HUNI VS TOA\n\nUndercard:\n  • Sean McCom
+ b vs Hugo Micallef\n\nTime: 8:00 AM
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:🥊 HUTCHINSON VS EZRA TAYLOR: Moses Itauma vs Franklin\, Zak Mil
  ler vs Liam Davies
 DTSTART:20260124T210000
@@ -193,6 +208,17 @@ DESCRIPTION:Main Event: HUTCHINSON VS EZRA TAYLOR\n\nUndercard:\n  • Mos
  es Itauma vs Franklin\n  • Zak Miller vs Liam Davies\n\nLocation: Co-Op 
  Live Arena\, Manchester\, GB\nTime: 9:00 PM
 LOCATION:Co-Op Live Arena\, Manchester\, GB
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 TAIGA IMANAGA VS MARTINEZ: Naoya Inoue vs Alan Picasso\, Tera
+ ji vs Garcia
+DTSTART:20251227T080000
+DTEND:20251227T120000
+UID:TaigaImanagavsMartinez20251227@boxingbot
+DESCRIPTION:Main Event: TAIGA IMANAGA VS MARTINEZ\n\nUndercard:\n  • Nao
+ ya Inoue vs Alan Picasso\n  • Teraji vs Garcia\n\nLocation: Mohammed Abd
+ o Arena\, Riyadh\, SA\nTime: 8:00 AM
+LOCATION:Mohammed Abdo Arena\, Riyadh\, SA
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 BADOU JACK VS NOEL MIKAELIAN
@@ -229,17 +255,6 @@ UID:AngeloLeovsLeratoDlamini20250222@boxingbot
 DESCRIPTION:Main Event: ANGELO LEO VS LERATO DLAMINI\n\nLocation: New Mexi
  co\, Albuquerque\, US\nTime: 1:00 AM
 LOCATION:New Mexico\, Albuquerque\, US
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 SHABAZ MASOUD VS PETER MCGRAIL
-DTSTART:20251206T180000
-DTEND:20251206T220000
-UID:ShabazMasoudvsPeterMcGrail20251206@boxingbot
-DESCRIPTION:Main Event: SHABAZ MASOUD VS PETER MCGRAIL\n\nLocation: Shabaz
-  Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, Dec. 6\nTime: 6:
- 00 PM
-LOCATION:Shabaz Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, D
- ec. 6
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 SUBRIEL MATIAS VS DALTON SMITH
@@ -342,15 +357,6 @@ DESCRIPTION:Main Event: NIKITA TSZYU VS MICHAEL ZERAFA\n\nLocation: Brisba
 LOCATION:Brisbane Entertainment Centre\, Brisbane\, AU
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 LEIGH WOOD VS WARRINGTON
-DTSTART:20260221T170000
-DTEND:20260221T210000
-UID:LeighWoodvsWarrington20260221@boxingbot
-DESCRIPTION:Main Event: LEIGH WOOD VS WARRINGTON\n\nLocation: Motorpoint A
- rena \, Nottingham\, GB\nTime: 5:00 PM
-LOCATION:Motorpoint Arena \, Nottingham\, GB
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:🥊 YABUKI VS FELIX ALVARADO
 DTSTART:20251227T080000
 DTEND:20251227T120000
@@ -358,5 +364,14 @@ UID:YabukivsFelixAlvarado20251227@boxingbot
 DESCRIPTION:Main Event: YABUKI VS FELIX ALVARADO\n\nLocation: Aichi Sky Ex
  po\, Japan\, Nagoya\, JP\nTime: 8:00 AM
 LOCATION:Aichi Sky Expo\, Japan\, Nagoya\, JP
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 XANDER ZAYAS VS ABASS BARAOU
+DTSTART:20260201T010000
+DTEND:20260201T050000
+UID:XanderZayasvsAbassBaraou20260201@boxingbot
+DESCRIPTION:Main Event: XANDER ZAYAS VS ABASS BARAOU\n\nLocation: Coliseo 
+ de Puerto Rico\, San Juan\, PR\nTime: 1:00 AM
+LOCATION:Coliseo de Puerto Rico\, San Juan\, PR
 END:VEVENT
 END:VCALENDAR
