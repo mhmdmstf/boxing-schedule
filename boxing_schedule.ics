@@ -132,14 +132,16 @@ LOCATION:FOX Theatre\, Detroit\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 FERREIRA VS NUR: Johnny Fisher vs Herbert Matovu\, Shabaz Mas
- oud vs Peter McGrail\, Pat McCormack vs Conah Walker
+ oud vs Peter McGrail\, Sean McComb vs Hugo Micallef\, Pat McCormack vs Con
+ ah Walker
 DTSTART:20251206T180000
 DTEND:20251206T220000
 UID:FerreiravsNur20251206@boxingbot
 DESCRIPTION:Main Event: FERREIRA VS NUR\n\nUndercard:\n  • Johnny Fisher
-  vs Herbert Matovu\n  • Shabaz Masoud vs Peter McGrail\n  • Pat McCorm
- ack vs Conah Walker\n\nLocation: Shabaz Masoud-Peter McGrail Tops Matchroo
- m's Monte-Carlo Show\, Dec. 6\nTime: 6:00 PM
+  vs Herbert Matovu\n  • Shabaz Masoud vs Peter McGrail\n  • Sean McCom
+ b vs Hugo Micallef\n  • Pat McCormack vs Conah Walker\n\nLocation: Shaba
+ z Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, Dec. 6\nTime: 6
+ :00 PM
 LOCATION:Shabaz Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, D
  ec. 6
 END:VEVENT
@@ -191,12 +193,11 @@ DESCRIPTION:Main Event: JOHN HEDGES VS ELLIS ZORRO\n\nUndercard:\n  • Vi
 LOCATION:Indigo at The O2\, London\, GB
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 JUSTIS HUNI VS TOA: Sean McComb vs Hugo Micallef
+SUMMARY:🥊 JUSTIS HUNI VS TOA
 DTSTART:20251206T080000
 DTEND:20251206T120000
 UID:JustisHunivsToa20251206@boxingbot
-DESCRIPTION:Main Event: JUSTIS HUNI VS TOA\n\nUndercard:\n  • Sean McCom
- b vs Hugo Micallef\n\nTime: 8:00 AM
+DESCRIPTION:Main Event: JUSTIS HUNI VS TOA\n\nTime: 8:00 AM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 HUTCHINSON VS EZRA TAYLOR: Moses Itauma vs Franklin\, Zak Mil
