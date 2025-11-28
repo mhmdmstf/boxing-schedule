@@ -131,19 +131,14 @@ DESCRIPTION:Main Event: OLIVIA CURRY VS KAYE SCOTT\n\nLocation: FOX Theatr
 LOCATION:FOX Theatre\, Detroit\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 FERREIRA VS NUR: Johnny Fisher vs Herbert Matovu\, Shabaz Mas
- oud vs Peter McGrail\, Sean McComb vs Hugo Micallef\, Pat McCormack vs Con
- ah Walker
+SUMMARY:🥊 FERREIRA VS NUR: Johnny Fisher vs Herbert Matovu\, Justis Hun
+ i vs Toa\, Shabaz Masoud vs Peter McGrail\, Pat McCormack vs Conah Walker
 DTSTART:20251206T180000
 DTEND:20251206T220000
 UID:FerreiravsNur20251206@boxingbot
 DESCRIPTION:Main Event: FERREIRA VS NUR\n\nUndercard:\n  • Johnny Fisher
-  vs Herbert Matovu\n  • Shabaz Masoud vs Peter McGrail\n  • Sean McCom
- b vs Hugo Micallef\n  • Pat McCormack vs Conah Walker\n\nLocation: Shaba
- z Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, Dec. 6\nTime: 6
- :00 PM
-LOCATION:Shabaz Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, D
- ec. 6
+  vs Herbert Matovu\n  • Justis Huni vs Toa\n  • Shabaz Masoud vs Peter
+  McGrail\n  • Pat McCormack vs Conah Walker\n\nTime: 6:00 PM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 MANUEL FLORES VS JORGE CHAVEZ: Ramirez vs Sirwan\, Alexis Roc
@@ -191,13 +186,6 @@ DESCRIPTION:Main Event: JOHN HEDGES VS ELLIS ZORRO\n\nUndercard:\n  • Vi
  sioli vs Joe Howarth\n\nLocation: Indigo at The O2\, London\, GB\nTime: 7:
  00 PM
 LOCATION:Indigo at The O2\, London\, GB
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 JUSTIS HUNI VS TOA
-DTSTART:20251206T080000
-DTEND:20251206T120000
-UID:JustisHunivsToa20251206@boxingbot
-DESCRIPTION:Main Event: JUSTIS HUNI VS TOA\n\nTime: 8:00 AM
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 HUTCHINSON VS EZRA TAYLOR: Moses Itauma vs Franklin\, Zak Mil
@@ -265,6 +253,17 @@ UID:SubrielMatiasvsDaltonSmith20260111@boxingbot
 DESCRIPTION:Main Event: SUBRIEL MATIAS VS DALTON SMITH\n\nLocation: Barcla
  ys Center\, New York City\, US\nTime: 2:00 AM
 LOCATION:Barclays Center\, New York City\, US
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 SEAN MCCOMB VS HUGO MICALLEF
+DTSTART:20251206T180000
+DTEND:20251206T220000
+UID:SeanMcCombvsHugoMicallef20251206@boxingbot
+DESCRIPTION:Main Event: SEAN MCCOMB VS HUGO MICALLEF\n\nLocation: Shabaz M
+ asoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, Dec. 6\nTime: 6:00
+  PM
+LOCATION:Shabaz Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, D
+ ec. 6
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 JASON MOLONEY VS HERLAN GOMEZ: Jai Opetaia vs Cinkara
