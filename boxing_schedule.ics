@@ -3,62 +3,36 @@ VERSION:2.0
 PRODID:-//Boxing Schedule//github-action//
 X-WR-CALNAME:Boxing Schedule
 BEGIN:VEVENT
-SUMMARY:🥊 ISAAC CRUZ VS LAMONT ROACH: Skye Nicolson vs Yuliahn Luna\, E
- rnesto Mercado vs Antonio Moran\, Foster vs Stephen Fulton\, Alimkhanuly v
- s Erislandy Lara
+SUMMARY:🥊 ISAAC CRUZ VS LAMONT ROACH: John Hedges vs Ellis Zorro\, Fost
+ er vs Stephen Fulton\, Alimkhanuly vs Erislandy Lara
 DTSTART:20251207T010000
 DTEND:20251207T050000
 UID:ISAACCRUZvsLAMONTROACH20251207@boxingbot
-DESCRIPTION:Main Event: ISAAC CRUZ VS LAMONT ROACH\n\nUndercard:\n  • Sk
- ye Nicolson vs Yuliahn Luna\n  • Ernesto Mercado vs Antonio Moran\n  •
-  Foster vs Stephen Fulton\n  • Alimkhanuly vs Erislandy Lara\n\nLocation
- : Frost Bank Center\, San Antonio\, US\nBroadcast: LIVE ON PRIME VIDEO PPV
- \nTime: 1:00 AM
+DESCRIPTION:Main Event: ISAAC CRUZ VS LAMONT ROACH\n\nUndercard:\n  • Jo
+ hn Hedges vs Ellis Zorro\n  • Foster vs Stephen Fulton\n  • Alimkhanul
+ y vs Erislandy Lara\n\nLocation: Frost Bank Center\, San Antonio\, US\nBro
+ adcast: LIVE ON PRIME VIDEO PPV\nTime: 1:00 AM
 LOCATION:Frost Bank Center\, San Antonio\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 TIM TSZYU VS ANTHONY VELAZQUEZ: Junto Nakatani vs Sebastian H
- ernandez\, Hayato Tsutsumi vs Jazza Dickens\, Reito Tsutsumi vs Leobardo Q
- uintana\, Sam Goodman vs Tyler Blizzard
-DTSTART:20251216T080000
-DTEND:20251216T120000
-UID:TimTszyuvsAnthonyVelazquez20251216@boxingbot
-DESCRIPTION:Main Event: TIM TSZYU VS ANTHONY VELAZQUEZ\n\nUndercard:\n  
- • Junto Nakatani vs Sebastian Hernandez\n  • Hayato Tsutsumi vs Jazza 
- Dickens\n  • Reito Tsutsumi vs Leobardo Quintana\n  • Sam Goodman vs T
- yler Blizzard\n\nLocation: ICC Sydney Theatre\, Sydney\, AU\nBroadcast: LI
- VE ON PRIME VIDEO PPV\nTime: 8:00 AM
-LOCATION:ICC Sydney Theatre\, Sydney\, AU
+SUMMARY:🥊 RAMON CARDENAS VS ERIK ROBLES
+DTSTART:20251220T010000
+DTEND:20251220T050000
+UID:RamonCardenasvsErikRobles20251220@boxingbot
+DESCRIPTION:Main Event: RAMON CARDENAS VS ERIK ROBLES\n\nLocation: War Mem
+ orial Auditorium\, Fort Lauderdale\, US\nBroadcast: LIVE ON PRIME VIDEO PP
+ V\nTime: 1:00 AM
+LOCATION:War Memorial Auditorium\, Fort Lauderdale\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 AMANDA SERRANO VS ERIKA CRUZ
-DTSTART:20260104T020000
-DTEND:20260104T060000
-UID:AmandaSerranovsErikaCruz20260104@boxingbot
-DESCRIPTION:Main Event: AMANDA SERRANO VS ERIKA CRUZ\n\nLocation: Coliseo 
- Robert Clemente\, San Juan\, PR\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\n
- Time: 2:00 AM
-LOCATION:Coliseo Robert Clemente\, San Juan\, PR
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 LEIGH WOOD VS JOSH WARRINGTON
-DTSTART:20260221T170000
-DTEND:20260221T210000
-UID:LeighWoodvsJoshWarrington20260221@boxingbot
-DESCRIPTION:Main Event: LEIGH WOOD VS JOSH WARRINGTON\n\nLocation: Motorpo
- int Arena \, Nottingham\, GB\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTim
- e: 5:00 PM
-LOCATION:Motorpoint Arena \, Nottingham\, GB
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 ERICK BADILLO VS ELWIN SOTO: Magdaleno vs Yaqubov
-DTSTART:20251130T010000
-DTEND:20251130T050000
-UID:ErickBadillovsElwinSoto20251130@boxingbot
-DESCRIPTION:Main Event: ERICK BADILLO VS ELWIN SOTO\n\nUndercard:\n  • M
- agdaleno vs Yaqubov\n\nLocation: Save Mart Center\, California\, US\nTime:
-  1:00 AM
-LOCATION:Save Mart Center\, California\, US
+SUMMARY:🥊 NIKITA TSZYU VS MICHAEL ZERAFA
+DTSTART:20260116T080000
+DTEND:20260116T120000
+UID:NikitaTszyuvsMichaelZerafa20260116@boxingbot
+DESCRIPTION:Main Event: NIKITA TSZYU VS MICHAEL ZERAFA\n\nLocation: Brisba
+ ne Entertainment Centre\, Brisbane\, AU\nBroadcast: LIVE ON PRIME VIDEO PP
+ V\nTime: 8:00 AM
+LOCATION:Brisbane Entertainment Centre\, Brisbane\, AU
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 JACOB BANK VS WILLIAM SCULL
@@ -83,38 +57,6 @@ DESCRIPTION:Main Event: BAUMGARDNER VS LEILA BEAUDOIN\n\nUndercard:\n  •
 LOCATION:Kaseya Center\, Miami\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 AARON BOWEN VS TOM COWLING: Cameron Vuong vs Gavin Gwynne\, B
- en Whittaker vs Gavazi
-DTSTART:20251129T180000
-DTEND:20251129T220000
-UID:AaronBowenvsTomCowling20251129@boxingbot
-DESCRIPTION:Main Event: AARON BOWEN VS TOM COWLING\n\nUndercard:\n  • Ca
- meron Vuong vs Gavin Gwynne\n  • Ben Whittaker vs Gavazi\n\nLocation: bp
-  pulse LIVE\, Birmingham\, GB\nTime: 6:00 PM
-LOCATION:bp pulse LIVE\, Birmingham\, GB
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 RAMON CARDENAS VS ROBLES
-DTSTART:20251220T010000
-DTEND:20251220T050000
-UID:RamonCardenasvsRobles20251220@boxingbot
-DESCRIPTION:Main Event: RAMON CARDENAS VS ROBLES\n\nLocation: War Memorial
-  Auditorium\, Fort Lauderdale\, US\nTime: 1:00 AM
-LOCATION:War Memorial Auditorium\, Fort Lauderdale\, US
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 FRAZER CLARKE VS TSHIKEVA: Bobby Dalton vs Joel Kodua\, Henne
- ssy vs Fabiana Bytyqi\, Jack Massey vs Gabriel\, Mauro Silva vs Goldsmith
-DTSTART:20251129T200000
-DTEND:20251130T000000
-UID:FrazerClarkevsTshikeva20251129@boxingbot
-DESCRIPTION:Main Event: FRAZER CLARKE VS TSHIKEVA\n\nUndercard:\n  • Bob
- by Dalton vs Joel Kodua\n  • Hennessy vs Fabiana Bytyqi\n  • Jack Mass
- ey vs Gabriel\n  • Mauro Silva vs Goldsmith\n\nLocation: Vaillant Live\,
-  Derby\, Derby\, GB\nTime: 8:00 PM
-LOCATION:Vaillant Live\, Derby\, Derby\, GB
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:🥊 OLIVIA CURRY VS KAYE SCOTT
 DTSTART:20251221T010000
 DTEND:20251221T050000
@@ -124,26 +66,25 @@ DESCRIPTION:Main Event: OLIVIA CURRY VS KAYE SCOTT\n\nLocation: FOX Theatr
 LOCATION:FOX Theatre\, Detroit\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 FERREIRA VS NUR
+SUMMARY:🥊 FERREIRA VS NUR: Justis Huni vs Toa
 DTSTART:20251206T180000
 DTEND:20251206T220000
 UID:FerreiravsNur20251206@boxingbot
-DESCRIPTION:Main Event: FERREIRA VS NUR\n\nLocation: Shabaz Masoud-Peter M
- cGrail Tops Matchroom's Monte-Carlo Show\, Dec. 6\nTime: 6:00 PM
-LOCATION:Shabaz Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, D
- ec. 6
+DESCRIPTION:Main Event: FERREIRA VS NUR\n\nUndercard:\n  • Justis Huni v
+ s Toa\n\nTime: 6:00 PM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 JOHNNY FISHER VS HERBERT MATOVU: Justis Huni vs Toa\, Shabaz 
- Masoud vs Peter McGrail\, Sean McComb vs Hugo Micallef\, Pat McCormack vs 
- Conah Walker
+SUMMARY:🥊 JOHNNY FISHER VS HERBERT MATOVU: Shabaz Masoud vs Peter McGra
+ il\, Sean McComb vs Hugo Micallef\, Pat McCormack vs Conah Walker
 DTSTART:20251206T000000
 DTEND:20251206T040000
 UID:JohnnyFishervsHerbertMatovu20251206@boxingbot
 DESCRIPTION:Main Event: JOHNNY FISHER VS HERBERT MATOVU\n\nUndercard:\n  
- • Justis Huni vs Toa\n  • Shabaz Masoud vs Peter McGrail\n  • Sean M
- cComb vs Hugo Micallef\n  • Pat McCormack vs Conah Walker\n\nTime: 12:00
-  AM
+ • Shabaz Masoud vs Peter McGrail\n  • Sean McComb vs Hugo Micallef\n  
+ • Pat McCormack vs Conah Walker\n\nLocation: Shabaz Masoud-Peter McGrail
+  Tops Matchroom's Monte-Carlo Show\, Dec. 6\nTime: 12:00 AM
+LOCATION:Shabaz Masoud-Peter McGrail Tops Matchroom's Monte-Carlo Show\, D
+ ec. 6
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 MANUEL FLORES VS JORGE CHAVEZ: Ramirez vs Sirwan\, Alexis Roc
@@ -157,13 +98,14 @@ DESCRIPTION:Main Event: MANUEL FLORES VS JORGE CHAVEZ\n\nUndercard:\n  •
 LOCATION:Acrisure Arena\, California\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 FLORES VS JOE CORDINA: Diego Pacheco vs Lele
+SUMMARY:🥊 FLORES VS JOE CORDINA: Mercado vs Antonio Moran\, Skye Nicols
+ on vs Luna\, Diego Pacheco vs Lele
 DTSTART:20251214T020000
 DTEND:20251214T060000
 UID:FloresvsJoeCordina20251214@boxingbot
-DESCRIPTION:Main Event: FLORES VS JOE CORDINA\n\nUndercard:\n  • Diego P
- acheco vs Lele\n\nLocation: Adventist Health Arena\, Stockton\, US\nTime: 
- 2:00 AM
+DESCRIPTION:Main Event: FLORES VS JOE CORDINA\n\nUndercard:\n  • Mercado
+  vs Antonio Moran\n  • Skye Nicolson vs Luna\n  • Diego Pacheco vs Lel
+ e\n\nLocation: Adventist Health Arena\, Stockton\, US\nTime: 2:00 AM
 LOCATION:Adventist Health Arena\, Stockton\, US
 END:VEVENT
 BEGIN:VEVENT
@@ -176,21 +118,21 @@ DESCRIPTION:Main Event: GAUMONT VS RAMADAN HISENI\n\nLocation: Lac Leamy C
 LOCATION:Lac Leamy Casino\, Gatineau\, CA
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:🥊 SAM GOODMAN VS TYLER BLIZZARD: Tim Tszyu vs Velazquez
+DTSTART:20251216T080000
+DTEND:20251216T120000
+UID:SamGoodmanvsTylerBlizzard20251216@boxingbot
+DESCRIPTION:Main Event: SAM GOODMAN VS TYLER BLIZZARD\n\nUndercard:\n  •
+  Tim Tszyu vs Velazquez\n\nLocation: ICC Sydney Theatre\, Sydney\, AU\nTim
+ e: 8:00 AM
+LOCATION:ICC Sydney Theatre\, Sydney\, AU
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:🥊 STEPHANIE HAN VS HOLLY HOLM
 DTSTART:20260104T020000
 DTEND:20260104T060000
 UID:StephanieHanvsHollyHolm20260104@boxingbot
 DESCRIPTION:Main Event: STEPHANIE HAN VS HOLLY HOLM\n\nTime: 2:00 AM
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 JOHN HEDGES VS ELLIS ZORRO: Visioli vs Joe Howarth
-DTSTART:20251217T190000
-DTEND:20251217T230000
-UID:JohnHedgesvsEllisZorro20251217@boxingbot
-DESCRIPTION:Main Event: JOHN HEDGES VS ELLIS ZORRO\n\nUndercard:\n  • Vi
- sioli vs Joe Howarth\n\nLocation: Indigo at The O2\, London\, GB\nTime: 7:
- 00 PM
-LOCATION:Indigo at The O2\, London\, GB
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 HUTCHINSON VS EZRA TAYLOR: Moses Itauma vs Franklin\, Zak Mil
@@ -204,14 +146,16 @@ DESCRIPTION:Main Event: HUTCHINSON VS EZRA TAYLOR\n\nUndercard:\n  • Mos
 LOCATION:Co-Op Live Arena\, Manchester\, GB
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 TAIGA IMANAGA VS MARTINEZ: Naoya Inoue vs Alan Picasso\, Tera
- ji vs Garcia
+SUMMARY:🥊 TAIGA IMANAGA VS MARTINEZ: Naoya Inoue vs Alan Picasso\, Junt
+ o Nakatani vs Hernandez\, Teraji vs Garcia\, Tsutsumi vs Jazza Dickens\, R
+ eito Tsutsumi vs Quintana
 DTSTART:20251227T080000
 DTEND:20251227T120000
 UID:TaigaImanagavsMartinez20251227@boxingbot
 DESCRIPTION:Main Event: TAIGA IMANAGA VS MARTINEZ\n\nUndercard:\n  • Nao
- ya Inoue vs Alan Picasso\n  • Teraji vs Garcia\n\nLocation: Mohammed Abd
- o Arena\, Riyadh\, SA\nTime: 8:00 AM
+ ya Inoue vs Alan Picasso\n  • Junto Nakatani vs Hernandez\n  • Teraji 
+ vs Garcia\n  • Tsutsumi vs Jazza Dickens\n  • Reito Tsutsumi vs Quinta
+ na\n\nLocation: Mohammed Abdo Arena\, Riyadh\, SA\nTime: 8:00 AM
 LOCATION:Mohammed Abdo Arena\, Riyadh\, SA
 END:VEVENT
 BEGIN:VEVENT
@@ -340,6 +284,15 @@ DESCRIPTION:Main Event: CRAIG RICHARDS VS DAN AZEEZ\n\nLocation: Legon Spo
 LOCATION:Legon Sports Stadium\, Accra\, GH
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:🥊 AMANDA SERRANO VS CRUZ
+DTSTART:20260104T020000
+DTEND:20260104T060000
+UID:AmandaSerranovsCruz20260104@boxingbot
+DESCRIPTION:Main Event: AMANDA SERRANO VS CRUZ\n\nLocation: Coliseo Robert
+  Clemente\, San Juan\, PR\nTime: 2:00 AM
+LOCATION:Coliseo Robert Clemente\, San Juan\, PR
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:🥊 CALLUM SIMPSON VS WILLIAMSON
 DTSTART:20251220T180000
 DTEND:20251220T220000
@@ -349,13 +302,22 @@ DESCRIPTION:Main Event: CALLUM SIMPSON VS WILLIAMSON\n\nLocation: First Di
 LOCATION:First Direct Bank Arena\, Leeds\, GB
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 NIKITA TSZYU VS MICHAEL ZERAFA
-DTSTART:20260116T080000
-DTEND:20260116T120000
-UID:NikitaTszyuvsMichaelZerafa20260116@boxingbot
-DESCRIPTION:Main Event: NIKITA TSZYU VS MICHAEL ZERAFA\n\nLocation: Brisba
- ne Entertainment Centre\, Brisbane\, AU\nTime: 8:00 AM
-LOCATION:Brisbane Entertainment Centre\, Brisbane\, AU
+SUMMARY:🥊 VISIOLI VS JOE HOWARTH
+DTSTART:20251217T190000
+DTEND:20251217T230000
+UID:VisiolivsJoeHowarth20251217@boxingbot
+DESCRIPTION:Main Event: VISIOLI VS JOE HOWARTH\n\nLocation: Indigo at The 
+ O2\, London\, GB\nTime: 7:00 PM
+LOCATION:Indigo at The O2\, London\, GB
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 LEIGH WOOD VS WARRINGTON
+DTSTART:20260221T170000
+DTEND:20260221T210000
+UID:LeighWoodvsWarrington20260221@boxingbot
+DESCRIPTION:Main Event: LEIGH WOOD VS WARRINGTON\n\nLocation: Motorpoint A
+ rena \, Nottingham\, GB\nTime: 5:00 PM
+LOCATION:Motorpoint Arena \, Nottingham\, GB
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 YABUKI VS FELIX ALVARADO
