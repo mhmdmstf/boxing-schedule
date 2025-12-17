@@ -3,26 +3,28 @@ VERSION:2.0
 PRODID:-//Boxing Schedule//github-action//
 X-WR-CALNAME:Boxing Schedule
 BEGIN:VEVENT
-SUMMARY:🥊 NAOYA INOUE VS ALAN PICASSO: Taiga Imanaga vs Martinez\, Tera
- ji vs Garcia\, Tsutsumi vs Jazza Dickens\, Reito Tsutsumi vs Quintana
+SUMMARY:🥊 NAOYA INOUE VS ALAN PICASSO: Stephanie Han vs Holly Holm\, Ta
+ iga Imanaga vs Martinez\, Junto Nakatani vs Hernandez\, Teraji vs Garcia\,
+  Tsutsumi vs Jazza Dickens\, Reito Tsutsumi vs Quintana
 DTSTART:20251227T080000
 DTEND:20251227T120000
 UID:NAOYAINOUEvsALANPICASSO20251227@boxingbot
-DESCRIPTION:Main Event: NAOYA INOUE VS ALAN PICASSO\n\nUndercard:\n  • T
- aiga Imanaga vs Martinez\n  • Teraji vs Garcia\n  • Tsutsumi vs Jazza 
- Dickens\n  • Reito Tsutsumi vs Quintana\n\nLocation: Mohammed Abdo Arena
- \, Riyadh\, SA\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTime: 8:00 AM
+DESCRIPTION:Main Event: NAOYA INOUE VS ALAN PICASSO\n\nUndercard:\n  • S
+ tephanie Han vs Holly Holm\n  • Taiga Imanaga vs Martinez\n  • Junto N
+ akatani vs Hernandez\n  • Teraji vs Garcia\n  • Tsutsumi vs Jazza Dick
+ ens\n  • Reito Tsutsumi vs Quintana\n\nLocation: Mohammed Abdo Arena\, R
+ iyadh\, SA\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTime: 8:00 AM
 LOCATION:Mohammed Abdo Arena\, Riyadh\, SA
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 AMANDA SERRANO VS ERIKA CRUZ
-DTSTART:20260104T020000
-DTEND:20260104T060000
-UID:AmandaSerranovsErikaCruz20260104@boxingbot
-DESCRIPTION:Main Event: AMANDA SERRANO VS ERIKA CRUZ\n\nLocation: Coliseo 
- Robert Clemente\, San Juan\, PR\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\n
- Time: 2:00 AM
-LOCATION:Coliseo Robert Clemente\, San Juan\, PR
+SUMMARY:🥊 AGIT KABAYEL VS DAMIAN KNYBA
+DTSTART:20260110T180000
+DTEND:20260110T220000
+UID:AgitKabayelvsDamianKnyba20260110@boxingbot
+DESCRIPTION:Main Event: AGIT KABAYEL VS DAMIAN KNYBA\n\nLocation: Rudolf W
+ eber Arena\, Oberhausen\, DE\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTim
+ e: 6:00 PM
+LOCATION:Rudolf Weber Arena\, Oberhausen\, DE
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 NICK BALL VS BRANDON FIGUEROA
@@ -93,39 +95,24 @@ DESCRIPTION:Main Event: DUBOIS VS PANATTA\n\nLocation: Kaseya Center\, Mia
 LOCATION:Kaseya Center\, Miami\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 MANUEL FLORES VS JORGE CHAVEZ
+SUMMARY:🥊 MANUEL FLORES VS JORGE CHAVEZ: Ramirez vs Sirwan\, Alexis Roc
+ ha vs Raul Curiel
 DTSTART:20260117T020000
 DTEND:20260117T060000
 UID:ManuelFloresvsJorgeChavez20260117@boxingbot
-DESCRIPTION:Main Event: MANUEL FLORES VS JORGE CHAVEZ\n\nLocation: TUE\, D
- EC 16 2025\nTime: 2:00 AM
-LOCATION:TUE\, DEC 16 2025
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 SAM GOODMAN VS TYLER BLIZZARD: Tim Tszyu vs Velazquez
-DTSTART:20251216T080000
-DTEND:20251216T120000
-UID:SamGoodmanvsTylerBlizzard20251216@boxingbot
-DESCRIPTION:Main Event: SAM GOODMAN VS TYLER BLIZZARD\n\nUndercard:\n  •
-  Tim Tszyu vs Velazquez\n\nLocation: ICC Sydney Theatre\, Sydney\, AU\nTim
- e: 8:00 AM
-LOCATION:ICC Sydney Theatre\, Sydney\, AU
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 STEPHANIE HAN VS HOLLY HOLM
-DTSTART:20260104T020000
-DTEND:20260104T060000
-UID:StephanieHanvsHollyHolm20260104@boxingbot
-DESCRIPTION:Main Event: STEPHANIE HAN VS HOLLY HOLM\n\nTime: 2:00 AM
+DESCRIPTION:Main Event: MANUEL FLORES VS JORGE CHAVEZ\n\nUndercard:\n  •
+  Ramirez vs Sirwan\n  • Alexis Rocha vs Raul Curiel\n\nLocation: Acrisur
+ e Arena\, California\, US\nTime: 2:00 AM
+LOCATION:Acrisure Arena\, California\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 JOHN HEDGES VS ELLIS ZORRO
 DTSTART:20251217T190000
 DTEND:20251217T230000
 UID:JohnHedgesvsEllisZorro20251217@boxingbot
-DESCRIPTION:Main Event: JOHN HEDGES VS ELLIS ZORRO\n\nLocation: TUE\, DEC 
- 16 2025\nTime: 7:00 PM
-LOCATION:TUE\, DEC 16 2025
+DESCRIPTION:Main Event: JOHN HEDGES VS ELLIS ZORRO\n\nLocation: WED\, DEC 
+ 17 2025\nTime: 7:00 PM
+LOCATION:WED\, DEC 17 2025
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 HUTCHINSON VS EZRA TAYLOR: Moses Itauma vs Franklin\, Zak Mil
@@ -139,15 +126,6 @@ DESCRIPTION:Main Event: HUTCHINSON VS EZRA TAYLOR\n\nUndercard:\n  • Mos
 LOCATION:Co-Op Live Arena\, Manchester\, GB
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 AGIT KABAYEL VS DAMIAN KNYBA
-DTSTART:20260110T180000
-DTEND:20260110T220000
-UID:AgitKabayelvsDamianKnyba20260110@boxingbot
-DESCRIPTION:Main Event: AGIT KABAYEL VS DAMIAN KNYBA\n\nLocation: Rudolf W
- eber Arena\, Oberhausen\, DE\nTime: 6:00 PM
-LOCATION:Rudolf Weber Arena\, Oberhausen\, DE
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:🥊 ANGELO LEO VS LERATO DLAMINI
 DTSTART:20250222T010000
 DTEND:20250222T050000
@@ -155,6 +133,15 @@ UID:AngeloLeovsLeratoDlamini20250222@boxingbot
 DESCRIPTION:Main Event: ANGELO LEO VS LERATO DLAMINI\n\nLocation: New Mexi
  co\, Albuquerque\, US\nTime: 1:00 AM
 LOCATION:New Mexico\, Albuquerque\, US
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 TEOFIMO LOPEZ VS STEVENSON
+DTSTART:20250201T010000
+DTEND:20250201T050000
+UID:TeofimoLopezvsStevenson20250201@boxingbot
+DESCRIPTION:Main Event: TEOFIMO LOPEZ VS STEVENSON\n\nLocation: WED\, DEC 
+ 17 2025\nTime: 1:00 AM
+LOCATION:WED\, DEC 17 2025
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 SUBRIEL MATIAS VS DALTON SMITH
@@ -184,22 +171,13 @@ DESCRIPTION:Main Event: MURTAZALIEV VS JOSH KELLY\n\nLocation: Utilita Are
 LOCATION:Utilita Arena\, Newcastle\, GB
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 JUNTO NAKATANI VS HERNANDEZ
-DTSTART:20251227T080000
-DTEND:20251227T120000
-UID:JuntoNakatanivsHernandez20251227@boxingbot
-DESCRIPTION:Main Event: JUNTO NAKATANI VS HERNANDEZ\n\nLocation: TUE\, DEC
-  16 2025\nTime: 8:00 AM
-LOCATION:TUE\, DEC 16 2025
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:🥊 NAVARRETE VS EDUARDO NUNEZ
 DTSTART:20260301T010000
 DTEND:20260301T050000
 UID:NavarretevsEduardoNunez20260301@boxingbot
-DESCRIPTION:Main Event: NAVARRETE VS EDUARDO NUNEZ\n\nLocation: Desert Dia
- mond Arena\, Glendale\, US\nTime: 1:00 AM
-LOCATION:Desert Diamond Arena\, Glendale\, US
+DESCRIPTION:Main Event: NAVARRETE VS EDUARDO NUNEZ\n\nLocation: WED\, DEC 
+ 17 2025\nTime: 1:00 AM
+LOCATION:WED\, DEC 17 2025
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 OLASCUAGA VS JUKIYA IIMURA: Kyosuke Takami vs Rene Santiago\,
@@ -220,16 +198,6 @@ UID:LiamParovsPaddyDonovan20260116@boxingbot
 DESCRIPTION:Main Event: LIAM PARO VS PADDY DONOVAN\n\nTime: 4:00 AM
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 RAMIREZ VS SIRWAN: Alexis Rocha vs Raul Curiel
-DTSTART:20260117T020000
-DTEND:20260117T060000
-UID:RamirezvsSirwan20260117@boxingbot
-DESCRIPTION:Main Event: RAMIREZ VS SIRWAN\n\nUndercard:\n  • Alexis Roch
- a vs Raul Curiel\n\nLocation: Acrisure Arena\, California\, US\nTime: 2:00
-  AM
-LOCATION:Acrisure Arena\, California\, US
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:🥊 CRAIG RICHARDS VS DAN AZEEZ
 DTSTART:20251220T170000
 DTEND:20251220T210000
@@ -237,6 +205,15 @@ UID:CraigRichardsvsDanAzeez20251220@boxingbot
 DESCRIPTION:Main Event: CRAIG RICHARDS VS DAN AZEEZ\n\nLocation: Legon Spo
  rts Stadium\, Accra\, GH\nTime: 5:00 PM
 LOCATION:Legon Sports Stadium\, Accra\, GH
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 AMANDA SERRANO VS CRUZ
+DTSTART:20260104T020000
+DTEND:20260104T060000
+UID:AmandaSerranovsCruz20260104@boxingbot
+DESCRIPTION:Main Event: AMANDA SERRANO VS CRUZ\n\nLocation: Coliseo Robert
+  Clemente\, San Juan\, PR\nTime: 2:00 AM
+LOCATION:Coliseo Robert Clemente\, San Juan\, PR
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 SHIELDS VS CREWS
@@ -279,9 +256,9 @@ SUMMARY:🥊 LEIGH WOOD VS WARRINGTON
 DTSTART:20260221T170000
 DTEND:20260221T210000
 UID:LeighWoodvsWarrington20260221@boxingbot
-DESCRIPTION:Main Event: LEIGH WOOD VS WARRINGTON\n\nLocation: TUE\, DEC 16
+DESCRIPTION:Main Event: LEIGH WOOD VS WARRINGTON\n\nLocation: WED\, DEC 17
   2025\nTime: 5:00 PM
-LOCATION:TUE\, DEC 16 2025
+LOCATION:WED\, DEC 17 2025
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 YABUKI VS FELIX ALVARADO
