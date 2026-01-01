@@ -26,13 +26,14 @@ LOCATION:Madison Square Garden\, New York City\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 CARLOS ADAMES VS WILLIAMS: Carrington vs Carlos Castro\, Keys
- hawn Davis vs Jamaine Ortiz
+ hawn Davis vs Jamaine Ortiz\, Jarrell Miller vs Kingsley Ibeh
 DTSTART:20260201T010000
 DTEND:20260201T050000
 UID:CarlosAdamesvsWilliams20260201@boxingbot
 DESCRIPTION:Main Event: CARLOS ADAMES VS WILLIAMS\n\nUndercard:\n  • Car
- rington vs Carlos Castro\n  • Keyshawn Davis vs Jamaine Ortiz\n\nLocatio
- n: Madison Square Garden\, New York City\, US\nTime: 1:00 AM
+ rington vs Carlos Castro\n  • Keyshawn Davis vs Jamaine Ortiz\n  • Jar
+ rell Miller vs Kingsley Ibeh\n\nLocation: Madison Square Garden\, New York
+  City\, US\nTime: 1:00 AM
 LOCATION:Madison Square Garden\, New York City\, US
 END:VEVENT
 BEGIN:VEVENT
@@ -63,22 +64,24 @@ DESCRIPTION:Main Event: KHALIL COE VS JESSE HART\n\nLocation: Xfinity Mobi
 LOCATION:Xfinity Mobile Arena\, Philadelphia\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 ISHMAEL DAVIS VS BILAL FAWAZ: Sandy Ryan vs Ramos
+SUMMARY:🥊 ISHMAEL DAVIS VS BILAL FAWAZ: Sandy Ryan vs Ramos\, Leigh Woo
+ d vs Warrington
 DTSTART:20260221T170000
 DTEND:20260221T210000
 UID:IshmaelDavisvsBilalFawaz20260221@boxingbot
 DESCRIPTION:Main Event: ISHMAEL DAVIS VS BILAL FAWAZ\n\nUndercard:\n  • 
- Sandy Ryan vs Ramos\n\nLocation: Motorpoint Arena \, Nottingham\, GB\nTime
- : 5:00 PM
+ Sandy Ryan vs Ramos\n  • Leigh Wood vs Warrington\n\nLocation: Motorpoin
+ t Arena \, Nottingham\, GB\nTime: 5:00 PM
 LOCATION:Motorpoint Arena \, Nottingham\, GB
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 MANUEL FLORES VS JORGE CHAVEZ
+SUMMARY:🥊 MANUEL FLORES VS JORGE CHAVEZ: Alexis Rocha vs Raul Curiel
 DTSTART:20260117T020000
 DTEND:20260117T060000
 UID:ManuelFloresvsJorgeChavez20260117@boxingbot
-DESCRIPTION:Main Event: MANUEL FLORES VS JORGE CHAVEZ\n\nLocation: Acrisur
- e Arena\, California\, US\nTime: 2:00 AM
+DESCRIPTION:Main Event: MANUEL FLORES VS JORGE CHAVEZ\n\nUndercard:\n  •
+  Alexis Rocha vs Raul Curiel\n\nLocation: Acrisure Arena\, California\, US
+ \nTime: 2:00 AM
 LOCATION:Acrisure Arena\, California\, US
 END:VEVENT
 BEGIN:VEVENT
@@ -135,22 +138,13 @@ DESCRIPTION:Main Event: SUBRIEL MATIAS VS DALTON SMITH\n\nLocation: Barcla
 LOCATION:Barclays Center\, New York City\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 JARRELL MILLER VS KINGSLEY IBEH
-DTSTART:20260201T010000
-DTEND:20260201T050000
-UID:JarrellMillervsKingsleyIbeh20260201@boxingbot
-DESCRIPTION:Main Event: JARRELL MILLER VS KINGSLEY IBEH\n\nLocation: WED\,
-  DEC 31 2025\nTime: 1:00 AM
-LOCATION:WED\, DEC 31 2025
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:🥊 NAVARRETE VS EDUARDO NUNEZ
 DTSTART:20260301T010000
 DTEND:20260301T050000
 UID:NavarretevsEduardoNunez20260301@boxingbot
-DESCRIPTION:Main Event: NAVARRETE VS EDUARDO NUNEZ\n\nLocation: WED\, DEC 
- 31 2025\nTime: 1:00 AM
-LOCATION:WED\, DEC 31 2025
+DESCRIPTION:Main Event: NAVARRETE VS EDUARDO NUNEZ\n\nLocation: Desert Dia
+ mond Arena\, Glendale\, US\nTime: 1:00 AM
+LOCATION:Desert Diamond Arena\, Glendale\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 JAMES VS BRYAN JIMENEZ: Persoon vs Caroline Veyre
@@ -174,18 +168,9 @@ SUMMARY:🥊 ALBERT RAMIREZ VS RICHARDS
 DTSTART:20260206T010000
 DTEND:20260206T050000
 UID:AlbertRamirezvsRichards20260206@boxingbot
-DESCRIPTION:Main Event: ALBERT RAMIREZ VS RICHARDS\n\nLocation: WED\, DEC 
- 31 2025\nTime: 1:00 AM
-LOCATION:WED\, DEC 31 2025
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 ALEXIS ROCHA VS RAUL CURIEL
-DTSTART:20260117T020000
-DTEND:20260117T060000
-UID:AlexisRochavsRaulCuriel20260117@boxingbot
-DESCRIPTION:Main Event: ALEXIS ROCHA VS RAUL CURIEL\n\nLocation: WED\, DEC
-  31 2025\nTime: 2:00 AM
-LOCATION:WED\, DEC 31 2025
+DESCRIPTION:Main Event: ALBERT RAMIREZ VS RICHARDS\n\nLocation: Montreal C
+ asino\, Montreal\, CA\nTime: 1:00 AM
+LOCATION:Montreal Casino\, Montreal\, CA
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 AMANDA SERRANO VS REINA TELLEZ
@@ -213,15 +198,6 @@ UID:NikitaTszyuvsMichaelZerafa20260116@boxingbot
 DESCRIPTION:Main Event: NIKITA TSZYU VS MICHAEL ZERAFA\n\nLocation: Brisba
  ne Entertainment Centre\, Brisbane\, AU\nTime: 8:00 AM
 LOCATION:Brisbane Entertainment Centre\, Brisbane\, AU
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 LEIGH WOOD VS WARRINGTON
-DTSTART:20260221T170000
-DTEND:20260221T210000
-UID:LeighWoodvsWarrington20260221@boxingbot
-DESCRIPTION:Main Event: LEIGH WOOD VS WARRINGTON\n\nLocation: WED\, DEC 31
-  2025\nTime: 5:00 PM
-LOCATION:WED\, DEC 31 2025
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 XANDER ZAYAS VS ABASS BARAOU
