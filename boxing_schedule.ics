@@ -15,14 +15,14 @@ DESCRIPTION:Main Event: MOSES ITAUMA VS JERMAINE FRANKLIN\n\nUndercard:\n
 LOCATION:Co-Op Live Arena\, Manchester\, GB
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 TEOFIMO LOPEZ VS SHAKUR STEVENSON
-DTSTART:20250201T010000
-DTEND:20250201T050000
-UID:TeofimoLopezvsShakurStevenson20250201@boxingbot
-DESCRIPTION:Main Event: TEOFIMO LOPEZ VS SHAKUR STEVENSON\n\nLocation: Mad
- ison Square Garden\, New York City\, US\nBroadcast: LIVE AND EXCLUSIVELY O
- N DAZN\nTime: 1:00 AM
-LOCATION:Madison Square Garden\, New York City\, US
+SUMMARY:🥊 XANDER ZAYAS VS ABASS BARAOU
+DTSTART:20260201T010000
+DTEND:20260201T050000
+UID:XanderZayasvsAbassBaraou20260201@boxingbot
+DESCRIPTION:Main Event: XANDER ZAYAS VS ABASS BARAOU\n\nLocation: Coliseo 
+ De Puerto Rico\, San Juan\, PR\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nT
+ ime: 1:00 AM
+LOCATION:Coliseo De Puerto Rico\, San Juan\, PR
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 JAZZA DICKENS VS ANTHONY CACACE: Pierce O'Leary vs Chamberlai
@@ -133,6 +133,15 @@ DESCRIPTION:Main Event: AGIT KABAYEL VS DAMIAN KNYBA\n\nLocation: Rudolf W
 LOCATION:Rudolf Weber Arena\, Oberhausen\, DE
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:🥊 TEOFIMO LOPEZ VS STEVENSON
+DTSTART:20250201T010000
+DTEND:20250201T050000
+UID:TeofimoLopezvsStevenson20250201@boxingbot
+DESCRIPTION:Main Event: TEOFIMO LOPEZ VS STEVENSON\n\nLocation: Madison Sq
+ uare Garden\, New York City\, US\nTime: 1:00 AM
+LOCATION:Madison Square Garden\, New York City\, US
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:🥊 MADRIMOV VS DAVID: Muratalla vs Andy Cruz
 DTSTART:20260125T020000
 DTEND:20260125T060000
@@ -161,12 +170,13 @@ DESCRIPTION:Main Event: MEDINA VS ADRIAN CURIEL\n\nLocation: Jalisco\, Mex
 LOCATION:Jalisco\, Mexico\, Guadalajara\, MX
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 MURTAZALIEV VS JOSH KELLY
+SUMMARY:🥊 MURTAZALIEV VS JOSH KELLY: Josh Padley vs Belmehdi
 DTSTART:20260131T170000
 DTEND:20260131T210000
 UID:MurtazalievvsJoshKelly20260131@boxingbot
-DESCRIPTION:Main Event: MURTAZALIEV VS JOSH KELLY\n\nLocation: Utilita Are
- na\, Newcastle\, GB\nTime: 5:00 PM
+DESCRIPTION:Main Event: MURTAZALIEV VS JOSH KELLY\n\nUndercard:\n  • Jos
+ h Padley vs Belmehdi\n\nLocation: Utilita Arena\, Newcastle\, GB\nTime: 5:
+ 00 PM
 LOCATION:Utilita Arena\, Newcastle\, GB
 END:VEVENT
 BEGIN:VEVENT
@@ -221,14 +231,5 @@ UID:NikitaTszyuvsMichaelZerafa20260116@boxingbot
 DESCRIPTION:Main Event: NIKITA TSZYU VS MICHAEL ZERAFA\n\nLocation: Brisba
  ne Entertainment Centre\, Brisbane\, AU\nTime: 8:00 AM
 LOCATION:Brisbane Entertainment Centre\, Brisbane\, AU
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 XANDER ZAYAS VS ABASS BARAOU
-DTSTART:20260201T010000
-DTEND:20260201T050000
-UID:XanderZayasvsAbassBaraou20260201@boxingbot
-DESCRIPTION:Main Event: XANDER ZAYAS VS ABASS BARAOU\n\nLocation: Coliseo 
- de Puerto Rico\, San Juan\, PR\nTime: 1:00 AM
-LOCATION:Coliseo de Puerto Rico\, San Juan\, PR
 END:VEVENT
 END:VCALENDAR
