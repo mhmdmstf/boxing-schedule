@@ -15,14 +15,18 @@ DESCRIPTION:Main Event: MOSES ITAUMA VS JERMAINE FRANKLIN\n\nUndercard:\n
 LOCATION:Co-Op Live Arena\, Manchester\, GB
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 XANDER ZAYAS VS ABASS BARAOU
+SUMMARY:🥊 TEOFIMO LOPEZ VS SHAKUR STEVENSON: Carlos Adames vs Williams\
+ , Carrington vs Carlos Castro\, Keyshawn Davis vs Jamaine Ortiz\, Jarrell 
+ Miller vs Kingsley Ibeh
 DTSTART:20260201T010000
 DTEND:20260201T050000
-UID:XanderZayasvsAbassBaraou20260201@boxingbot
-DESCRIPTION:Main Event: XANDER ZAYAS VS ABASS BARAOU\n\nLocation: Coliseo 
- De Puerto Rico\, San Juan\, PR\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nT
- ime: 1:00 AM
-LOCATION:Coliseo De Puerto Rico\, San Juan\, PR
+UID:TeofimoLopezvsShakurStevenson20260201@boxingbot
+DESCRIPTION:Main Event: TEOFIMO LOPEZ VS SHAKUR STEVENSON\n\nUndercard:\n 
+  • Carlos Adames vs Williams\n  • Carrington vs Carlos Castro\n  • K
+ eyshawn Davis vs Jamaine Ortiz\n  • Jarrell Miller vs Kingsley Ibeh\n\nL
+ ocation: Madison Square Garden\, New York City\, US\nBroadcast: LIVE AND E
+ XCLUSIVELY ON DAZN\nTime: 1:00 AM
+LOCATION:Madison Square Garden\, New York City\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 JAZZA DICKENS VS ANTHONY CACACE: Pierce O'Leary vs Chamberlai
@@ -34,18 +38,6 @@ DESCRIPTION:Main Event: JAZZA DICKENS VS ANTHONY CACACE\n\nUndercard:\n
  • Pierce O'Leary vs Chamberlain\n\nLocation: 3Arena\, Dublin\, IE\nBroad
  cast: LIVE AND EXCLUSIVELY ON DAZN\nTime: 6:00 PM
 LOCATION:3Arena\, Dublin\, IE
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 CARLOS ADAMES VS WILLIAMS: Carrington vs Carlos Castro\, Keys
- hawn Davis vs Jamaine Ortiz\, Jarrell Miller vs Kingsley Ibeh
-DTSTART:20260201T010000
-DTEND:20260201T050000
-UID:CarlosAdamesvsWilliams20260201@boxingbot
-DESCRIPTION:Main Event: CARLOS ADAMES VS WILLIAMS\n\nUndercard:\n  • Car
- rington vs Carlos Castro\n  • Keyshawn Davis vs Jamaine Ortiz\n  • Jar
- rell Miller vs Kingsley Ibeh\n\nLocation: Madison Square Garden\, New York
-  City\, US\nTime: 1:00 AM
-LOCATION:Madison Square Garden\, New York City\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 ADAM AZIM VS DANIEL
@@ -131,15 +123,6 @@ UID:AgitKabayelvsDamianKnyba20260110@boxingbot
 DESCRIPTION:Main Event: AGIT KABAYEL VS DAMIAN KNYBA\n\nLocation: Rudolf W
  eber Arena\, Oberhausen\, DE\nTime: 6:00 PM
 LOCATION:Rudolf Weber Arena\, Oberhausen\, DE
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 TEOFIMO LOPEZ VS STEVENSON
-DTSTART:20250201T010000
-DTEND:20250201T050000
-UID:TeofimoLopezvsStevenson20250201@boxingbot
-DESCRIPTION:Main Event: TEOFIMO LOPEZ VS STEVENSON\n\nLocation: Madison Sq
- uare Garden\, New York City\, US\nTime: 1:00 AM
-LOCATION:Madison Square Garden\, New York City\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 MADRIMOV VS DAVID: Muratalla vs Andy Cruz
@@ -231,5 +214,14 @@ UID:NikitaTszyuvsMichaelZerafa20260116@boxingbot
 DESCRIPTION:Main Event: NIKITA TSZYU VS MICHAEL ZERAFA\n\nLocation: Brisba
  ne Entertainment Centre\, Brisbane\, AU\nTime: 8:00 AM
 LOCATION:Brisbane Entertainment Centre\, Brisbane\, AU
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 XANDER ZAYAS VS ABASS BARAOU
+DTSTART:20260201T010000
+DTEND:20260201T050000
+UID:XanderZayasvsAbassBaraou20260201@boxingbot
+DESCRIPTION:Main Event: XANDER ZAYAS VS ABASS BARAOU\n\nLocation: Coliseo 
+ de Puerto Rico\, San Juan\, PR\nTime: 1:00 AM
+LOCATION:Coliseo de Puerto Rico\, San Juan\, PR
 END:VEVENT
 END:VCALENDAR
