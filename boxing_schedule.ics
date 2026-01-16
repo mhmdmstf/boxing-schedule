@@ -112,6 +112,16 @@ DESCRIPTION:Main Event: KHALIL COE VS JESSE HART\n\nLocation: Xfinity Mobi
 LOCATION:Xfinity Mobile Arena\, Philadelphia\, US
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:🥊 RAUL CURIEL VS JORDAN PANTHEN: Manuel Flores vs Jorge Chavez
+DTSTART:20260117T020000
+DTEND:20260117T060000
+UID:RaulCurielvsJordanPanthen20260117@boxingbot
+DESCRIPTION:Main Event: RAUL CURIEL VS JORDAN PANTHEN\n\nUndercard:\n  •
+  Manuel Flores vs Jorge Chavez\n\nLocation: Acrisure Arena\, California\, 
+ US\nTime: 2:00 AM
+LOCATION:Acrisure Arena\, California\, US
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:🥊 ISHMAEL DAVIS VS BILAL FAWAZ: Sandy Ryan vs Ramos\, Leigh Woo
  d vs Warrington
 DTSTART:20260221T170000
@@ -121,16 +131,6 @@ DESCRIPTION:Main Event: ISHMAEL DAVIS VS BILAL FAWAZ\n\nUndercard:\n  •
  Sandy Ryan vs Ramos\n  • Leigh Wood vs Warrington\n\nLocation: Motorpoin
  t Arena \, Nottingham\, GB\nTime: 5:00 PM
 LOCATION:Motorpoint Arena \, Nottingham\, GB
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 MANUEL FLORES VS JORGE CHAVEZ: Alexis Rocha vs Raul Curiel
-DTSTART:20260117T020000
-DTEND:20260117T060000
-UID:ManuelFloresvsJorgeChavez20260117@boxingbot
-DESCRIPTION:Main Event: MANUEL FLORES VS JORGE CHAVEZ\n\nUndercard:\n  •
-  Alexis Rocha vs Raul Curiel\n\nLocation: Acrisure Arena\, California\, US
- \nTime: 2:00 AM
-LOCATION:Acrisure Arena\, California\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 MADRIMOV VS DAVID: Muratalla vs Andy Cruz
