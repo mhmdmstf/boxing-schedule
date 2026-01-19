@@ -21,9 +21,9 @@ SUMMARY:🥊 EFE AJAGBA VS CHARLES MARTIN
 DTSTART:20260214T020000
 DTEND:20260214T060000
 UID:EfeAjagbavsCharlesMartin20260214@boxingbot
-DESCRIPTION:Main Event: EFE AJAGBA VS CHARLES MARTIN\n\nLocation: UFC Apex
- \, Las Vegas\, US\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTime: 2:00 AM
-LOCATION:UFC Apex\, Las Vegas\, US
+DESCRIPTION:Main Event: EFE AJAGBA VS CHARLES MARTIN\n\nLocation: Meta Ape
+ x\, Las Vegas\, US\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTime: 2:00 AM
+LOCATION:Meta Apex\, Las Vegas\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 JAZZA DICKENS VS ANTHONY CACACE: Jono Carroll vs Colm Murphy\
@@ -132,6 +132,17 @@ DESCRIPTION:Main Event: ROMAN FRESS VS TAHIR KAHROVIC\n\nLocation: Messeha
 LOCATION:Messehalle\, Magdeburg\, DE
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:🥊 HUTCHINSON VS EZRA TAYLOR: Moses Itauma vs Franklin\, Zak Mil
+ ler vs Liam Davies\, Thompson vs Brad Pauls
+DTSTART:20260328T210000
+DTEND:20260329T010000
+UID:HutchinsonvsEzraTaylor20260328@boxingbot
+DESCRIPTION:Main Event: HUTCHINSON VS EZRA TAYLOR\n\nUndercard:\n  • Mos
+ es Itauma vs Franklin\n  • Zak Miller vs Liam Davies\n  • Thompson vs 
+ Brad Pauls\n\nLocation: Co-Op Live Arena\, Manchester\, GB\nTime: 9:00 PM
+LOCATION:Co-Op Live Arena\, Manchester\, GB
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:🥊 MADRIMOV VS DAVID: Muratalla vs Andy Cruz
 DTSTART:20260125T020000
 DTEND:20260125T060000
@@ -195,6 +206,17 @@ DTSTART:20260201T010000
 DTEND:20260201T050000
 UID:RohanPolancovsGomez20260201@boxingbot
 DESCRIPTION:Main Event: ROHAN POLANCO VS GOMEZ\n\nTime: 1:00 AM
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 RODRIGUEZ VS AUSTIN DEANDA: Rodriguez vs Cain Sandoval\, Cand
+ e vs Max Ornelas\, Callum Walsh vs Carlos Ocampo
+DTSTART:20260124T010000
+DTEND:20260124T050000
+UID:RodriguezvsAustinDeAnda20260124@boxingbot
+DESCRIPTION:Main Event: RODRIGUEZ VS AUSTIN DEANDA\n\nUndercard:\n  • Ro
+ driguez vs Cain Sandoval\n  • Cande vs Max Ornelas\n  • Callum Walsh v
+ s Carlos Ocampo\n\nLocation: Meta Apex\, Las Vegas\, US\nTime: 1:00 AM
+LOCATION:Meta Apex\, Las Vegas\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 SHIELDS VS CREWS
