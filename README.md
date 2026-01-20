@@ -1,115 +1,56 @@
 # Boxing Schedule Calendar
 
-An automated, self-updating iCal feed for upcoming boxing matches, scraped from The Ring Magazine.
+[![Update Boxing Calendar](https://github.com/mhmdmstf/boxing-schedule/actions/workflows/main.yml/badge.svg)](https://github.com/mhmdmstf/boxing-schedule/actions/workflows/main.yml)
 
----
+Auto-updating iCal feed for upcoming boxing matches, scraped from The Ring Magazine.
 
-## Quick Subscribe
-
-You can subscribe to the calendar directly without setting anything up:
+## Subscribe
 
 ```
 https://raw.githubusercontent.com/mhmdmstf/boxing-schedule/refs/heads/main/boxing_schedule.ics
 ```
 
-**Apple Calendar (iOS/Mac):** File > New Calendar Subscription > paste the URL > set Auto-refresh to "Every Day"
+**Apple Calendar:** File > New Calendar Subscription > paste URL > set Auto-refresh to "Every Day"
 
-**Google Calendar:** Other calendars > + > From URL > paste the URL
+**Google Calendar:** Other calendars > + > From URL > paste URL
 
-**Outlook:** Add calendar > Subscribe from web > paste the URL
-
-If you want your own copy or want to modify it, see the setup guide below.
-
----
+**Outlook:** Add calendar > Subscribe from web > paste URL
 
 ## How It Works
 
-1. A Python script uses Playwright to load [The Ring Magazine schedule page](https://ringmagazine.com/en/schedule/fights)
-2. It clicks "Load More" to expand the full schedule
-3. Extracts all fight URLs from the page and visits each fight's detail page
-4. Scrapes fighter names, dates, locations, times, and broadcast info from each page
-5. Groups fights into **cards** by date and venue
-6. Creates one calendar event per card with the full fight lineup
-7. GitHub Actions runs this daily at 06:00 UTC
-8. GitHub Pages hosts the file at a public URL
+1. Python script uses Playwright to load [The Ring Magazine schedule](https://ringmagazine.com/en/schedule/fights)
+2. Clicks "Load More" to expand the full schedule
+3. Scrapes fighter names, dates, locations, times, and broadcast info
+4. Groups fights into cards by date and venue
+5. Creates one calendar event per card
+6. GitHub Actions runs daily at 06:00 UTC
 
----
+## Event Format
 
-## Calendar Event Format
-
-Each calendar event represents a full **fight card** (not individual fights). The format is:
+Each event represents a fight card:
 
 ```
-🥊 MAIN EVENT: undercard1, undercard2, undercard3
+MAIN EVENT: undercard1, undercard2
 ```
 
-**Convention:**
-- **MAIN EVENT** (ALL CAPS): The headline fight of the card
-- **undercards** (title case): Supporting fights on the same card, separated by commas
+- **MAIN EVENT** (ALL CAPS): Headline fight
+- **undercards** (title case): Supporting fights
 
-**Example:**
-```
-🥊 ISAAC CRUZ VS LAMONT ROACH: Gabriel Flores vs Joe Cordina, Skye Nicolson vs Yuliahn Luna
-```
+## Run Your Own
 
-This means Isaac Cruz vs Lamont Roach is the main event, with Flores-Cordina and Nicolson-Luna as undercard fights.
+1. Fork this repo (must be public for free GitHub Pages)
+2. Enable GitHub Pages: Settings > Pages > Deploy from branch > main / root
+3. Actions tab > Run workflow
 
-**Event Description** includes:
-- Main event name
-- Full undercard list with bullet points
-- Venue location
-- Broadcast network (e.g., "LIVE ON PRIME VIDEO PPV")
-- Start time
-
----
-
-## Setup Your Own Version
-
-### 1. Create Repository
-
-1. Fork this repo or create a new public repository
-2. The repository must be **Public** for GitHub Pages to work for free
-
-### 2. Add Files
-
-Copy these files to your repository:
-- `requirements.txt` - Python dependencies
-- `scraper.py` - The scraper script
-- `.github/workflows/main.yml` - GitHub Actions workflow
-
-### 3. Configure GitHub Pages
-
-1. Go to repository Settings > Pages
-2. Under Source, select "Deploy from a branch"
-3. Select the `main` branch and `/ (root)` folder
-4. Save
-
-### 4. Run It
-
-1. Go to the Actions tab
-2. Select "Update Boxing Calendar"
-3. Click "Run workflow"
-
-Your calendar will be available at:
-```
-https://raw.githubusercontent.com/<YOUR-USERNAME>/<REPO-NAME>/refs/heads/main/boxing_schedule.ics
-```
-
----
+Your calendar: `https://raw.githubusercontent.com/<USER>/<REPO>/refs/heads/main/boxing_schedule.ics`
 
 ## Troubleshooting
 
-This scraper depends on The Ring Magazine website structure. If they redesign their site, the scraper may break.
-
-Common issues:
-- **No fights found:** The page structure may have changed. Check if fight detail pages still exist at `/en/schedule/fights/<slug>`.
-- **Timeout errors:** The page may be slow to load. Try increasing the timeout values in the script.
-- **Missing dates:** Some fights may not have dates listed yet on the source page.
-- **Duplicate fights:** The scraper uses fuzzy name matching to deduplicate. If you see duplicates, the fighter names may be formatted differently on different pages.
-- **Wrong grouping:** Fights are grouped by date and venue. If fights appear on separate cards when they should be together, check if the venue names match exactly.
-
----
+- **No fights found:** Website structure may have changed
+- **Timeout errors:** Try increasing timeout values in script
+- **Missing dates:** Source may not have dates listed yet
+- **Duplicates:** Fighter names may differ across pages
 
 ## License
 
-Open source. Fork and modify as needed.
+MIT License. Fork and modify freely.
