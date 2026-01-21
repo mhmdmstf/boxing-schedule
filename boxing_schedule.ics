@@ -26,16 +26,14 @@ DESCRIPTION:Main Event: EFE AJAGBA VS CHARLES MARTIN\n\nLocation: Meta Ape
 LOCATION:Meta Apex\, Las Vegas\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 JAZZA DICKENS VS ANTHONY CACACE: Jono Carroll vs Colm Murphy\
- , Pierce O'Leary vs Chamberlain
-DTSTART:20260314T180000
-DTEND:20260314T220000
-UID:JazzaDickensvsAnthonyCacace20260314@boxingbot
-DESCRIPTION:Main Event: JAZZA DICKENS VS ANTHONY CACACE\n\nUndercard:\n  
- • Jono Carroll vs Colm Murphy\n  • Pierce O'Leary vs Chamberlain\n\nLo
- cation: 3Arena\, Dublin\, IE\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTim
- e: 6:00 PM
-LOCATION:3Arena\, Dublin\, IE
+SUMMARY:🥊 STEVEN BUTLER VS RAMADAN HISENI
+DTSTART:20260307T010000
+DTEND:20260307T050000
+UID:StevenButlervsRamadanHiseni20260307@boxingbot
+DESCRIPTION:Main Event: STEVEN BUTLER VS RAMADAN HISENI\n\nLocation: Montr
+ eal Casino\, Montreal\, CA\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTime:
+  1:00 AM
+LOCATION:Montreal Casino\, Montreal\, CA
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 BRANDON ADAMS VS AGYARKO
@@ -94,6 +92,17 @@ DESCRIPTION:Main Event: MARIO BARRIOS VS RYAN GARCIA\n\nLocation: T-Mobile
 LOCATION:T-Mobile Arena\, Las Vegas\, US
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:🥊 JONO CARROLL VS COLM MURPHY: Jazza Dickens vs Anthony Cacace\
+ , Pierce O'Leary vs Chamberlain
+DTSTART:20260314T170000
+DTEND:20260314T210000
+UID:JonoCarrollvsColmMurphy20260314@boxingbot
+DESCRIPTION:Main Event: JONO CARROLL VS COLM MURPHY\n\nUndercard:\n  • J
+ azza Dickens vs Anthony Cacace\n  • Pierce O'Leary vs Chamberlain\n\nLoc
+ ation: 3Arena\, Dublin\, IE\nTime: 5:00 PM
+LOCATION:3Arena\, Dublin\, IE
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:🥊 KHALIL COE VS JESSE HART
 DTSTART:20260125T020000
 DTEND:20260125T060000
@@ -143,6 +152,14 @@ DESCRIPTION:Main Event: HUTCHINSON VS EZRA TAYLOR\n\nUndercard:\n  • Mos
 LOCATION:Co-Op Live Arena\, Manchester\, GB
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:🥊 ROARKE KNAPP VS BRANDON THYSSE: Kuse vs Joey Canoy
+DTSTART:20260328T170000
+DTEND:20260328T210000
+UID:RoarkeKnappvsBrandonThysse20260328@boxingbot
+DESCRIPTION:Main Event: ROARKE KNAPP VS BRANDON THYSSE\n\nUndercard:\n  
+ • Kuse vs Joey Canoy\n\nTime: 5:00 PM
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:🥊 MADRIMOV VS DAVID: Muratalla vs Andy Cruz
 DTSTART:20260125T020000
 DTEND:20260125T060000
@@ -182,13 +199,13 @@ DESCRIPTION:Main Event: NISHIDA VS MERCADO\n\nLocation: Sumiyoshi Sports C
 LOCATION:Sumiyoshi Sports Center\, Osaka\, JP
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 JAMES VS BRYAN JIMENEZ: Persoon vs Caroline Veyre
+SUMMARY:🥊 JOSHUA PAGAN VS BRYAN JIMENEZ: Persoon vs Caroline Veyre
 DTSTART:20260123T010000
 DTEND:20260123T050000
-UID:JamesvsBryanJimenez20260123@boxingbot
-DESCRIPTION:Main Event: JAMES VS BRYAN JIMENEZ\n\nUndercard:\n  • Persoo
- n vs Caroline Veyre\n\nLocation: GLC Live\, Grand Rapids\, US\nTime: 1:00 
- AM
+UID:JoshuaPaganvsBryanJimenez20260123@boxingbot
+DESCRIPTION:Main Event: JOSHUA PAGAN VS BRYAN JIMENEZ\n\nUndercard:\n  •
+  Persoon vs Caroline Veyre\n\nLocation: GLC Live\, Grand Rapids\, US\nTime
+ : 1:00 AM
 LOCATION:GLC Live\, Grand Rapids\, US
 END:VEVENT
 BEGIN:VEVENT
