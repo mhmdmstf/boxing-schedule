@@ -3,27 +3,29 @@ VERSION:2.0
 PRODID:-//Boxing Schedule//github-action//
 X-WR-CALNAME:Boxing Schedule
 BEGIN:VEVENT
-SUMMARY:🥊 TEOFIMO LOPEZ VS SHAKUR STEVENSON: Carlos Adames vs Williams\
- , Carrington vs Carlos Castro\, Keyshawn Davis vs Jamaine Ortiz\, Jarrell 
- Miller vs Kingsley Ibeh
+SUMMARY:🥊 TEOFIMO LOPEZ VS SHAKUR STEVENSON: Subaru Murata vs Gabriel S
+ antisima\, Carlos Adames vs Williams\, Carrington vs Carlos Castro\, Keysh
+ awn Davis vs Jamaine Ortiz\, Jarrell Miller vs Kingsley Ibeh
 DTSTART:20260201T010000
 DTEND:20260201T050000
 UID:TEOFIMOLOPEZvsSHAKURSTEVENSON20260201@boxingbot
 DESCRIPTION:Main Event: TEOFIMO LOPEZ VS SHAKUR STEVENSON\n\nUndercard:\n 
-  • Carlos Adames vs Williams\n  • Carrington vs Carlos Castro\n  • K
- eyshawn Davis vs Jamaine Ortiz\n  • Jarrell Miller vs Kingsley Ibeh\n\nL
- ocation: Madison Square Garden\, New York City\, US\nBroadcast: LIVE AND E
- XCLUSIVELY ON DAZN\nTime: 1:00 AM
+  • Subaru Murata vs Gabriel Santisima\n  • Carlos Adames vs Williams\n
+   • Carrington vs Carlos Castro\n  • Keyshawn Davis vs Jamaine Ortiz\n
+   • Jarrell Miller vs Kingsley Ibeh\n\nLocation: Madison Square Garden\,
+  New York City\, US\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTime: 1:00 A
+ M
 LOCATION:Madison Square Garden\, New York City\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 EFE AJAGBA VS CHARLES MARTIN
-DTSTART:20260214T020000
-DTEND:20260214T060000
-UID:EfeAjagbavsCharlesMartin20260214@boxingbot
-DESCRIPTION:Main Event: EFE AJAGBA VS CHARLES MARTIN\n\nLocation: Meta Ape
- x\, Las Vegas\, US\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTime: 2:00 AM
-LOCATION:Meta Apex\, Las Vegas\, US
+SUMMARY:🥊 NICK BALL VS BRANDON FIGUEROA
+DTSTART:20260207T170000
+DTEND:20260207T210000
+UID:NickBallvsBrandonFigueroa20260207@boxingbot
+DESCRIPTION:Main Event: NICK BALL VS BRANDON FIGUEROA\n\nLocation: M&S Ban
+ k Arena\, Liverpool\, GB\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTime: 5
+ :00 PM
+LOCATION:M&S Bank Arena\, Liverpool\, GB
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 STEVEN BUTLER VS RAMADAN HISENI
@@ -45,6 +47,15 @@ DESCRIPTION:Main Event: BRANDON ADAMS VS AGYARKO\n\nLocation: Toyota Arena
 LOCATION:Toyota Arena\, Ontario\, US
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:🥊 EFE AJAGBA VS CHARLES MARTIN
+DTSTART:20260214T020000
+DTEND:20260214T060000
+UID:EfeAjagbavsCharlesMartin20260214@boxingbot
+DESCRIPTION:Main Event: EFE AJAGBA VS CHARLES MARTIN\n\nLocation: Meta Ape
+ x\, Las Vegas\, US\nTime: 2:00 AM
+LOCATION:Meta Apex\, Las Vegas\, US
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:🥊 DZMITRY ASANAU VS GABRIEL: Albert Ramirez vs Richards
 DTSTART:20260206T010000
 DTEND:20260206T050000
@@ -62,15 +73,6 @@ UID:AdamAzimvsDaniel20260131@boxingbot
 DESCRIPTION:Main Event: ADAM AZIM VS DANIEL\n\nUndercard:\n  • Hennessy 
  vs Bouttell\n\nLocation: Copper Box Arena\, London\, GB\nTime: 6:00 PM
 LOCATION:Copper Box Arena\, London\, GB
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 NICK BALL VS FIGUEROA
-DTSTART:20260207T170000
-DTEND:20260207T210000
-UID:NickBallvsFigueroa20260207@boxingbot
-DESCRIPTION:Main Event: NICK BALL VS FIGUEROA\n\nLocation: M&S Bank Arena\
- , Liverpool\, GB\nTime: 5:00 PM
-LOCATION:M&S Bank Arena\, Liverpool\, GB
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 JACOB BANK VS WILLIAM SCULL: Dina Thorslund vs dos
@@ -152,6 +154,16 @@ DESCRIPTION:Main Event: HUTCHINSON VS EZRA TAYLOR\n\nUndercard:\n  • Mos
 LOCATION:Co-Op Live Arena\, Manchester\, GB
 END:VEVENT
 BEGIN:VEVENT
+SUMMARY:🥊 CHE KENNEALLY VS PERKINS: Shields vs Crews
+DTSTART:20260223T010000
+DTEND:20260223T050000
+UID:CheKenneallyvsPerkins20260223@boxingbot
+DESCRIPTION:Main Event: CHE KENNEALLY VS PERKINS\n\nUndercard:\n  • Shie
+ lds vs Crews\n\nLocation: Little Caesars Arena\, Detroit\, US\nTime: 1:00 
+ AM
+LOCATION:Little Caesars Arena\, Detroit\, US
+END:VEVENT
+BEGIN:VEVENT
 SUMMARY:🥊 ROARKE KNAPP VS BRANDON THYSSE: Kuse vs Joey Canoy
 DTSTART:20260328T170000
 DTEND:20260328T210000
@@ -181,15 +193,6 @@ DESCRIPTION:Main Event: MURTAZALIEV VS JOSH KELLY\n\nUndercard:\n  • Jos
 LOCATION:Utilita Arena\, Newcastle\, GB
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 NAVARRETE VS EDUARDO NUNEZ
-DTSTART:20260301T010000
-DTEND:20260301T050000
-UID:NavarretevsEduardoNunez20260301@boxingbot
-DESCRIPTION:Main Event: NAVARRETE VS EDUARDO NUNEZ\n\nLocation: Desert Dia
- mond Arena\, Glendale\, US\nTime: 1:00 AM
-LOCATION:Desert Diamond Arena\, Glendale\, US
-END:VEVENT
-BEGIN:VEVENT
 SUMMARY:🥊 NISHIDA VS MERCADO
 DTSTART:20260215T080000
 DTEND:20260215T120000
@@ -197,6 +200,15 @@ UID:NishidavsMercado20260215@boxingbot
 DESCRIPTION:Main Event: NISHIDA VS MERCADO\n\nLocation: Sumiyoshi Sports C
  enter\, Osaka\, JP\nTime: 8:00 AM
 LOCATION:Sumiyoshi Sports Center\, Osaka\, JP
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 JHON OROBIO VS YOMAR ALAMO
+DTSTART:20260306T020000
+DTEND:20260306T060000
+UID:JhonOrobiovsYomarAlamo20260306@boxingbot
+DESCRIPTION:Main Event: JHON OROBIO VS YOMAR ALAMO\n\nLocation: Montreal C
+ asino\, Montreal\, CA\nTime: 2:00 AM
+LOCATION:Montreal Casino\, Montreal\, CA
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 JOSHUA PAGAN VS BRYAN JIMENEZ: Persoon vs Caroline Veyre
@@ -236,13 +248,22 @@ DESCRIPTION:Main Event: RODRIGUEZ VS AUSTIN DEANDA\n\nUndercard:\n  • Ro
 LOCATION:Meta Apex\, Las Vegas\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 SHIELDS VS CREWS
-DTSTART:20250223T010000
-DTEND:20250223T050000
-UID:ShieldsvsCrews20250223@boxingbot
-DESCRIPTION:Main Event: SHIELDS VS CREWS\n\nLocation: Little Caesars Arena
- \, Detroit\, US\nTime: 1:00 AM
-LOCATION:Little Caesars Arena\, Detroit\, US
+SUMMARY:🥊 SHORI UMEZU VS FUMIYA FUSE
+DTSTART:20260207T080000
+DTEND:20260207T120000
+UID:ShoriUmezuvsFumiyaFuse20260207@boxingbot
+DESCRIPTION:Main Event: SHORI UMEZU VS FUMIYA FUSE\n\nLocation: Korakuen H
+ all\, Tokyo\, JP\nTime: 8:00 AM
+LOCATION:Korakuen Hall\, Tokyo\, JP
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 ZAMORANO VS VERONICA
+DTSTART:20260222T020000
+DTEND:20260222T060000
+UID:ZamoranovsVeronica20260222@boxingbot
+DESCRIPTION:Main Event: ZAMORANO VS VERONICA\n\nLocation: Palenque Expogan
+ \, Hermosillo\, MX\nTime: 2:00 AM
+LOCATION:Palenque Expogan\, Hermosillo\, MX
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 XANDER ZAYAS VS ABASS BARAOU
