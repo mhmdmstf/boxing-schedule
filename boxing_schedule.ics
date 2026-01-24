@@ -3,29 +3,28 @@ VERSION:2.0
 PRODID:-//Boxing Schedule//github-action//
 X-WR-CALNAME:Boxing Schedule
 BEGIN:VEVENT
-SUMMARY:🥊 TEOFIMO LOPEZ VS SHAKUR STEVENSON: Subaru Murata vs Gabriel S
- antisima\, Carlos Adames vs Williams\, Carrington vs Carlos Castro\, Keysh
- awn Davis vs Jamaine Ortiz\, Jarrell Miller vs Kingsley Ibeh
+SUMMARY:🥊 TEOFIMO LOPEZ VS SHAKUR STEVENSON: Carlos Adames vs Williams\
+ , Carrington vs Carlos Castro\, Keyshawn Davis vs Jamaine Ortiz\, Jarrell 
+ Miller vs Kingsley Ibeh
 DTSTART:20260201T010000
 DTEND:20260201T050000
 UID:TEOFIMOLOPEZvsSHAKURSTEVENSON20260201@boxingbot
 DESCRIPTION:Main Event: TEOFIMO LOPEZ VS SHAKUR STEVENSON\n\nUndercard:\n 
-  • Subaru Murata vs Gabriel Santisima\n  • Carlos Adames vs Williams\n
-   • Carrington vs Carlos Castro\n  • Keyshawn Davis vs Jamaine Ortiz\n
-   • Jarrell Miller vs Kingsley Ibeh\n\nLocation: Madison Square Garden\,
-  New York City\, US\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTime: 1:00 A
- M
+  • Carlos Adames vs Williams\n  • Carrington vs Carlos Castro\n  • K
+ eyshawn Davis vs Jamaine Ortiz\n  • Jarrell Miller vs Kingsley Ibeh\n\nL
+ ocation: Madison Square Garden\, New York City\, US\nBroadcast: LIVE AND E
+ XCLUSIVELY ON DAZN\nTime: 1:00 AM
 LOCATION:Madison Square Garden\, New York City\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 NICK BALL VS BRANDON FIGUEROA
-DTSTART:20260207T170000
-DTEND:20260207T210000
-UID:NickBallvsBrandonFigueroa20260207@boxingbot
-DESCRIPTION:Main Event: NICK BALL VS BRANDON FIGUEROA\n\nLocation: M&S Ban
- k Arena\, Liverpool\, GB\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTime: 5
- :00 PM
-LOCATION:M&S Bank Arena\, Liverpool\, GB
+SUMMARY:🥊 RYOSUKE NISHIDA VS BRYAN MERCADO
+DTSTART:20260215T080000
+DTEND:20260215T120000
+UID:RyosukeNishidavsBryanMercado20260215@boxingbot
+DESCRIPTION:Main Event: RYOSUKE NISHIDA VS BRYAN MERCADO\n\nLocation: Sumi
+ yoshi Sports Center\, Osaka\, JP\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\
+ nTime: 8:00 AM
+LOCATION:Sumiyoshi Sports Center\, Osaka\, JP
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 STEVEN BUTLER VS RAMADAN HISENI
@@ -73,6 +72,15 @@ UID:AdamAzimvsDaniel20260131@boxingbot
 DESCRIPTION:Main Event: ADAM AZIM VS DANIEL\n\nUndercard:\n  • Hennessy 
  vs Bouttell\n\nLocation: Copper Box Arena\, London\, GB\nTime: 6:00 PM
 LOCATION:Copper Box Arena\, London\, GB
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 NICK BALL VS FIGUEROA
+DTSTART:20260207T170000
+DTEND:20260207T210000
+UID:NickBallvsFigueroa20260207@boxingbot
+DESCRIPTION:Main Event: NICK BALL VS FIGUEROA\n\nLocation: M&S Bank Arena\
+ , Liverpool\, GB\nTime: 5:00 PM
+LOCATION:M&S Bank Arena\, Liverpool\, GB
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 JACOB BANK VS WILLIAM SCULL: Dina Thorslund vs dos
@@ -193,13 +201,13 @@ DESCRIPTION:Main Event: MURTAZALIEV VS JOSH KELLY\n\nUndercard:\n  • Jos
 LOCATION:Utilita Arena\, Newcastle\, GB
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 NISHIDA VS MERCADO
-DTSTART:20260215T080000
-DTEND:20260215T120000
-UID:NishidavsMercado20260215@boxingbot
-DESCRIPTION:Main Event: NISHIDA VS MERCADO\n\nLocation: Sumiyoshi Sports C
- enter\, Osaka\, JP\nTime: 8:00 AM
-LOCATION:Sumiyoshi Sports Center\, Osaka\, JP
+SUMMARY:🥊 NAVARRETE VS EDUARDO NUNEZ
+DTSTART:20260301T010000
+DTEND:20260301T050000
+UID:NavarretevsEduardoNunez20260301@boxingbot
+DESCRIPTION:Main Event: NAVARRETE VS EDUARDO NUNEZ\n\nLocation: Desert Dia
+ mond Arena\, Glendale\, US\nTime: 1:00 AM
+LOCATION:Desert Diamond Arena\, Glendale\, US
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 JHON OROBIO VS YOMAR ALAMO
@@ -225,26 +233,6 @@ DTSTART:20260201T010000
 DTEND:20260201T050000
 UID:RohanPolancovsGomez20260201@boxingbot
 DESCRIPTION:Main Event: ROHAN POLANCO VS GOMEZ\n\nTime: 1:00 AM
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 RODRIGUEZ VS AUSTIN DEANDA: Rodriguez vs Cain Sandoval\, Cand
- e vs Max Ornelas\, Callum Walsh vs Carlos Ocampo
-DTSTART:20260124T010000
-DTEND:20260124T050000
-UID:RodriguezvsAustinDeAnda20260124@boxingbot
-DESCRIPTION:Main Event: RODRIGUEZ VS AUSTIN DEANDA\n\nUndercard:\n  • Ro
- driguez vs Cain Sandoval\n  • Cande vs Max Ornelas\n  • Callum Walsh v
- s Carlos Ocampo\n\nLocation: Meta Apex\, Las Vegas\, US\nTime: 1:00 AM
-LOCATION:Meta Apex\, Las Vegas\, US
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 SHORI UMEZU VS FUMIYA FUSE
-DTSTART:20260207T080000
-DTEND:20260207T120000
-UID:ShoriUmezuvsFumiyaFuse20260207@boxingbot
-DESCRIPTION:Main Event: SHORI UMEZU VS FUMIYA FUSE\n\nLocation: Korakuen H
- all\, Tokyo\, JP\nTime: 8:00 AM
-LOCATION:Korakuen Hall\, Tokyo\, JP
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 VALENZUELA VS DIEGO TORRES
