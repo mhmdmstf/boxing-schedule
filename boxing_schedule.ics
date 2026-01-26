@@ -26,15 +26,15 @@ DESCRIPTION:Main Event: EFE AJAGBA VS CHARLES MARTIN\n\nLocation: Meta Ape
 LOCATION:Meta Apex\, Las Vegas\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 JAZZA DICKENS VS ANTHONY CACACE: Jono Carroll vs Colm Murphy\
- , Pierce O'Leary vs Chamberlain
+SUMMARY:🥊 JAZZA DICKENS VS ANTHONY CACACE: Steven Cairns vs Cori Gibbs\
+ , Jono Carroll vs Colm Murphy\, Pierce O'Leary vs Chamberlain
 DTSTART:20260314T180000
 DTEND:20260314T220000
 UID:JazzaDickensvsAnthonyCacace20260314@boxingbot
 DESCRIPTION:Main Event: JAZZA DICKENS VS ANTHONY CACACE\n\nUndercard:\n  
- • Jono Carroll vs Colm Murphy\n  • Pierce O'Leary vs Chamberlain\n\nLo
- cation: 3Arena\, Dublin\, IE\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTim
- e: 6:00 PM
+ • Steven Cairns vs Cori Gibbs\n  • Jono Carroll vs Colm Murphy\n  • 
+ Pierce O'Leary vs Chamberlain\n\nLocation: 3Arena\, Dublin\, IE\nBroadcast
+ : LIVE AND EXCLUSIVELY ON DAZN\nTime: 6:00 PM
 LOCATION:3Arena\, Dublin\, IE
 END:VEVENT
 BEGIN:VEVENT
@@ -55,15 +55,6 @@ DESCRIPTION:Main Event: DZMITRY ASANAU VS GABRIEL\n\nUndercard:\n  • Alb
  ert Ramirez vs Richards\n\nLocation: Montreal Casino\, Montreal\, CA\nTime
  : 1:00 AM
 LOCATION:Montreal Casino\, Montreal\, CA
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 ADAM AZIM VS DANIEL: Hennessy vs Bouttell
-DTSTART:20260131T180000
-DTEND:20260131T220000
-UID:AdamAzimvsDaniel20260131@boxingbot
-DESCRIPTION:Main Event: ADAM AZIM VS DANIEL\n\nUndercard:\n  • Hennessy 
- vs Bouttell\n\nLocation: Copper Box Arena\, London\, GB\nTime: 6:00 PM
-LOCATION:Copper Box Arena\, London\, GB
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 NICK BALL VS FIGUEROA
@@ -121,6 +112,16 @@ UID:RomanFressvsTahirKahrovic20260307@boxingbot
 DESCRIPTION:Main Event: ROMAN FRESS VS TAHIR KAHROVIC\n\nLocation: Messeha
  lle\, Magdeburg\, DE\nTime: 6:00 PM
 LOCATION:Messehalle\, Magdeburg\, DE
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 HENNESSY VS BOUTTELL: Gradus Kraus vs Boris Crighton
+DTSTART:20260131T180000
+DTEND:20260131T220000
+UID:HennessyvsBouttell20260131@boxingbot
+DESCRIPTION:Main Event: HENNESSY VS BOUTTELL\n\nUndercard:\n  • Gradus K
+ raus vs Boris Crighton\n\nLocation: Copper Box Arena\, London\, GB\nTime: 
+ 6:00 PM
+LOCATION:Copper Box Arena\, London\, GB
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:🥊 HUTCHINSON VS EZRA TAYLOR: Moses Itauma vs Franklin\, Zak Mil
