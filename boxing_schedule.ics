@@ -3,17 +3,13 @@ VERSION:2.0
 PRODID:-//Boxing Schedule//github-action//
 X-WR-CALNAME:Boxing Schedule
 BEGIN:VEVENT
-SUMMARY:🥊 TEOFIMO LOPEZ VS SHAKUR STEVENSON: Carlos Adames vs Williams\
- , Carrington vs Carlos Castro\, Keyshawn Davis vs Jamaine Ortiz\, Jarrell 
- Miller vs Kingsley Ibeh
+SUMMARY:🥊 TEOFIMO LOPEZ VS SHAKUR STEVENSON: Carlos Adames vs Williams
 DTSTART:20260201T010000
 DTEND:20260201T050000
 UID:TEOFIMOLOPEZvsSHAKURSTEVENSON20260201@boxingbot
 DESCRIPTION:Main Event: TEOFIMO LOPEZ VS SHAKUR STEVENSON\n\nUndercard:\n 
-  • Carlos Adames vs Williams\n  • Carrington vs Carlos Castro\n  • K
- eyshawn Davis vs Jamaine Ortiz\n  • Jarrell Miller vs Kingsley Ibeh\n\nL
- ocation: Madison Square Garden\, New York City\, US\nBroadcast: LIVE AND E
- XCLUSIVELY ON DAZN\nTime: 1:00 AM
+  • Carlos Adames vs Williams\n\nLocation: Madison Square Garden\, New Yo
+ rk City\, US\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTime: 1:00 AM
 LOCATION:Madison Square Garden\, New York City\, US
 END:VEVENT
 BEGIN:VEVENT
@@ -26,15 +22,12 @@ DESCRIPTION:Main Event: EFE AJAGBA VS CHARLES MARTIN\n\nLocation: Meta Ape
 LOCATION:Meta Apex\, Las Vegas\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 JAZZA DICKENS VS ANTHONY CACACE: Steven Cairns vs Cori Gibbs\
- , Jono Carroll vs Colm Murphy\, Pierce O'Leary vs Chamberlain
+SUMMARY:🥊 JAZZA DICKENS VS ANTHONY CACACE
 DTSTART:20260314T180000
 DTEND:20260314T220000
 UID:JazzaDickensvsAnthonyCacace20260314@boxingbot
-DESCRIPTION:Main Event: JAZZA DICKENS VS ANTHONY CACACE\n\nUndercard:\n  
- • Steven Cairns vs Cori Gibbs\n  • Jono Carroll vs Colm Murphy\n  • 
- Pierce O'Leary vs Chamberlain\n\nLocation: 3Arena\, Dublin\, IE\nBroadcast
- : LIVE AND EXCLUSIVELY ON DAZN\nTime: 6:00 PM
+DESCRIPTION:Main Event: JAZZA DICKENS VS ANTHONY CACACE\n\nLocation: 3Aren
+ a\, Dublin\, IE\nBroadcast: LIVE AND EXCLUSIVELY ON DAZN\nTime: 6:00 PM
 LOCATION:3Arena\, Dublin\, IE
 END:VEVENT
 BEGIN:VEVENT
@@ -47,13 +40,12 @@ DESCRIPTION:Main Event: BRANDON ADAMS VS AGYARKO\n\nLocation: Toyota Arena
 LOCATION:Toyota Arena\, Ontario\, US
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 DZMITRY ASANAU VS GABRIEL: Albert Ramirez vs Richards
+SUMMARY:🥊 DZMITRY ASANAU VS GABRIEL
 DTSTART:20260206T010000
 DTEND:20260206T050000
 UID:DzmitryAsanauvsGabriel20260206@boxingbot
-DESCRIPTION:Main Event: DZMITRY ASANAU VS GABRIEL\n\nUndercard:\n  • Alb
- ert Ramirez vs Richards\n\nLocation: Montreal Casino\, Montreal\, CA\nTime
- : 1:00 AM
+DESCRIPTION:Main Event: DZMITRY ASANAU VS GABRIEL\n\nLocation: Montreal Ca
+ sino\, Montreal\, CA\nTime: 1:00 AM
 LOCATION:Montreal Casino\, Montreal\, CA
 END:VEVENT
 BEGIN:VEVENT
@@ -66,187 +58,12 @@ DESCRIPTION:Main Event: NICK BALL VS FIGUEROA\n\nLocation: M&S Bank Arena\
 LOCATION:M&S Bank Arena\, Liverpool\, GB
 END:VEVENT
 BEGIN:VEVENT
-SUMMARY:🥊 JACOB BANK VS WILLIAM SCULL: Dina Thorslund vs dos
+SUMMARY:🥊 JACOB BANK VS WILLIAM SCULL
 DTSTART:20260131T180000
 DTEND:20260131T220000
 UID:JacobBankvsWilliamScull20260131@boxingbot
-DESCRIPTION:Main Event: JACOB BANK VS WILLIAM SCULL\n\nUndercard:\n  • D
- ina Thorslund vs dos\n\nLocation: Sydbank Arena\, Kolding\, DK\nTime: 6:00
-  PM
+DESCRIPTION:Main Event: JACOB BANK VS WILLIAM SCULL\n\nLocation: Sydbank A
+ rena\, Kolding\, DK\nTime: 6:00 PM
 LOCATION:Sydbank Arena\, Kolding\, DK
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 MARIO BARRIOS VS RYAN GARCIA
-DTSTART:20260222T010000
-DTEND:20260222T050000
-UID:MarioBarriosvsRyanGarcia20260222@boxingbot
-DESCRIPTION:Main Event: MARIO BARRIOS VS RYAN GARCIA\n\nLocation: T-Mobile
-  Arena\, Las Vegas\, US\nTime: 1:00 AM
-LOCATION:T-Mobile Arena\, Las Vegas\, US
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 OWEN COOPER VS URSU
-DTSTART:20260228T170000
-DTEND:20260228T210000
-UID:OwenCoopervsUrsu20260228@boxingbot
-DESCRIPTION:Main Event: OWEN COOPER VS URSU\n\nLocation: Vaillant Live\, D
- erby\, Derby\, GB\nTime: 5:00 PM
-LOCATION:Vaillant Live\, Derby\, Derby\, GB
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 ISHMAEL DAVIS VS BILAL FAWAZ: Sandy Ryan vs Ramos\, Leigh Woo
- d vs Warrington
-DTSTART:20260221T170000
-DTEND:20260221T210000
-UID:IshmaelDavisvsBilalFawaz20260221@boxingbot
-DESCRIPTION:Main Event: ISHMAEL DAVIS VS BILAL FAWAZ\n\nUndercard:\n  • 
- Sandy Ryan vs Ramos\n  • Leigh Wood vs Warrington\n\nLocation: Motorpoin
- t Arena \, Nottingham\, GB\nTime: 5:00 PM
-LOCATION:Motorpoint Arena \, Nottingham\, GB
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 ROMAN FRESS VS TAHIR KAHROVIC
-DTSTART:20260307T180000
-DTEND:20260307T220000
-UID:RomanFressvsTahirKahrovic20260307@boxingbot
-DESCRIPTION:Main Event: ROMAN FRESS VS TAHIR KAHROVIC\n\nLocation: Messeha
- lle\, Magdeburg\, DE\nTime: 6:00 PM
-LOCATION:Messehalle\, Magdeburg\, DE
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 HENNESSY VS BOUTTELL: Gradus Kraus vs Boris Crighton
-DTSTART:20260131T180000
-DTEND:20260131T220000
-UID:HennessyvsBouttell20260131@boxingbot
-DESCRIPTION:Main Event: HENNESSY VS BOUTTELL\n\nUndercard:\n  • Gradus K
- raus vs Boris Crighton\n\nLocation: Copper Box Arena\, London\, GB\nTime: 
- 6:00 PM
-LOCATION:Copper Box Arena\, London\, GB
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 HUTCHINSON VS EZRA TAYLOR: Moses Itauma vs Franklin\, Zak Mil
- ler vs Liam Davies\, Thompson vs Brad Pauls
-DTSTART:20260328T210000
-DTEND:20260329T010000
-UID:HutchinsonvsEzraTaylor20260328@boxingbot
-DESCRIPTION:Main Event: HUTCHINSON VS EZRA TAYLOR\n\nUndercard:\n  • Mos
- es Itauma vs Franklin\n  • Zak Miller vs Liam Davies\n  • Thompson vs 
- Brad Pauls\n\nLocation: Co-Op Live Arena\, Manchester\, GB\nTime: 9:00 PM
-LOCATION:Co-Op Live Arena\, Manchester\, GB
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 CHE KENNEALLY VS PERKINS: Shields vs Crews
-DTSTART:20260223T010000
-DTEND:20260223T050000
-UID:CheKenneallyvsPerkins20260223@boxingbot
-DESCRIPTION:Main Event: CHE KENNEALLY VS PERKINS\n\nUndercard:\n  • Shie
- lds vs Crews\n\nLocation: Little Caesars Arena\, Detroit\, US\nTime: 1:00 
- AM
-LOCATION:Little Caesars Arena\, Detroit\, US
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 ROARKE KNAPP VS BRANDON THYSSE: Kuse vs Joey Canoy
-DTSTART:20260328T170000
-DTEND:20260328T210000
-UID:RoarkeKnappvsBrandonThysse20260328@boxingbot
-DESCRIPTION:Main Event: ROARKE KNAPP VS BRANDON THYSSE\n\nUndercard:\n  
- • Kuse vs Joey Canoy\n\nTime: 5:00 PM
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 MEDINA VS ADRIAN CURIEL
-DTSTART:20260207T010000
-DTEND:20260207T050000
-UID:MedinavsAdrianCuriel20260207@boxingbot
-DESCRIPTION:Main Event: MEDINA VS ADRIAN CURIEL\n\nLocation: Jalisco\, Mex
- ico\, Guadalajara\, MX\nTime: 1:00 AM
-LOCATION:Jalisco\, Mexico\, Guadalajara\, MX
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 SUBARU MURATA VS SANTISIMA
-DTSTART:20260207T000000
-DTEND:20260207T040000
-UID:SubaruMuratavsSantisima20260207@boxingbot
-DESCRIPTION:Main Event: SUBARU MURATA VS SANTISIMA\n\nTime: 12:00 AM
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 MURTAZALIEV VS JOSH KELLY: Josh Padley vs Belmehdi\, Nur vs T
- aylah Gentzen
-DTSTART:20260131T170000
-DTEND:20260131T210000
-UID:MurtazalievvsJoshKelly20260131@boxingbot
-DESCRIPTION:Main Event: MURTAZALIEV VS JOSH KELLY\n\nUndercard:\n  • Jos
- h Padley vs Belmehdi\n  • Nur vs Taylah Gentzen\n\nLocation: Utilita Are
- na\, Newcastle\, GB\nTime: 5:00 PM
-LOCATION:Utilita Arena\, Newcastle\, GB
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 NAVARRETE VS EDUARDO NUNEZ
-DTSTART:20260301T010000
-DTEND:20260301T050000
-UID:NavarretevsEduardoNunez20260301@boxingbot
-DESCRIPTION:Main Event: NAVARRETE VS EDUARDO NUNEZ\n\nLocation: Desert Dia
- mond Arena\, Glendale\, US\nTime: 1:00 AM
-LOCATION:Desert Diamond Arena\, Glendale\, US
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 NISHIDA VS MERCADO
-DTSTART:20260215T080000
-DTEND:20260215T120000
-UID:NishidavsMercado20260215@boxingbot
-DESCRIPTION:Main Event: NISHIDA VS MERCADO\n\nLocation: Sumiyoshi Sports C
- enter\, Osaka\, JP\nTime: 8:00 AM
-LOCATION:Sumiyoshi Sports Center\, Osaka\, JP
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 ELIJAH PIERCE VS LORENZO PARRA
-DTSTART:20260301T020000
-DTEND:20260301T060000
-UID:ElijahPiercevsLorenzoParra20260301@boxingbot
-DESCRIPTION:Main Event: ELIJAH PIERCE VS LORENZO PARRA\n\nLocation: Turnin
- g Stone Resort and Casino\, New York\, US\nTime: 2:00 AM
-LOCATION:Turning Stone Resort and Casino\, New York\, US
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 ROHAN POLANCO VS GOMEZ
-DTSTART:20260201T010000
-DTEND:20260201T050000
-UID:RohanPolancovsGomez20260201@boxingbot
-DESCRIPTION:Main Event: ROHAN POLANCO VS GOMEZ\n\nTime: 1:00 AM
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 SHORI UMEZU VS FUMIYA FUSE
-DTSTART:20260207T080000
-DTEND:20260207T120000
-UID:ShoriUmezuvsFumiyaFuse20260207@boxingbot
-DESCRIPTION:Main Event: SHORI UMEZU VS FUMIYA FUSE\n\nLocation: Korakuen H
- all\, Tokyo\, JP\nTime: 8:00 AM
-LOCATION:Korakuen Hall\, Tokyo\, JP
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 VALENZUELA VS DIEGO TORRES
-DTSTART:20260202T020000
-DTEND:20260202T060000
-UID:ValenzuelavsDiegoTorres20260202@boxingbot
-DESCRIPTION:Main Event: VALENZUELA VS DIEGO TORRES\n\nLocation: Meta Apex\
- , Las Vegas\, US\nTime: 2:00 AM
-LOCATION:Meta Apex\, Las Vegas\, US
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 ZAMORANO VS VERONICA
-DTSTART:20260222T020000
-DTEND:20260222T060000
-UID:ZamoranovsVeronica20260222@boxingbot
-DESCRIPTION:Main Event: ZAMORANO VS VERONICA\n\nLocation: Palenque Expogan
- \, Hermosillo\, MX\nTime: 2:00 AM
-LOCATION:Palenque Expogan\, Hermosillo\, MX
-END:VEVENT
-BEGIN:VEVENT
-SUMMARY:🥊 XANDER ZAYAS VS ABASS BARAOU
-DTSTART:20260201T010000
-DTEND:20260201T050000
-UID:XanderZayasvsAbassBaraou20260201@boxingbot
-DESCRIPTION:Main Event: XANDER ZAYAS VS ABASS BARAOU\n\nLocation: Coliseo 
- de Puerto Rico\, San Juan\, PR\nTime: 1:00 AM
-LOCATION:Coliseo de Puerto Rico\, San Juan\, PR
 END:VEVENT
 END:VCALENDAR
