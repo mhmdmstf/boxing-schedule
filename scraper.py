@@ -1,6 +1,6 @@
 import re
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import TypedDict
 
 from icalendar import Calendar, Event
@@ -411,7 +411,7 @@ def run() -> list[Card]:
     final_cards: list[Card] = []
     for key, card in cards.items():
         if not card['main_event'] and card['undercards']:
-            card['main_event'] = card['undercards'].pop(0)
+            card['main_event'] = card['undercards'].pop()
 
         if card['main_event']:
             card['undercards'] = [
@@ -479,7 +479,7 @@ def create_calendar(cards: list[Card]) -> Calendar:
             except:
                 pass
 
-            dt = dt.replace(hour=hour, minute=minute, second=0)
+            dt = dt.replace(hour=hour, minute=minute, second=0, tzinfo=timezone.utc)
 
             event.add('dtstart', dt)
             event.add('dtend', dt + timedelta(hours=4))
