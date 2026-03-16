@@ -2,55 +2,53 @@
 
 [![Update Boxing Calendar](https://github.com/mhmdmstf/boxing-schedule/actions/workflows/main.yml/badge.svg)](https://github.com/mhmdmstf/boxing-schedule/actions/workflows/main.yml)
 
-Auto-updating iCal feed for upcoming boxing matches, scraped from The Ring Magazine.
+A self-updating iCal feed for upcoming boxing matches, scraped daily from [The Ring Magazine](https://ringmagazine.com/en/schedule/fights).
 
 ## Subscribe
+
+Paste this URL into your calendar app:
 
 ```
 https://raw.githubusercontent.com/mhmdmstf/boxing-schedule/refs/heads/main/boxing_schedule.ics
 ```
 
-**Apple Calendar:** File > New Calendar Subscription > paste URL > set Auto-refresh to "Every Day"
+**Apple Calendar:** File > New Calendar Subscription > paste URL > Auto-refresh: Every Day
 
-**Google Calendar:** Other calendars > + > From URL > paste URL
+**Google Calendar:** Other calendars (+) > From URL > paste URL
 
 **Outlook:** Add calendar > Subscribe from web > paste URL
 
+## What You Get
+
+Each calendar event is a full **fight card**, not individual bouts:
+
+```
+🥊 JAKE PAUL VS ANTHONY JOSHUA (+4 more)
+```
+
+The event description lists the full card — main event in caps, undercard fights below, plus venue, broadcast, and start time. Events include timezone info based on the venue location.
+
+Past events are automatically removed after one week.
+
 ## How It Works
 
-1. Python script uses Playwright to load [The Ring Magazine schedule](https://ringmagazine.com/en/schedule/fights)
-2. Clicks "Load More" to expand the full schedule
-3. Scrapes fighter names, dates, locations, times, and broadcast info
-4. Groups fights into cards by date and venue
-5. Creates one calendar event per card
-6. GitHub Actions runs daily at 06:00 UTC
+1. A Python script scrapes The Ring Magazine schedule using Playwright
+2. Fights are grouped into cards by date and venue
+3. Main events are detected from the source page formatting
+4. An `.ics` calendar file is generated with timezone-aware times
+5. GitHub Actions runs this daily at 06:00 UTC and commits any changes
 
-## Event Format
+## Self-Host
 
-Each event represents a fight card:
+1. Fork this repo (must be **public** for free GitHub Pages)
+2. Go to Settings > Pages > Deploy from `main` branch
+3. Go to Actions > "Update Boxing Calendar" > Run workflow
 
+Your feed will be at:
 ```
-MAIN EVENT: undercard1, undercard2
+https://raw.githubusercontent.com/<YOU>/<REPO>/refs/heads/main/boxing_schedule.ics
 ```
-
-- **MAIN EVENT** (ALL CAPS): Headline fight
-- **undercards** (title case): Supporting fights
-
-## Run Your Own
-
-1. Fork this repo (must be public for free GitHub Pages)
-2. Enable GitHub Pages: Settings > Pages > Deploy from branch > main / root
-3. Actions tab > Run workflow
-
-Your calendar: `https://raw.githubusercontent.com/<USER>/<REPO>/refs/heads/main/boxing_schedule.ics`
-
-## Troubleshooting
-
-- **No fights found:** Website structure may have changed
-- **Timeout errors:** Try increasing timeout values in script
-- **Missing dates:** Source may not have dates listed yet
-- **Duplicates:** Fighter names may differ across pages
 
 ## License
 
-MIT License. Fork and modify freely.
+Open source. Fork and modify as needed.

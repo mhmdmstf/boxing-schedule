@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:ringmagazine.com)"
+      "WebFetch(domain:ringmagazine.com)",
+      "Bash(find:*)",
+      "Bash(git:*)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,79 +1,307 @@
+"""
+Boxing Schedule Scraper v2
+Scrapes Ring Magazine for upcoming boxing fights, groups them into cards,
+and generates a subscribable iCalendar (.ics) file.
+"""
+
+import logging
 import re
 import sys
-from datetime import datetime, timedelta, timezone
-from typing import TypedDict
+import traceback
+from dataclasses import dataclass, field
+from datetime import datetime, timedelta
+from typing import Optional
+from zoneinfo import ZoneInfo
 
 from icalendar import Calendar, Event
 from playwright.sync_api import sync_playwright
 
+# ---------------------------------------------------------------------------
+# Configuration
+# ---------------------------------------------------------------------------
 
-# Type definitions
-class Fight(TypedDict):
+SCHEDULE_URL = "https://ringmagazine.com/en/schedule/fights"
+LOAD_MORE_CLICKS = 5
+PAGE_LOAD_TIMEOUT = 60_000
+DETAIL_PAGE_TIMEOUT = 30_000
+DETAIL_PAGE_WAIT = 2_000
+DEFAULT_HOUR = 20
+DEFAULT_MINUTE = 0
+EVENT_DURATION_HOURS = 4
+PAST_EVENT_CUTOFF_DAYS = 7
+OUTPUT_FILE = "boxing_schedule.ics"
+
+log = logging.getLogger("boxing")
+
+# ---------------------------------------------------------------------------
+# Data Model
+# ---------------------------------------------------------------------------
+
+
+@dataclass
+class Fight:
     fighter1: str
     fighter2: str
-    title: str
-    date_raw: str
-    location: str
-    time: str
-    broadcast: str
-    is_main_event: bool
+    is_main_event: bool = False
+    source: str = ""
+
+    @property
+    def title(self) -> str:
+        return f"{self.fighter1} vs {self.fighter2}"
 
 
-class Card(TypedDict):
-    main_event: Fight | None
-    undercards: list[Fight]
-    date_raw: str
-    location: str
-    time: str
-    broadcast: str
+@dataclass
+class Card:
+    date: Optional[datetime] = None
+    date_raw: str = "TBD"
+    location: str = ""
+    time_raw: str = ""
+    timezone: str = "America/New_York"
+    broadcast: str = ""
+    fights: list[Fight] = field(default_factory=list)
+
+    @property
+    def main_event(self) -> Optional[Fight]:
+        for f in self.fights:
+            if f.is_main_event:
+                return f
+        return self.fights[0] if self.fights else None
+
+    @property
+    def undercards(self) -> list[Fight]:
+        main = self.main_event
+        return [f for f in self.fights if f is not main]
+
+    def add_fight(self, fight: Fight) -> bool:
+        """Add fight if not a duplicate. Returns True if added."""
+        for existing in self.fights:
+            if fighters_match(existing, fight):
+                return False
+        self.fights.append(fight)
+        return True
 
 
-# Timeout constants (milliseconds)
-PAGE_LOAD_TIMEOUT_MS = 60000
-DETAIL_PAGE_TIMEOUT_MS = 30000
-INITIAL_LOAD_WAIT_MS = 5000
-POST_CLICK_WAIT_MS = 2000
+# ---------------------------------------------------------------------------
+# Name Matching
+# ---------------------------------------------------------------------------
 
-# Scraping constants
-LOAD_MORE_CLICKS = 5
-LOOKAHEAD_LINES = 12
-MIN_FIGHTER_NAME_LENGTH = 3
 
-# Compiled regex patterns
-DATE_PATTERN = re.compile(
-    r'(Sun|Mon|Tue|Wed|Thu|Fri|Sat),\s+'
-    r'(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2}\s+\d{4}'
+def normalize_name(name: str) -> str:
+    """Normalize a fighter name for comparison."""
+    name = name.lower().strip()
+    name = re.sub(r"\s+", " ", name)
+    name = re.sub(r"\s+(jr\.?|sr\.?|iii|ii|iv)$", "", name)
+    return name
+
+
+def _names_match(n1: str, n2: str) -> bool:
+    """Check if two normalized fighter names refer to the same person."""
+    if n1 == n2:
+        return True
+    parts1 = n1.split()
+    parts2 = n2.split()
+    if not parts1 or not parts2:
+        return False
+    # Last names must match exactly
+    if parts1[-1] != parts2[-1]:
+        return False
+    # If both have first names, they must match
+    if len(parts1) > 1 and len(parts2) > 1:
+        return parts1[0] == parts2[0] or parts1[0][:3] == parts2[0][:3]
+    # One is a single name (just last name) — accept the last name match
+    return True
+
+
+def fighters_match(fight1: Fight, fight2: Fight) -> bool:
+    """Check if two fights are the same matchup (either order)."""
+    a1 = normalize_name(fight1.fighter1)
+    a2 = normalize_name(fight1.fighter2)
+    b1 = normalize_name(fight2.fighter1)
+    b2 = normalize_name(fight2.fighter2)
+    forward = _names_match(a1, b1) and _names_match(a2, b2)
+    crossed = _names_match(a1, b2) and _names_match(a2, b1)
+    return forward or crossed
+
+
+# ---------------------------------------------------------------------------
+# Date / Time / Timezone Parsing
+# ---------------------------------------------------------------------------
+
+DATE_FORMATS = [
+    "%b %d %Y",
+    "%B %d %Y",
+    "%B %d, %Y",
+    "%b %d, %Y",
+    "%d %B %Y",
+    "%d %b %Y",
+]
+
+
+def parse_date(date_str: str) -> Optional[datetime]:
+    """Parse a date string into a datetime. Returns None on failure."""
+    if not date_str or date_str == "TBD":
+        return None
+    cleaned = re.sub(
+        r"^(Sun|Mon|Tue|Wed|Thu|Fri|Sat)(day|nesday|urday)?,?\s*", "", date_str
+    )
+    for fmt in DATE_FORMATS:
+        try:
+            return datetime.strptime(cleaned.strip(), fmt)
+        except ValueError:
+            continue
+    log.warning("Could not parse date: '%s'", date_str)
+    return None
+
+
+def parse_time(time_str: str) -> tuple[int, int]:
+    """Extract hour and minute from a time string. Returns (20, 0) default."""
+    if not time_str:
+        return DEFAULT_HOUR, DEFAULT_MINUTE
+    # AM/PM format
+    m = re.match(r"(\d{1,2}):(\d{2})\s*(AM|PM)", time_str, re.IGNORECASE)
+    if m:
+        hour = int(m.group(1))
+        minute = int(m.group(2))
+        if m.group(3).upper() == "PM" and hour != 12:
+            hour += 12
+        elif m.group(3).upper() == "AM" and hour == 12:
+            hour = 0
+        return hour, minute
+    # GMT / 24h format
+    m = re.match(r"(\d{1,2}):(\d{2})", time_str)
+    if m:
+        return int(m.group(1)), int(m.group(2))
+    return DEFAULT_HOUR, DEFAULT_MINUTE
+
+
+# Country suffix -> timezone (checked at end of location string)
+_COUNTRY_TZ: list[tuple[str, str]] = [
+    (", GB", "Europe/London"),
+    (", UK", "Europe/London"),
+    (", AU", "Australia/Sydney"),
+    (", JP", "Asia/Tokyo"),
+    (", DE", "Europe/Berlin"),
+    (", DK", "Europe/Copenhagen"),
+    (", MX", "America/Mexico_City"),
+    (", PR", "America/Puerto_Rico"),
+    (", SA", "Asia/Riyadh"),
+    (", AE", "Asia/Dubai"),
+    (", GH", "Africa/Accra"),
+    (", CA", "America/Toronto"),
+    (", IE", "Europe/Dublin"),
+    (", FR", "Europe/Paris"),
+    (", PH", "Asia/Manila"),
+    (", NZ", "Pacific/Auckland"),
+    (", KR", "Asia/Seoul"),
+]
+
+# City/region keywords -> timezone (checked anywhere in location)
+_CITY_TZ: list[tuple[list[str], str]] = [
+    (["LONDON", "MANCHESTER", "BIRMINGHAM", "LEEDS", "NOTTINGHAM",
+      "DERBY", "SHEFFIELD", "LIVERPOOL"], "Europe/London"),
+    (["SYDNEY", "MELBOURNE", "BRISBANE", "GOLD COAST", "PERTH",
+      "ADELAIDE"], "Australia/Sydney"),
+    (["TOKYO", "OSAKA", "NAGOYA", "SAITAMA"], "Asia/Tokyo"),
+    (["OBERHAUSEN", "BERLIN", "HAMBURG"], "Europe/Berlin"),
+    (["KOLDING", "COPENHAGEN"], "Europe/Copenhagen"),
+    (["RIYADH", "JEDDAH", "SAUDI"], "Asia/Riyadh"),
+    (["DUBAI", "ABU DHABI"], "Asia/Dubai"),
+    (["ACCRA", "GHANA"], "Africa/Accra"),
+    (["MONTREAL", "TORONTO", "VANCOUVER", "GATINEAU", "OTTAWA",
+      "CALGARY"], "America/Toronto"),
+    (["PUERTO RICO", "SAN JUAN"], "America/Puerto_Rico"),
+    # US West Coast
+    (["LAS VEGAS", "NEVADA", "LOS ANGELES", "CALIFORNIA", "PHOENIX",
+      "GLENDALE", "STOCKTON", "ANAHEIM", "INGLEWOOD"], "America/Los_Angeles"),
+    # US Central
+    (["CHICAGO", "ILLINOIS", "SAN ANTONIO", "HOUSTON", "DALLAS",
+      "TEXAS"], "America/Chicago"),
+]
+
+
+def infer_timezone(time_str: str, location: str) -> str:
+    """Guess timezone from time string and location."""
+    if "GMT" in time_str.upper():
+        return "Europe/London"
+    loc_upper = location.upper().strip()
+    # Check city keywords first (more specific than country suffix)
+    for keywords, tz in _CITY_TZ:
+        if any(kw in loc_upper for kw in keywords):
+            return tz
+    # Then check country suffix at end of string
+    for suffix, tz in _COUNTRY_TZ:
+        if loc_upper.endswith(suffix.upper()):
+            return tz
+    return "America/New_York"
+
+
+# ---------------------------------------------------------------------------
+# Scraping — Main Page
+# ---------------------------------------------------------------------------
+
+# Regex patterns
+_DATE_PAT = re.compile(
+    r"(Sun|Mon|Tue|Wed|Thu|Fri|Sat),\s+"
+    r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2}\s+\d{4}"
 )
-LONG_DATE_PATTERN = re.compile(
-    r'(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday),\s+'
-    r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+'
-    r'(\d{1,2}),?\s+(\d{4})'
+_TIME_PAT = re.compile(r"(\d{1,2}:\d{2}\s+(?:AM|PM))\s+(\S+)")
+_GMT_PAT = re.compile(r"(\d{1,2}:\d{2})\s+GMT")
+
+# Words that disqualify a line from being a venue/location
+_LOCATION_NEGATIVE = re.compile(
+    r"(tops|signs|announces?|preview|odds|results|highlights|confirmed|"
+    r"undercard|breaking|report|watch|recap|analysis|exclusive|interview|"
+    r"article|news|update|sources?|weighs?\s+in)",
+    re.IGNORECASE,
 )
-TIME_PATTERN = re.compile(r'(\d{1,2}:\d{2}\s+(?:AM|PM))\s+(\S+)')
-TIME_ONLY_PATTERN = re.compile(r'(\d{1,2}:\d{2}\s*(?:AM|PM))', re.IGNORECASE)
-GMT_PATTERN = re.compile(r'(\d{1,2}:\d{2})\s*GMT', re.IGNORECASE)
 
-# Date conversion maps
-LONG_TO_SHORT_MONTH = {
-    'January': 'Jan', 'February': 'Feb', 'March': 'Mar', 'April': 'Apr',
-    'May': 'May', 'June': 'Jun', 'July': 'Jul', 'August': 'Aug',
-    'September': 'Sep', 'October': 'Oct', 'November': 'Nov', 'December': 'Dec'
-}
-LONG_TO_SHORT_DAY = {
-    'Sunday': 'Sun', 'Monday': 'Mon', 'Tuesday': 'Tue', 'Wednesday': 'Wed',
-    'Thursday': 'Thu', 'Friday': 'Fri', 'Saturday': 'Sat'
-}
+# Known country suffixes for location detection
+_COUNTRY_SUFFIXES = (
+    ", US", ", UK", ", GB", ", AU", ", JP", ", PR", ", MX", ", DE",
+    ", DK", ", CA", ", SA", ", AE", ", GH", ", IE", ", FR", ", ES",
+    ", IT", ", PH", ", NZ", ", ZA", ", KR", ", CN", ", TH",
+)
+
+_VENUE_KEYWORDS = (
+    "ARENA", "CENTER", "CENTRE", "STADIUM", "HALL", "THEATER", "THEATRE",
+    "CASINO", "GARDEN", "COLISEUM", "COLISEO", "DOME", "PAVILION",
+    "AUDITORIUM", "CONVENTION", "EXPO",
+)
 
 
-def scrape_main_page_fights(page) -> list[Fight]:
-    """
-    Scrape fights from the main page, preserving casing to identify main events.
-    Returns list of fights with is_main_event flag and context info.
-    """
-    fights: list[Fight] = []
+def _is_location_line(line: str) -> bool:
+    """Check if a line looks like a venue/location."""
+    if "," not in line or len(line) < 8 or len(line) > 120:
+        return False
+    if line.startswith("|") or line[0].isdigit():
+        return False
+    if _DATE_PAT.search(line):
+        return False
+    if _LOCATION_NEGATIVE.search(line):
+        return False
+    upper = line.upper()
+    return (
+        any(upper.endswith(s) for s in _COUNTRY_SUFFIXES)
+        or any(kw in upper for kw in _VENUE_KEYWORDS)
+    )
 
-    body = page.inner_text('body')
-    lines = [l.strip() for l in body.split('\n') if l.strip()]
+
+def _is_valid_fighter(name: str) -> bool:
+    """Check if a string looks like a fighter name."""
+    return (
+        len(name) >= 3
+        and "CHAMPION" not in name.upper()
+        and not name.isdigit()
+        and not name.startswith("LIVE ")
+        and not _DATE_PAT.match(name)
+    )
+
+
+def scrape_main_page(page) -> list[dict]:
+    """Scrape fights from the main schedule page."""
+    fights = []
+    body = page.inner_text("body")
+    lines = [line.strip() for line in body.split("\n") if line.strip()]
 
     current_date = None
     current_location = None
@@ -84,103 +312,122 @@ def scrape_main_page_fights(page) -> list[Fight]:
     while i < len(lines):
         line = lines[i]
 
-        if DATE_PATTERN.match(line):
+        # Update context
+        if _DATE_PAT.match(line):
             current_date = line
             i += 1
             continue
 
-        time_match = TIME_PATTERN.match(line)
+        time_match = _TIME_PAT.match(line)
         if time_match:
             current_time = time_match.group(1)
             i += 1
             continue
 
-        gmt_match = GMT_PATTERN.match(line)
+        gmt_match = _GMT_PAT.match(line)
         if gmt_match and not current_time:
             current_time = gmt_match.group(1) + " GMT"
             i += 1
             continue
 
-        if line.startswith('LIVE ON ') or line.startswith('LIVE AND '):
+        if line.startswith("LIVE ON ") or line.startswith("LIVE AND "):
             current_broadcast = line
             i += 1
             continue
 
-        if line == 'VS' and i > 0 and i < len(lines) - 1:
+        # Detect fights via VS pattern
+        if line == "VS" and 0 < i < len(lines) - 1:
             fighter1 = lines[i - 1]
             fighter2 = lines[i + 1]
 
-            if (len(fighter1) < MIN_FIGHTER_NAME_LENGTH or
-                len(fighter2) < MIN_FIGHTER_NAME_LENGTH or
-                'CHAMPION' in fighter1.upper() or 'CHAMPION' in fighter2.upper() or
-                fighter1.isdigit() or fighter2.isdigit()):
-                i += 1
-                continue
+            if _is_valid_fighter(fighter1) and _is_valid_fighter(fighter2):
+                is_main_event = fighter1.isupper() and fighter2.isupper()
 
-            is_main_event = fighter1.isupper() and fighter2.isupper()
+                # Look ahead for fight-specific details
+                fight_location = None
+                fight_date = None
+                fight_time = None
+                fight_broadcast = None
 
-            fight_location = None
-            fight_date = None
-            fight_time = None
-            fight_broadcast = None
+                for j in range(i + 2, min(i + 12, len(lines))):
+                    scan = lines[j]
+                    if scan == "VS":
+                        break
+                    if _DATE_PAT.match(scan):
+                        fight_date = scan
+                    tm = _TIME_PAT.match(scan)
+                    if tm:
+                        fight_time = tm.group(1)
+                    gm = _GMT_PAT.match(scan)
+                    if gm and not fight_time:
+                        fight_time = gm.group(1) + " GMT"
+                    if scan.startswith("LIVE ON ") or scan.startswith("LIVE AND "):
+                        fight_broadcast = scan
+                    if _is_location_line(scan) and not fight_location:
+                        fight_location = scan
 
-            for j in range(i + 2, min(i + LOOKAHEAD_LINES, len(lines))):
-                scan_line = lines[j]
-                if scan_line == 'VS':
-                    break
-                if DATE_PATTERN.match(scan_line):
-                    fight_date = scan_line
-                time_match = TIME_PATTERN.match(scan_line)
-                if time_match:
-                    fight_time = time_match.group(1)
-                gmt_match = GMT_PATTERN.match(scan_line)
-                if gmt_match and not fight_time:
-                    fight_time = gmt_match.group(1) + " GMT"
-                if scan_line.startswith('LIVE ON ') or scan_line.startswith('LIVE AND '):
-                    fight_broadcast = scan_line
-                if (',' in scan_line and not scan_line.startswith('|') and
-                    not scan_line.isdigit() and not DATE_PATTERN.match(scan_line) and
-                    len(scan_line) > 5):
-                    fight_location = scan_line
+                final_date = fight_date or current_date
+                final_location = fight_location or current_location
+                final_time = fight_time or current_time
+                final_broadcast = fight_broadcast or current_broadcast
 
-            final_date = fight_date or current_date
-            final_location = fight_location or current_location
-            final_time = fight_time or current_time
-            final_broadcast = fight_broadcast or current_broadcast
+                # Update context for subsequent undercards
+                current_date = fight_date or current_date
+                current_location = fight_location or current_location
+                current_time = fight_time or current_time
+                current_broadcast = fight_broadcast or current_broadcast
 
-            if fight_date:
-                current_date = fight_date
-            if fight_location:
-                current_location = fight_location
-            if fight_time:
-                current_time = fight_time
-            if fight_broadcast:
-                current_broadcast = fight_broadcast
-
-            fights.append({
-                'fighter1': fighter1,
-                'fighter2': fighter2,
-                'title': f"{fighter1} vs {fighter2}",
-                'date_raw': final_date or "TBD",
-                'location': final_location or "",
-                'time': final_time or "",
-                'broadcast': final_broadcast or "",
-                'is_main_event': is_main_event
-            })
+                fights.append({
+                    "fighter1": fighter1,
+                    "fighter2": fighter2,
+                    "date_raw": final_date or "TBD",
+                    "location": final_location or "",
+                    "time": final_time or "",
+                    "broadcast": final_broadcast or "",
+                    "is_main_event": is_main_event,
+                    "source": "main_page",
+                })
 
         i += 1
 
     return fights
 
 
-def scrape_fight_detail(page, url: str) -> Fight | None:
+# ---------------------------------------------------------------------------
+# Scraping — Detail Pages
+# ---------------------------------------------------------------------------
+
+_LONG_DATE_PAT = re.compile(
+    r"(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday),\s+"
+    r"(January|February|March|April|May|June|July|August|September|"
+    r"October|November|December)\s+(\d{1,2}),?\s+(\d{4})"
+)
+_SHORT_DATE_PAT = re.compile(
+    r"(Sun|Mon|Tue|Wed|Thu|Fri|Sat),\s+"
+    r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})\s+(\d{4})"
+)
+_TIME_SEARCH_PAT = re.compile(r"(\d{1,2}:\d{2}\s*(?:AM|PM))", re.IGNORECASE)
+_GMT_SEARCH_PAT = re.compile(r"(\d{1,2}:\d{2})\s*GMT", re.IGNORECASE)
+
+_MONTH_ABBREV = {
+    "January": "Jan", "February": "Feb", "March": "Mar", "April": "Apr",
+    "May": "May", "June": "Jun", "July": "Jul", "August": "Aug",
+    "September": "Sep", "October": "Oct", "November": "Nov", "December": "Dec",
+}
+_DAY_ABBREV = {
+    "Sunday": "Sun", "Monday": "Mon", "Tuesday": "Tue", "Wednesday": "Wed",
+    "Thursday": "Thu", "Friday": "Fri", "Saturday": "Sat",
+}
+
+
+def scrape_fight_detail(page, url: str) -> Optional[dict]:
     """Scrape details from an individual fight page."""
     try:
-        page.goto(url, timeout=DETAIL_PAGE_TIMEOUT_MS)
-        page.wait_for_timeout(POST_CLICK_WAIT_MS)
+        page.goto(url, timeout=DETAIL_PAGE_TIMEOUT)
+        page.wait_for_timeout(DETAIL_PAGE_WAIT)
 
-        body = page.inner_text('body')
-        lines = [l.strip() for l in body.split('\n') if l.strip()]
+        body = page.inner_text("body")
+        lines = [line.strip() for line in body.split("\n") if line.strip()]
 
         fighter1 = None
         fighter2 = None
@@ -188,349 +435,344 @@ def scrape_fight_detail(page, url: str) -> Fight | None:
         location = None
         time_str = None
         broadcast = None
+        is_first_vs = True
 
         for i, line in enumerate(lines):
-            if line.upper() == 'VS' and i > 0 and i < len(lines) - 1:
-                potential_f1 = lines[i - 1]
-                potential_f2 = lines[i + 1]
-                if (len(potential_f1) >= MIN_FIGHTER_NAME_LENGTH and
-                    len(potential_f2) >= MIN_FIGHTER_NAME_LENGTH and
-                    'CHAMPION' not in potential_f1.upper() and
-                    'CHAMPION' not in potential_f2.upper() and
-                    not potential_f1.isdigit() and not potential_f2.isdigit()):
-                    fighter1 = potential_f1
-                    fighter2 = potential_f2
+            # Fighter names via VS pattern
+            if line.upper() == "VS" and 0 < i < len(lines) - 1:
+                f1 = lines[i - 1]
+                f2 = lines[i + 1]
+                if _is_valid_fighter(f1) and _is_valid_fighter(f2):
+                    if is_first_vs:
+                        # First VS on a detail page = main event
+                        fighter1 = f1
+                        fighter2 = f2
+                        is_first_vs = False
 
-            long_match = LONG_DATE_PATTERN.search(line)
-            if long_match and not fight_date:
-                day_name = LONG_TO_SHORT_DAY.get(long_match.group(1), long_match.group(1)[:3])
-                month = LONG_TO_SHORT_MONTH.get(long_match.group(2), long_match.group(2)[:3])
-                fight_date = f"{day_name}, {month} {long_match.group(3)} {long_match.group(4)}"
+            # Date parsing
+            long_m = _LONG_DATE_PAT.search(line)
+            if long_m and not fight_date:
+                day_a = _DAY_ABBREV.get(long_m.group(1), long_m.group(1)[:3])
+                mon_a = _MONTH_ABBREV.get(long_m.group(2), long_m.group(2)[:3])
+                fight_date = f"{day_a}, {mon_a} {long_m.group(3)} {long_m.group(4)}"
 
-            short_match = DATE_PATTERN.search(line)
-            if short_match and not fight_date:
-                fight_date = short_match.group(0)
+            short_m = _SHORT_DATE_PAT.search(line)
+            if short_m and not fight_date:
+                fight_date = short_m.group(0)
 
-            if 'GMT' in line.upper() and not time_str:
-                gmt_match = GMT_PATTERN.search(line)
-                if gmt_match:
-                    time_str = gmt_match.group(1) + " GMT"
+            # Time parsing
+            if "GMT" in line.upper() and not time_str:
+                gmt_m = _GMT_SEARCH_PAT.search(line)
+                if gmt_m:
+                    time_str = gmt_m.group(1) + " GMT"
 
-            time_match = TIME_ONLY_PATTERN.search(line)
-            if time_match and not time_str:
-                time_str = time_match.group(1)
+            time_m = _TIME_SEARCH_PAT.search(line)
+            if time_m and not time_str:
+                time_str = time_m.group(1)
 
-            if (',' in line and len(line) > 10 and len(line) < 100 and
-                not DATE_PATTERN.search(line) and not LONG_DATE_PATTERN.search(line) and
-                not line.startswith('|') and any(c.isalpha() for c in line)):
-                if any(x in line.upper() for x in [', US', ', UK', ', GB', ', AU', ', JP', ', PR', ', MX', ', DE',
-                       'ARENA', 'CENTER', 'CENTRE', 'STADIUM', 'HALL', 'THEATER', 'THEATRE', 'CASINO', 'GARDEN', 'LIVE']):
-                    if not location:
-                        location = line
+            # Location
+            if _is_location_line(line) and not location:
+                location = line
 
-            if line.upper().startswith('LIVE ON ') or line.upper().startswith('LIVE AND '):
+            # Broadcast
+            if line.upper().startswith("LIVE ON ") or line.upper().startswith("LIVE AND "):
                 broadcast = line
 
         if fighter1 and fighter2:
             return {
-                'fighter1': fighter1,
-                'fighter2': fighter2,
-                'title': f"{fighter1} vs {fighter2}",
-                'date_raw': fight_date or "TBD",
-                'location': location or "",
-                'time': time_str or "",
-                'broadcast': broadcast or "",
-                'is_main_event': False
+                "fighter1": fighter1,
+                "fighter2": fighter2,
+                "date_raw": fight_date or "TBD",
+                "location": location or "",
+                "time": time_str or "",
+                "broadcast": broadcast or "",
+                "is_main_event": True,  # First VS on detail page = main event
+                "source": "detail_page",
             }
 
     except Exception as e:
-        print(f"  Error scraping {url}: {e}")
+        log.warning("Error scraping %s: %s", url, e)
 
     return None
 
 
-def normalize_key(date: str | None, location: str | None) -> tuple[str, str]:
-    """Create a normalized key for grouping fights into cards."""
-    loc_key = location.lower().strip() if location else ""
-    loc_key = re.sub(r'\s*,\s*(us|uk|gb|au|jp|pr|mx|de|dk)$', '', loc_key, flags=re.IGNORECASE)
-    return (date or "TBD", loc_key)
+# ---------------------------------------------------------------------------
+# Scraping — Orchestrator
+# ---------------------------------------------------------------------------
 
 
-def normalize_fighter_name(name: str) -> str:
-    """Normalize a fighter name for comparison."""
-    name = name.lower().strip()
-    name = re.sub(r'\s+', ' ', name)
-    return name
-
-
-def fighters_match(fight1: Fight, fight2: Fight) -> bool:
-    """Check if two fights are the same based on fighter names."""
-    f1_a = normalize_fighter_name(fight1['fighter1'])
-    f1_b = normalize_fighter_name(fight1['fighter2'])
-    f2_a = normalize_fighter_name(fight2['fighter1'])
-    f2_b = normalize_fighter_name(fight2['fighter2'])
-
-    def names_match(n1: str, n2: str) -> bool:
-        if n1 == n2:
-            return True
-        if n1 in n2 or n2 in n1:
-            return True
-        parts1 = n1.split()
-        parts2 = n2.split()
-        if parts1 and parts2 and parts1[-1] == parts2[-1]:
-            return True
-        return False
-
-    match1 = names_match(f1_a, f2_a) and names_match(f1_b, f2_b)
-    match2 = names_match(f1_a, f2_b) and names_match(f1_b, f2_a)
-
-    return match1 or match2
-
-
-def run() -> list[Card]:
-    """
-    Scrape upcoming boxing fights and group them into cards.
-    Returns a list of card dictionaries with main event and undercards.
-    """
-    all_fights: list[Fight] = []
+def scrape_all_fights() -> list[dict]:
+    """Launch browser, scrape main page + detail pages, return all fights."""
+    all_fights: list[dict] = []
     seen_slugs: set[str] = set()
-    main_page_fights: dict[str, Fight] = {}
 
     with sync_playwright() as p:
-        print("--- LAUNCHING BROWSER ---")
+        log.info("Launching browser")
         browser = p.chromium.launch(
             headless=True,
             args=[
-                '--disable-blink-features=AutomationControlled',
-                '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-            ]
+                "--disable-blink-features=AutomationControlled",
+                "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/120.0.0.0 Safari/537.36",
+            ],
         )
         page = browser.new_page()
 
         try:
-            print("Loading main schedule page...")
-            page.goto("https://ringmagazine.com/en/schedule/fights", timeout=PAGE_LOAD_TIMEOUT_MS)
-            page.wait_for_timeout(INITIAL_LOAD_WAIT_MS)
+            log.info("Loading schedule page")
+            page.goto(SCHEDULE_URL, timeout=PAGE_LOAD_TIMEOUT)
+            page.wait_for_timeout(5000)
 
+            # Expand full schedule
             for i in range(LOAD_MORE_CLICKS):
                 try:
-                    btn = page.locator('text=Load More')
+                    btn = page.locator("text=Load More")
                     if btn.count() > 0 and btn.first.is_visible():
-                        print(f"Clicking Load More ({i+1})...")
+                        log.info("Clicking Load More (%d/%d)", i + 1, LOAD_MORE_CLICKS)
                         btn.first.click()
-                        page.wait_for_timeout(POST_CLICK_WAIT_MS)
+                        page.wait_for_timeout(2000)
                     else:
                         break
-                except:
-                    pass
+                except Exception as e:
+                    log.debug("Load More click %d failed: %s", i + 1, e)
+                    break
 
-            print("\nScraping main page for featured events...")
-            main_fights = scrape_main_page_fights(page)
+            # Pass 1: Main page (preserves casing for main event detection)
+            log.info("Scraping main page")
+            main_fights = scrape_main_page(page)
             for fight in main_fights:
-                title_key = fight['title'].upper()
-                main_page_fights[title_key] = fight
                 all_fights.append(fight)
-                print(f"  {'[MAIN]' if fight['is_main_event'] else '[card]'} {fight['title']} - {fight['date_raw']}")
+                tag = "[MAIN]" if fight["is_main_event"] else "[card]"
+                log.info("  %s %s vs %s — %s",
+                         tag, fight["fighter1"], fight["fighter2"], fight["date_raw"])
 
+            # Collect detail page URLs
             html = page.content()
-            fight_urls = re.findall(r'/en/schedule/fights/([a-z0-9-]+)', html)
-            unique_slugs = sorted(set(fight_urls))
+            slugs = sorted(set(re.findall(r"/en/schedule/fights/([a-z0-9-]+)", html)))
+            log.info("Found %d fight detail URLs", len(slugs))
 
-            print(f"\nFound {len(unique_slugs)} fight URLs, scraping details...")
-
-            for slug in unique_slugs:
+            # Pass 2: Detail pages (fills in missing info)
+            for slug in slugs:
                 if slug in seen_slugs:
                     continue
                 seen_slugs.add(slug)
 
                 url = f"https://ringmagazine.com/en/schedule/fights/{slug}"
-                print(f"  Scraping: {slug}...")
+                log.info("  Scraping: %s", slug)
 
-                fight = scrape_fight_detail(page, url)
-                if fight:
-                    found_match = False
-                    for existing in all_fights:
-                        if fighters_match(fight, existing):
-                            if not existing['location'] and fight['location']:
-                                existing['location'] = fight['location']
-                            if not existing['time'] and fight['time']:
-                                existing['time'] = fight['time']
-                            if not existing['broadcast'] and fight['broadcast']:
-                                existing['broadcast'] = fight['broadcast']
-                            found_match = True
-                            break
+                detail = scrape_fight_detail(page, url)
+                if not detail:
+                    continue
 
-                    if not found_match:
-                        all_fights.append(fight)
-                    print(f"    Found: {fight['title']} - {fight['date_raw']}")
+                # Merge with existing or add new
+                detail_fight = Fight(detail["fighter1"], detail["fighter2"])
+                merged = False
+                for existing in all_fights:
+                    existing_fight = Fight(existing["fighter1"], existing["fighter2"])
+                    if fighters_match(detail_fight, existing_fight):
+                        # Fill missing fields from detail page
+                        for key in ("location", "time", "broadcast"):
+                            if not existing[key] and detail[key]:
+                                existing[key] = detail[key]
+                        if existing["date_raw"] == "TBD" and detail["date_raw"] != "TBD":
+                            existing["date_raw"] = detail["date_raw"]
+                        if detail["is_main_event"]:
+                            existing["is_main_event"] = True
+                        merged = True
+                        break
+
+                if not merged:
+                    all_fights.append(detail)
+                    log.info("    New fight: %s vs %s — %s",
+                             detail["fighter1"], detail["fighter2"], detail["date_raw"])
 
         except Exception as e:
-            print(f"Browser Error: {e}")
-            import traceback
+            log.error("Browser error: %s", e)
             traceback.print_exc()
+        finally:
+            browser.close()
 
-        browser.close()
+    return all_fights
 
-    print("\nGrouping fights into cards...")
-    cards: dict[tuple[str, str], Card] = {}
 
-    for fight in all_fights:
-        key = normalize_key(fight['date_raw'], fight['location'])
-        if key not in cards:
-            cards[key] = {
-                'main_event': None,
-                'undercards': [],
-                'date_raw': fight['date_raw'],
-                'location': fight['location'],
-                'time': fight['time'],
-                'broadcast': fight['broadcast']
-            }
+# ---------------------------------------------------------------------------
+# Card Assembly
+# ---------------------------------------------------------------------------
 
-        card = cards[key]
 
-        if not card['location'] and fight['location']:
-            card['location'] = fight['location']
-        if not card['time'] and fight['time']:
-            card['time'] = fight['time']
-        if not card['broadcast'] and fight['broadcast']:
-            card['broadcast'] = fight['broadcast']
+def _normalize_location_key(location: str) -> str:
+    """Normalize location for grouping (strip country suffix, lowercase)."""
+    loc = location.lower().strip()
+    loc = re.sub(r"\s*,\s*[a-z]{2}$", "", loc)
+    return loc
 
-        if fight['is_main_event']:
-            card['main_event'] = fight
+
+def build_cards(raw_fights: list[dict]) -> list[Card]:
+    """Group raw fight dicts into Cards by date + location."""
+    cards_by_key: dict[tuple, Card] = {}
+
+    for raw in raw_fights:
+        date = parse_date(raw["date_raw"])
+        date_key = date.strftime("%Y-%m-%d") if date else "TBD"
+        loc_key = _normalize_location_key(raw.get("location", ""))
+        key = (date_key, loc_key)
+
+        if key not in cards_by_key:
+            cards_by_key[key] = Card(
+                date=date,
+                date_raw=raw["date_raw"],
+                location=raw.get("location", ""),
+                time_raw=raw.get("time", ""),
+                broadcast=raw.get("broadcast", ""),
+            )
+
+        card = cards_by_key[key]
+        fight = Fight(
+            fighter1=raw["fighter1"],
+            fighter2=raw["fighter2"],
+            is_main_event=raw.get("is_main_event", False),
+            source=raw.get("source", ""),
+        )
+        card.add_fight(fight)
+
+        # Fill missing card metadata
+        if not card.location and raw.get("location"):
+            card.location = raw["location"]
+        if not card.time_raw and raw.get("time"):
+            card.time_raw = raw["time"]
+        if not card.broadcast and raw.get("broadcast"):
+            card.broadcast = raw["broadcast"]
+
+    # Infer timezone for each card
+    for card in cards_by_key.values():
+        card.timezone = infer_timezone(card.time_raw, card.location)
+
+    return list(cards_by_key.values())
+
+
+def filter_past_events(cards: list[Card], cutoff_days: int = PAST_EVENT_CUTOFF_DAYS) -> list[Card]:
+    """Remove events that ended more than cutoff_days ago."""
+    cutoff = datetime.now() - timedelta(days=cutoff_days)
+    result = []
+    for card in cards:
+        if card.date is None or card.date >= cutoff:
+            result.append(card)
         else:
-            if card['main_event'] and fighters_match(fight, card['main_event']):
-                continue
-            is_duplicate = False
-            for uc in card['undercards']:
-                if fighters_match(fight, uc):
-                    is_duplicate = True
-                    break
-            if not is_duplicate:
-                card['undercards'].append(fight)
+            main = card.main_event
+            name = main.title if main else "unknown"
+            log.info("Filtering past event: %s (%s)", name, card.date_raw)
+    return result
 
-    final_cards: list[Card] = []
-    for key, card in cards.items():
-        if not card['main_event'] and card['undercards']:
-            card['main_event'] = card['undercards'].pop()
 
-        if card['main_event']:
-            card['undercards'] = [
-                uc for uc in card['undercards']
-                if not fighters_match(uc, card['main_event'])
-            ]
-            final_cards.append(card)
-
-    print(f"Created {len(final_cards)} cards from {len(all_fights)} fights")
-    return final_cards
+# ---------------------------------------------------------------------------
+# Calendar Generation
+# ---------------------------------------------------------------------------
 
 
 def create_calendar(cards: list[Card]) -> Calendar:
-    """
-    Create an iCalendar file from the list of cards.
-    Each card becomes one event with main event and undercards.
-    """
+    """Create an iCalendar from the list of cards."""
     cal = Calendar()
-    cal.add('prodid', '-//Boxing Schedule//github-action//')
-    cal.add('version', '2.0')
-    cal.add('x-wr-calname', 'Boxing Schedule')
+    cal.add("prodid", "-//Boxing Schedule//github-action//")
+    cal.add("version", "2.0")
+    cal.add("x-wr-calname", "Boxing Schedule")
+    cal.add("method", "PUBLISH")
 
     for card in cards:
-        try:
-            main = card['main_event']
-            undercards = card['undercards']
-
-            main_title = main['title'].upper()
-            if undercards:
-                undercard_titles = [f['title'] for f in undercards]
-                title = f"{main_title}: {', '.join(undercard_titles)}"
-            else:
-                title = main_title
-
-            event = Event()
-            event.add('summary', f"\U0001F94A {title}")
-
-            dt = datetime.now()
-            try:
-                date_str = card['date_raw']
-                if date_str and date_str != "TBD":
-                    date_str = re.sub(r'^(Sun|Mon|Tue|Wed|Thu|Fri|Sat),\s*', '', date_str)
-                    dt = datetime.strptime(date_str, "%b %d %Y")
-            except Exception as e:
-                print(f"  Date parse error for '{card['date_raw']}': {e}")
-
-            hour, minute = 20, 0
-            try:
-                if card.get('time'):
-                    time_str = card['time']
-                    if 'AM' in time_str.upper() or 'PM' in time_str.upper():
-                        time_match = re.match(r'(\d{1,2}):(\d{2})\s*(AM|PM)', time_str, re.IGNORECASE)
-                        if time_match:
-                            hour = int(time_match.group(1))
-                            minute = int(time_match.group(2))
-                            if time_match.group(3).upper() == 'PM' and hour != 12:
-                                hour += 12
-                            elif time_match.group(3).upper() == 'AM' and hour == 12:
-                                hour = 0
-                    elif 'GMT' in time_str.upper():
-                        time_match = re.match(r'(\d{1,2}):(\d{2})', time_str)
-                        if time_match:
-                            hour = int(time_match.group(1))
-                            minute = int(time_match.group(2))
-            except:
-                pass
-
-            dt = dt.replace(hour=hour, minute=minute, second=0, tzinfo=timezone.utc)
-
-            event.add('dtstart', dt)
-            event.add('dtend', dt + timedelta(hours=4))
-
-            description_parts = [f"Main Event: {main['title'].upper()}"]
-            if undercards:
-                description_parts.append("")
-                description_parts.append("Undercard:")
-                for uc in undercards:
-                    description_parts.append(f"  \u2022 {uc['title']}")
-            description_parts.append("")
-            if card.get('location'):
-                description_parts.append(f"Location: {card['location']}")
-            if card.get('broadcast'):
-                description_parts.append(f"Broadcast: {card['broadcast']}")
-            if card.get('time'):
-                description_parts.append(f"Time: {card['time']}")
-
-            event.add('description', '\n'.join(description_parts))
-
-            if card.get('location'):
-                event.add('location', card['location'])
-
-            uid_base = re.sub(r'[^a-zA-Z0-9]', '', main['title'])
-            uid = f"{uid_base}{dt.strftime('%Y%m%d')}@boxingbot"
-            event.add('uid', uid)
-
-            cal.add_component(event)
-
-        except Exception as e:
-            print(f"  Error creating event: {e}")
+        main = card.main_event
+        if not main:
             continue
+
+        if not card.date:
+            log.warning("Skipping event with no date: %s", main.title)
+            continue
+
+        undercards = card.undercards
+
+        # Summary: MAIN EVENT (+N more)
+        summary = f"\U0001f94a {main.title.upper()}"
+        if undercards:
+            summary += f" (+{len(undercards)} more)"
+
+        event = Event()
+        event.add("summary", summary)
+
+        # Date/time with timezone
+        hour, minute = parse_time(card.time_raw)
+        try:
+            tz = ZoneInfo(card.timezone)
+        except Exception:
+            tz = ZoneInfo("America/New_York")
+        dt = card.date.replace(hour=hour, minute=minute, second=0, tzinfo=tz)
+        event.add("dtstart", dt)
+        event.add("dtend", dt + timedelta(hours=EVENT_DURATION_HOURS))
+
+        # Description
+        desc_lines = [f"MAIN EVENT: {main.title.upper()}", ""]
+        if undercards:
+            desc_lines.append("Undercard:")
+            for uc in undercards:
+                desc_lines.append(f"  - {uc.title}")
+            desc_lines.append("")
+        if card.location:
+            desc_lines.append(f"Location: {card.location}")
+        if card.broadcast:
+            desc_lines.append(f"Broadcast: {card.broadcast}")
+        if card.time_raw:
+            desc_lines.append(f"Time: {card.time_raw}")
+        event.add("description", "\n".join(desc_lines))
+
+        if card.location:
+            event.add("location", card.location)
+
+        # Stable UID
+        names = re.sub(r"[^a-zA-Z0-9]", "", main.title)
+        date_str = card.date.strftime("%Y%m%d")
+        event.add("uid", f"{names}-{date_str}@boxingschedule")
+
+        cal.add_component(event)
 
     return cal
 
 
-if __name__ == "__main__":
-    cards = run()
-    print(f"\n--- FOUND {len(cards)} CARDS ---")
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
 
-    if len(cards) > 0:
-        cal = create_calendar(cards)
-        with open('boxing_schedule.ics', 'wb') as f:
-            f.write(cal.to_ical())
-        print("SUCCESS: boxing_schedule.ics created")
 
-        print("\nCards in calendar:")
-        for card in cards:
-            main = card['main_event']
-            uc_count = len(card['undercards'])
-            print(f"  - {main['title'].upper()} ({card['date_raw']}) + {uc_count} undercard(s)")
-    else:
-        print("FAILURE: No cards found. The website structure may have changed.")
+def main():
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(levelname)s %(message)s",
+        datefmt="%H:%M:%S",
+    )
+
+    raw_fights = scrape_all_fights()
+
+    if not raw_fights:
+        log.error("No fights found. The website structure may have changed.")
         sys.exit(1)
+
+    cards = build_cards(raw_fights)
+    cards = filter_past_events(cards)
+
+    # Sort by date (TBD at end)
+    cards.sort(key=lambda c: c.date or datetime.max)
+
+    log.info("Built %d cards from %d fights", len(cards), len(raw_fights))
+
+    cal = create_calendar(cards)
+    with open(OUTPUT_FILE, "wb") as f:
+        f.write(cal.to_ical())
+    log.info("Written %s", OUTPUT_FILE)
+
+    # Summary
+    for card in cards:
+        main = card.main_event
+        if main:
+            uc = len(card.undercards)
+            log.info("  %s (%s) +%d undercard(s)", main.title.upper(), card.date_raw, uc)
+
+
+if __name__ == "__main__":
+    main()

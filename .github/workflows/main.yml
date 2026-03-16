@@ -34,6 +34,9 @@ jobs:
       - name: Install Playwright browsers
         run: playwright install chromium && playwright install-deps
 
+      - name: Run tests
+        run: python -m pytest tests.py -v
+
       - name: Run scraper
         run: python scraper.py
 
