@@ -1,0 +1,39 @@
+[project]
+name = "boxing-schedule"
+version = "2.1.0"
+description = "Self-updating iCal feed for upcoming boxing matches"
+requires-python = ">=3.11"
+dependencies = [
+    "playwright>=1.40.0",
+    "icalendar>=5.0.0",
+    "tzdata>=2024.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "ruff>=0.4.0",
+    "mypy>=1.10.0",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = ["icalendar.*", "playwright.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["."]
+python_files = ["tests.py"]

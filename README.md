@@ -12,42 +12,29 @@ Paste this URL into your calendar app:
 https://raw.githubusercontent.com/mhmdmstf/boxing-schedule/refs/heads/main/boxing_schedule.ics
 ```
 
-**Apple Calendar:** File > New Calendar Subscription > paste URL > Auto-refresh: Every Day
-
-**Google Calendar:** Other calendars (+) > From URL > paste URL
-
-**Outlook:** Add calendar > Subscribe from web > paste URL
+- **Apple Calendar:** File > New Calendar Subscription > paste URL > Auto-refresh: Every Day
+- **Google Calendar:** Other calendars (+) > From URL > paste URL
+- **Outlook:** Add calendar > Subscribe from web > paste URL
 
 ## What You Get
 
-Each calendar event is a full **fight card**, not individual bouts:
+Each calendar event is a full fight card:
 
 ```
-🥊 JAKE PAUL VS ANTHONY JOSHUA (+4 more)
+🥊 CANELO ALVAREZ VS DAVID BENAVIDEZ (+4 more)
 ```
 
-The event description lists the full card — main event in caps, undercard fights below, plus venue, broadcast, and start time. Events include timezone info based on the venue location.
-
-Past events are automatically removed after one week.
+The description lists the full card with venue, broadcast, and start time. Events are timezone-aware based on venue location. Past events drop off after one week.
 
 ## How It Works
 
-1. A Python script scrapes The Ring Magazine schedule using Playwright
-2. Fights are grouped into cards by date and venue
-3. Main events are detected from the source page formatting
-4. An `.ics` calendar file is generated with timezone-aware times
-5. GitHub Actions runs this daily at 06:00 UTC and commits any changes
+A Python script scrapes The Ring Magazine schedule via Playwright, groups fights into cards by date and venue, detects main events from page formatting, and generates a timezone-aware `.ics` file. GitHub Actions runs this daily at 06:00 UTC.
 
 ## Self-Host
 
-1. Fork this repo (must be **public** for free GitHub Pages)
-2. Go to Settings > Pages > Deploy from `main` branch
-3. Go to Actions > "Update Boxing Calendar" > Run workflow
-
-Your feed will be at:
-```
-https://raw.githubusercontent.com/<YOU>/<REPO>/refs/heads/main/boxing_schedule.ics
-```
+1. Fork this repo
+2. Go to Actions > "Update Boxing Calendar" > Run workflow
+3. Subscribe to `https://raw.githubusercontent.com/<YOU>/<REPO>/refs/heads/main/boxing_schedule.ics`
 
 ## License
 
