@@ -1,890 +1,457 @@
-"""
-Boxing Schedule Scraper v2.1
-Scrapes Ring Magazine for upcoming boxing fights, groups them into cards,
-and generates a subscribable iCalendar (.ics) file.
+"""Boxing Schedule scraper.
+
+Pipeline:
+    fetch_events()         -> dict          (raw API response)
+    parse_events()         -> list[Event]   (typed, timezone-aware)
+    filter_recent()        -> list[Event]   (drop events older than cutoff)
+    build_calendar()       -> Calendar      (iCal object, RFC 5545)
+    write_ics()            -> bytes         (serialise + persist)
+
+Data source: ringmagazine.com's public schedule API.  No browser, no HTML
+parsing -- the API returns the same structured records that power the website.
 """
 
-import hashlib
+from __future__ import annotations
+
+import json
 import logging
-import re
 import sys
-import traceback
-from dataclasses import dataclass, field
-from datetime import datetime, timedelta
-from zoneinfo import ZoneInfo
+import urllib.error
+import urllib.request
+from dataclasses import dataclass
+from datetime import UTC, datetime, timedelta
+from pathlib import Path
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
-from icalendar import Calendar, Event  # type: ignore[import-untyped]
-from playwright.sync_api import Page, sync_playwright
+from icalendar import Calendar  # type: ignore[import-untyped]
+from icalendar import Event as IcalEvent
 
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
 
-SCHEDULE_URL = "https://ringmagazine.com/en/schedule/fights"
-LOAD_MORE_CLICKS = 5
-PAGE_LOAD_TIMEOUT = 60_000
-DETAIL_PAGE_TIMEOUT = 30_000
-DETAIL_PAGE_WAIT = 2_000
-DEFAULT_HOUR = 20
-DEFAULT_MINUTE = 0
-EVENT_DURATION_HOURS = 4
-PAST_EVENT_CUTOFF_DAYS = 7
-OUTPUT_FILE = "boxing_schedule.ics"
+EVENTS_API = (
+    "https://www.ringmagazine.com/api/cached/v1/content/search/events/upcoming"
+    "?limit=50&language=en"
+)
+HTTP_TIMEOUT_SECONDS = 30
+USER_AGENT = (
+    "Mozilla/5.0 (compatible; boxing-schedule/3.0; "
+    "+https://github.com/mhmdmstf/boxing-schedule)"
+)
+EVENT_DURATION = timedelta(hours=4)
+PAST_EVENT_CUTOFF = timedelta(days=7)
+OUTPUT_FILE = Path("boxing_schedule.ics")
+CALENDAR_NAME = "Boxing Schedule"
+CALENDAR_PRODID = "-//Boxing Schedule//github-action//"
 
 log = logging.getLogger("boxing")
 
 # ---------------------------------------------------------------------------
-# Data Model
+# Timezone inference
+# ---------------------------------------------------------------------------
+#
+# Strategy: ISO-3166 country code provides a default timezone; selected cities
+# in multi-zone countries (US, CA, AU, RU) override that default.  Keep the
+# overrides curated, not exhaustive -- the country default is correct for the
+# common case.
+
+_COUNTRY_DEFAULT_TZ: dict[str, str] = {
+    "AR": "America/Argentina/Buenos_Aires",
+    "AU": "Australia/Sydney",
+    "BR": "America/Sao_Paulo",
+    "CA": "America/Toronto",
+    "CN": "Asia/Shanghai",
+    "CO": "America/Bogota",
+    "CR": "America/Costa_Rica",
+    "DE": "Europe/Berlin",
+    "DK": "Europe/Copenhagen",
+    "DO": "America/Santo_Domingo",
+    "EG": "Africa/Cairo",
+    "ES": "Europe/Madrid",
+    "FR": "Europe/Paris",
+    "GB": "Europe/London",
+    "GH": "Africa/Accra",
+    "IE": "Europe/Dublin",
+    "IT": "Europe/Rome",
+    "JP": "Asia/Tokyo",
+    "KG": "Asia/Bishkek",
+    "KR": "Asia/Seoul",
+    "MX": "America/Mexico_City",
+    "NI": "America/Managua",
+    "NZ": "Pacific/Auckland",
+    "PA": "America/Panama",
+    "PH": "Asia/Manila",
+    "PL": "Europe/Warsaw",
+    "PR": "America/Puerto_Rico",
+    "RU": "Europe/Moscow",
+    "SA": "Asia/Riyadh",
+    "TH": "Asia/Bangkok",
+    "UA": "Europe/Kyiv",
+    "AE": "Asia/Dubai",
+    "UK": "Europe/London",  # informal alias for GB
+    "US": "America/New_York",
+    "ZA": "Africa/Johannesburg",
+}
+
+# City -> timezone for places that aren't covered by their country default.
+# Compared case-insensitively against ApiLocation.city.
+_CITY_OVERRIDE_TZ: dict[str, str] = {
+    # United States (default America/New_York)
+    "los angeles": "America/Los_Angeles",
+    "las vegas": "America/Los_Angeles",
+    "san diego": "America/Los_Angeles",
+    "san francisco": "America/Los_Angeles",
+    "san jose": "America/Los_Angeles",
+    "phoenix": "America/Phoenix",
+    "glendale": "America/Phoenix",
+    "tucson": "America/Phoenix",
+    "denver": "America/Denver",
+    "albuquerque": "America/Denver",
+    "salt lake city": "America/Denver",
+    "chicago": "America/Chicago",
+    "dallas": "America/Chicago",
+    "houston": "America/Chicago",
+    "san antonio": "America/Chicago",
+    "new orleans": "America/Chicago",
+    "memphis": "America/Chicago",
+    "nashville": "America/Chicago",
+    "el paso": "America/Denver",
+    "tx": "America/Chicago",
+    "texas": "America/Chicago",
+    # Canada (default America/Toronto)
+    "vancouver": "America/Vancouver",
+    "calgary": "America/Edmonton",
+    "edmonton": "America/Edmonton",
+    "winnipeg": "America/Winnipeg",
+    # Russia (default Europe/Moscow)
+    "yekaterinburg": "Asia/Yekaterinburg",
+    "novosibirsk": "Asia/Novosibirsk",
+    "vladivostok": "Asia/Vladivostok",
+    # Australia (default Australia/Sydney)
+    "perth": "Australia/Perth",
+    "adelaide": "Australia/Adelaide",
+    "brisbane": "Australia/Brisbane",
+}
+
+
+def infer_timezone(country: str | None, city: str | None) -> ZoneInfo:
+    """Return the best-guess timezone for an event venue.
+
+    Falls back to America/New_York if neither country nor city resolves.
+    The fallback only kicks in for events we genuinely can't place; logging
+    surfaces such cases so the override list can grow.
+    """
+    if city:
+        tz_name = _CITY_OVERRIDE_TZ.get(city.lower())
+        if tz_name:
+            return _zoneinfo(tz_name)
+    if country:
+        tz_name = _COUNTRY_DEFAULT_TZ.get(country.upper())
+        if tz_name:
+            return _zoneinfo(tz_name)
+    log.warning("Falling back to America/New_York for country=%r city=%r",
+                country, city)
+    return ZoneInfo("America/New_York")
+
+
+def _zoneinfo(name: str) -> ZoneInfo:
+    try:
+        return ZoneInfo(name)
+    except ZoneInfoNotFoundError:
+        log.warning("Unknown timezone %r, using UTC", name)
+        return ZoneInfo("UTC")
+
+
+# ---------------------------------------------------------------------------
+# Domain types
 # ---------------------------------------------------------------------------
 
 
-@dataclass
+@dataclass(frozen=True)
 class Fight:
-    fighter1: str
-    fighter2: str
-    is_main_event: bool = False
-    source: str = ""
+    fighter_a: str
+    fighter_b: str
+    is_main_event: bool
+    weight_class: str | None = None
+    rounds: int | None = None
 
     @property
     def title(self) -> str:
-        return f"{self.fighter1} vs {self.fighter2}"
+        return f"{self.fighter_a} vs {self.fighter_b}"
 
 
-@dataclass
-class RawFight:
-    """Intermediate representation from scraping, before grouping into cards."""
+@dataclass(frozen=True)
+class Event:
+    """A single boxing card."""
 
-    fighter1: str
-    fighter2: str
-    date_raw: str = "TBD"
-    location: str = ""
-    time: str = ""
-    broadcast: str = ""
-    is_main_event: bool = False
-    source: str = ""
-
-    def as_fight(self) -> Fight:
-        return Fight(self.fighter1, self.fighter2, self.is_main_event, self.source)
-
-
-@dataclass
-class Card:
-    date: datetime | None = None
-    date_raw: str = "TBD"
-    location: str = ""
-    time_raw: str = ""
-    timezone: str = "America/New_York"
-    broadcast: str = ""
-    fights: list[Fight] = field(default_factory=list)
+    id: str
+    start_utc: datetime
+    end_utc: datetime | None
+    venue: str | None
+    city: str | None
+    country: str | None  # ISO-3166-1 alpha-2
+    fights: tuple[Fight, ...]
+    is_sold_out: bool
 
     @property
     def main_event(self) -> Fight | None:
-        default = self.fights[0] if self.fights else None
-        return next((f for f in self.fights if f.is_main_event), default)
+        for fight in self.fights:
+            if fight.is_main_event:
+                return fight
+        return self.fights[0] if self.fights else None
 
     @property
-    def undercards(self) -> list[Fight]:
+    def undercards(self) -> tuple[Fight, ...]:
         main = self.main_event
-        return [f for f in self.fights if f is not main]
+        return tuple(f for f in self.fights if f is not main)
 
-    def add_fight(self, fight: Fight) -> bool:
-        """Add fight if not a duplicate. Returns True if added."""
-        for existing in self.fights:
-            if fighters_match(existing, fight):
-                return False
-        self.fights.append(fight)
-        return True
+    @property
+    def timezone(self) -> ZoneInfo:
+        return infer_timezone(self.country, self.city)
 
+    @property
+    def local_start(self) -> datetime:
+        return self.start_utc.astimezone(self.timezone)
 
-# ---------------------------------------------------------------------------
-# Name Matching
-# ---------------------------------------------------------------------------
-
-
-def normalize_name(name: str) -> str:
-    """Normalize a fighter name for comparison."""
-    name = name.lower().strip()
-    name = re.sub(r"\s+", " ", name)
-    name = re.sub(r"\s+(jr\.?|sr\.?|iii|ii|iv)$", "", name)
-    return name
-
-
-def _names_match(n1: str, n2: str) -> bool:
-    """Check if two normalized fighter names refer to the same person."""
-    if n1 == n2:
-        return True
-    parts1 = n1.split()
-    parts2 = n2.split()
-    if not parts1 or not parts2:
-        return False
-    # Last names must match exactly
-    if parts1[-1] != parts2[-1]:
-        return False
-    # If both have first names, they must match
-    if len(parts1) > 1 and len(parts2) > 1:
-        return parts1[0] == parts2[0] or parts1[0][:3] == parts2[0][:3]
-    # One is a single name (just last name) — accept the last name match
-    return True
-
-
-def fighters_match(fight1: Fight, fight2: Fight) -> bool:
-    """Check if two fights are the same matchup (either order)."""
-    a1 = normalize_name(fight1.fighter1)
-    a2 = normalize_name(fight1.fighter2)
-    b1 = normalize_name(fight2.fighter1)
-    b2 = normalize_name(fight2.fighter2)
-    forward = _names_match(a1, b1) and _names_match(a2, b2)
-    crossed = _names_match(a1, b2) and _names_match(a2, b1)
-    return forward or crossed
+    @property
+    def location_str(self) -> str:
+        parts = [p for p in (self.venue, self.city, self.country) if p]
+        return ", ".join(parts)
 
 
 # ---------------------------------------------------------------------------
-# Date / Time / Timezone Parsing
+# Parsing -- pure functions over the API JSON shape
 # ---------------------------------------------------------------------------
 
-DATE_FORMATS = [
-    "%b %d %Y",
-    "%B %d %Y",
-    "%B %d, %Y",
-    "%b %d, %Y",
-    "%d %B %Y",
-    "%d %b %Y",
-]
+
+def _parse_iso_utc(value: str) -> datetime:
+    """Parse an ISO-8601 timestamp into an aware UTC datetime."""
+    return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(
+        UTC
+    )
 
 
-def parse_date(date_str: str) -> datetime | None:
-    """Parse a date string into a datetime. Returns None on failure."""
-    if not date_str or date_str == "TBD":
+def parse_fight(raw: dict) -> Fight:
+    return Fight(
+        fighter_a=(raw.get("fighterA") or {}).get("name", "").strip(),
+        fighter_b=(raw.get("fighterB") or {}).get("name", "").strip(),
+        is_main_event=bool(raw.get("isMainEvent")),
+        weight_class=(raw.get("weightClass") or None),
+        rounds=raw.get("noOfRounds"),
+    )
+
+
+def parse_event(raw: dict) -> Event | None:
+    """Build an Event from one API record.  Returns None if essential fields
+    are missing -- start time and at least one named fight."""
+    start_raw = raw.get("eventStart")
+    if not start_raw:
+        log.debug("Skipping event %s: no eventStart", raw.get("id"))
         return None
-    cleaned = re.sub(
-        r"^(Sun|Mon|Tue|Wed|Thu|Fri|Sat)(day|nesday|urday)?,?\s*", "", date_str
-    )
-    for fmt in DATE_FORMATS:
-        try:
-            return datetime.strptime(cleaned.strip(), fmt)
-        except ValueError:
-            continue
-    log.warning("Could not parse date: '%s'", date_str)
-    return None
-
-
-def parse_time(time_str: str) -> tuple[int, int]:
-    """Extract hour and minute from a time string. Returns (20, 0) default."""
-    if not time_str:
-        return DEFAULT_HOUR, DEFAULT_MINUTE
-    # AM/PM format
-    m = re.match(r"(\d{1,2}):(\d{2})\s*(AM|PM)", time_str, re.IGNORECASE)
-    if m:
-        hour = int(m.group(1))
-        minute = int(m.group(2))
-        if m.group(3).upper() == "PM" and hour != 12:
-            hour += 12
-        elif m.group(3).upper() == "AM" and hour == 12:
-            hour = 0
-        return hour, minute
-    # GMT / 24h format
-    m = re.match(r"(\d{1,2}):(\d{2})", time_str)
-    if m:
-        return int(m.group(1)), int(m.group(2))
-    return DEFAULT_HOUR, DEFAULT_MINUTE
-
-
-# Country suffix -> timezone (checked at end of location string)
-_COUNTRY_TZ: list[tuple[str, str]] = [
-    (", GB", "Europe/London"),
-    (", UK", "Europe/London"),
-    (", AU", "Australia/Sydney"),
-    (", JP", "Asia/Tokyo"),
-    (", DE", "Europe/Berlin"),
-    (", DK", "Europe/Copenhagen"),
-    (", MX", "America/Mexico_City"),
-    (", PR", "America/Puerto_Rico"),
-    (", SA", "Asia/Riyadh"),
-    (", AE", "Asia/Dubai"),
-    (", GH", "Africa/Accra"),
-    (", CA", "America/Toronto"),
-    (", IE", "Europe/Dublin"),
-    (", FR", "Europe/Paris"),
-    (", PH", "Asia/Manila"),
-    (", NZ", "Pacific/Auckland"),
-    (", KR", "Asia/Seoul"),
-    (", PL", "Europe/Warsaw"),
-    (", TH", "Asia/Bangkok"),
-    (", CN", "Asia/Shanghai"),
-    (", IT", "Europe/Rome"),
-    (", ES", "Europe/Madrid"),
-    (", AR", "America/Argentina/Buenos_Aires"),
-    (", CO", "America/Bogota"),
-    (", NI", "America/Managua"),
-    (", PA", "America/Panama"),
-    (", ZA", "Africa/Johannesburg"),
-]
-
-# City/region keywords -> timezone (checked anywhere in location)
-_CITY_TZ: list[tuple[list[str], str]] = [
-    # United Kingdom
-    (["LONDON", "MANCHESTER", "BIRMINGHAM", "LEEDS", "NOTTINGHAM",
-      "DERBY", "SHEFFIELD", "LIVERPOOL", "BELFAST"], "Europe/London"),
-    # Ireland
-    (["DUBLIN"], "Europe/Dublin"),
-    # Australia
-    (["SYDNEY", "MELBOURNE", "BRISBANE", "GOLD COAST", "PERTH",
-      "ADELAIDE"], "Australia/Sydney"),
-    # Japan
-    (["TOKYO", "OSAKA", "NAGOYA", "SAITAMA"], "Asia/Tokyo"),
-    # Germany
-    (["OBERHAUSEN", "BERLIN", "HAMBURG"], "Europe/Berlin"),
-    # Denmark
-    (["KOLDING", "COPENHAGEN"], "Europe/Copenhagen"),
-    # France
-    (["PARIS", "MARSEILLE"], "Europe/Paris"),
-    # Italy
-    (["ROME", "MILAN", "NAPLES"], "Europe/Rome"),
-    # Spain
-    (["MADRID", "BARCELONA"], "Europe/Madrid"),
-    # Poland
-    (["WARSAW", "KRAKOW", "WROCLAW"], "Europe/Warsaw"),
-    # Saudi Arabia
-    (["RIYADH", "JEDDAH", "SAUDI"], "Asia/Riyadh"),
-    # UAE
-    (["DUBAI", "ABU DHABI"], "Asia/Dubai"),
-    # Ghana
-    (["ACCRA", "GHANA"], "Africa/Accra"),
-    # South Africa
-    (["JOHANNESBURG", "CAPE TOWN", "DURBAN"], "Africa/Johannesburg"),
-    # Thailand
-    (["BANGKOK", "PATTAYA"], "Asia/Bangkok"),
-    # China
-    (["BEIJING", "SHANGHAI", "SHENZHEN", "MACAO", "MACAU"], "Asia/Shanghai"),
-    # South Korea
-    (["SEOUL", "BUSAN"], "Asia/Seoul"),
-    # Philippines
-    (["MANILA", "CEBU"], "Asia/Manila"),
-    # Canada
-    (["MONTREAL", "TORONTO", "VANCOUVER", "GATINEAU", "OTTAWA",
-      "CALGARY"], "America/Toronto"),
-    # Puerto Rico
-    (["PUERTO RICO", "SAN JUAN"], "America/Puerto_Rico"),
-    # Mexico
-    (["MEXICO CITY", "GUADALAJARA", "CANCUN", "TIJUANA",
-      "MONTERREY"], "America/Mexico_City"),
-    # Central/South America
-    (["BUENOS AIRES", "CORDOBA"], "America/Argentina/Buenos_Aires"),
-    (["BOGOTA", "MEDELLIN", "BARRANQUILLA"], "America/Bogota"),
-    (["MANAGUA", "NICARAGUA"], "America/Managua"),
-    (["PANAMA CITY", "PANAMA"], "America/Panama"),
-    # US West Coast
-    (["LAS VEGAS", "NEVADA", "LOS ANGELES", "CALIFORNIA", "PHOENIX",
-      "GLENDALE", "STOCKTON", "ANAHEIM", "INGLEWOOD"], "America/Los_Angeles"),
-    # US Mountain
-    (["DENVER", "ALBUQUERQUE", "TUCSON"], "America/Denver"),
-    # US Central
-    (["CHICAGO", "ILLINOIS", "SAN ANTONIO", "HOUSTON", "DALLAS",
-      "TEXAS", "MINNEAPOLIS", "TULSA", "OMAHA", "NEW ORLEANS",
-      "KANSAS CITY", "MILWAUKEE", "NASHVILLE", "MEMPHIS"], "America/Chicago"),
-    # US East Coast (explicit)
-    (["PHILADELPHIA", "ATLANTIC CITY", "NEWARK", "BROOKLYN",
-      "CLEVELAND", "DETROIT", "MIAMI", "ORLANDO", "TAMPA"], "America/New_York"),
-]
-
-
-def infer_timezone(time_str: str, location: str) -> str:
-    """Guess timezone from time string and location."""
-    if "GMT" in time_str.upper():
-        return "Europe/London"
-    loc_upper = location.upper().strip()
-    # Check city keywords first (more specific than country suffix)
-    for keywords, tz in _CITY_TZ:
-        if any(kw in loc_upper for kw in keywords):
-            return tz
-    # Then check country suffix at end of string
-    for suffix, tz in _COUNTRY_TZ:
-        if loc_upper.endswith(suffix.upper()):
-            return tz
-    return "America/New_York"
-
-
-# ---------------------------------------------------------------------------
-# Content Detection Patterns
-# ---------------------------------------------------------------------------
-
-# Regex patterns
-_DATE_PAT = re.compile(
-    r"(Sun|Mon|Tue|Wed|Thu|Fri|Sat),\s+"
-    r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2}\s+\d{4}"
-)
-_TIME_PAT = re.compile(r"(\d{1,2}:\d{2}\s+(?:AM|PM))\s+(\S+)")
-_GMT_PAT = re.compile(r"(\d{1,2}:\d{2})\s+GMT")
-
-# Words that disqualify a line from being a venue/location
-_LOCATION_NEGATIVE = re.compile(
-    r"(tops|signs|announces?|preview|odds|results|highlights|confirmed|"
-    r"undercard|breaking|report|watch|recap|analysis|exclusive|interview|"
-    r"article|news|update|sources?|weighs?\s+in)",
-    re.IGNORECASE,
-)
-
-# Known country suffixes for location detection
-_COUNTRY_SUFFIXES = (
-    ", US", ", UK", ", GB", ", AU", ", JP", ", PR", ", MX", ", DE",
-    ", DK", ", CA", ", SA", ", AE", ", GH", ", IE", ", FR", ", ES",
-    ", IT", ", PH", ", NZ", ", ZA", ", KR", ", CN", ", TH",
-    ", PL", ", AR", ", CO", ", NI", ", PA", ", CR",
-)
-
-_VENUE_KEYWORDS = (
-    "ARENA", "CENTER", "CENTRE", "STADIUM", "HALL", "THEATER", "THEATRE",
-    "CASINO", "GARDEN", "COLISEUM", "COLISEO", "DOME", "PAVILION",
-    "AUDITORIUM", "CONVENTION", "EXPO", "FIELD", "PARK", "PLAZA",
-    "RESORT", "HOTEL", "CLUB", "HIPPODROME", "PALAIS", "PALACIO",
-    "GIMNASIO",
-)
-
-
-def _is_location_line(line: str) -> bool:
-    """Check if a line looks like a venue/location."""
-    if "," not in line or len(line) < 8 or len(line) > 120:
-        return False
-    if line.startswith("|") or line[0].isdigit():
-        return False
-    if _DATE_PAT.search(line):
-        return False
-    if _LOCATION_NEGATIVE.search(line):
-        return False
-    upper = line.upper()
-    return (
-        any(upper.endswith(s) for s in _COUNTRY_SUFFIXES)
-        or any(kw in upper for kw in _VENUE_KEYWORDS)
-    )
-
-
-def _is_valid_fighter(name: str) -> bool:
-    """Check if a string looks like a fighter name."""
-    upper = name.upper()
-    return (
-        3 <= len(name) <= 60
-        and "CHAMPION" not in upper
-        and "SCHEDULE" not in upper
-        and "BOXING" not in upper
-        and not name.isdigit()
-        and not name.startswith("LIVE ")
-        and not name.startswith("http")
-        and not _DATE_PAT.match(name)
-    )
-
-
-# ---------------------------------------------------------------------------
-# Text Parsing — Pure Functions (testable without Playwright)
-# ---------------------------------------------------------------------------
-
-
-def parse_main_page_text(lines: list[str]) -> list[RawFight]:
-    """Parse fight data from the main schedule page text lines."""
-    fights: list[RawFight] = []
-
-    current_date: str | None = None
-    current_location: str | None = None
-    current_time: str | None = None
-    current_broadcast: str | None = None
-
-    i = 0
-    while i < len(lines):
-        line = lines[i]
-
-        # Update context
-        if _DATE_PAT.match(line):
-            current_date = line
-            i += 1
-            continue
-
-        time_match = _TIME_PAT.match(line)
-        if time_match:
-            current_time = time_match.group(1)
-            i += 1
-            continue
-
-        gmt_match = _GMT_PAT.match(line)
-        if gmt_match and not current_time:
-            current_time = gmt_match.group(1) + " GMT"
-            i += 1
-            continue
-
-        if line.startswith("LIVE ON ") or line.startswith("LIVE AND "):
-            current_broadcast = line
-            i += 1
-            continue
-
-        # Detect fights via VS pattern
-        if line == "VS" and 0 < i < len(lines) - 1:
-            fighter1 = lines[i - 1]
-            fighter2 = lines[i + 1]
-
-            if _is_valid_fighter(fighter1) and _is_valid_fighter(fighter2):
-                is_main_event = fighter1.isupper() and fighter2.isupper()
-
-                # Look ahead for fight-specific details
-                fight_location = None
-                fight_date = None
-                fight_time = None
-                fight_broadcast = None
-
-                for j in range(i + 2, min(i + 12, len(lines))):
-                    scan = lines[j]
-                    if scan == "VS":
-                        break
-                    if _DATE_PAT.match(scan):
-                        fight_date = scan
-                    tm = _TIME_PAT.match(scan)
-                    if tm:
-                        fight_time = tm.group(1)
-                    gm = _GMT_PAT.match(scan)
-                    if gm and not fight_time:
-                        fight_time = gm.group(1) + " GMT"
-                    if scan.startswith("LIVE ON ") or scan.startswith("LIVE AND "):
-                        fight_broadcast = scan
-                    if _is_location_line(scan) and not fight_location:
-                        fight_location = scan
-
-                final_date = fight_date or current_date
-                final_location = fight_location or current_location
-                final_time = fight_time or current_time
-                final_broadcast = fight_broadcast or current_broadcast
-
-                # Update context for subsequent undercards
-                current_date = fight_date or current_date
-                current_location = fight_location or current_location
-                current_time = fight_time or current_time
-                current_broadcast = fight_broadcast or current_broadcast
-
-                fights.append(RawFight(
-                    fighter1=fighter1,
-                    fighter2=fighter2,
-                    date_raw=final_date or "TBD",
-                    location=final_location or "",
-                    time=final_time or "",
-                    broadcast=final_broadcast or "",
-                    is_main_event=is_main_event,
-                    source="main_page",
-                ))
-
-        i += 1
-
-    return fights
-
-
-# ---------------------------------------------------------------------------
-# Text Parsing — Detail Pages
-# ---------------------------------------------------------------------------
-
-_LONG_DATE_PAT = re.compile(
-    r"(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday),\s+"
-    r"(January|February|March|April|May|June|July|August|September|"
-    r"October|November|December)\s+(\d{1,2}),?\s+(\d{4})"
-)
-_SHORT_DATE_PAT = re.compile(
-    r"(Sun|Mon|Tue|Wed|Thu|Fri|Sat),\s+"
-    r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})\s+(\d{4})"
-)
-_TIME_SEARCH_PAT = re.compile(r"(\d{1,2}:\d{2}\s*(?:AM|PM))", re.IGNORECASE)
-_GMT_SEARCH_PAT = re.compile(r"(\d{1,2}:\d{2})\s*GMT", re.IGNORECASE)
-
-_MONTH_ABBREV = {
-    "January": "Jan", "February": "Feb", "March": "Mar", "April": "Apr",
-    "May": "May", "June": "Jun", "July": "Jul", "August": "Aug",
-    "September": "Sep", "October": "Oct", "November": "Nov", "December": "Dec",
-}
-_DAY_ABBREV = {
-    "Sunday": "Sun", "Monday": "Mon", "Tuesday": "Tue", "Wednesday": "Wed",
-    "Thursday": "Thu", "Friday": "Fri", "Saturday": "Sat",
-}
-
-
-def parse_fight_detail_text(lines: list[str]) -> RawFight | None:
-    """Parse fight details from a detail page's text lines."""
-    fighter1 = None
-    fighter2 = None
-    fight_date = None
-    location = None
-    time_str = None
-    broadcast = None
-    is_first_vs = True
-
-    for i, line in enumerate(lines):
-        # Fighter names via VS pattern
-        if line.upper() == "VS" and 0 < i < len(lines) - 1:
-            f1 = lines[i - 1]
-            f2 = lines[i + 1]
-            if _is_valid_fighter(f1) and _is_valid_fighter(f2) and is_first_vs:
-                fighter1 = f1
-                fighter2 = f2
-                is_first_vs = False
-
-        # Date parsing
-        long_m = _LONG_DATE_PAT.search(line)
-        if long_m and not fight_date:
-            day_a = _DAY_ABBREV.get(long_m.group(1), long_m.group(1)[:3])
-            mon_a = _MONTH_ABBREV.get(long_m.group(2), long_m.group(2)[:3])
-            fight_date = f"{day_a}, {mon_a} {long_m.group(3)} {long_m.group(4)}"
-
-        short_m = _SHORT_DATE_PAT.search(line)
-        if short_m and not fight_date:
-            fight_date = short_m.group(0)
-
-        # Time parsing
-        if "GMT" in line.upper() and not time_str:
-            gmt_m = _GMT_SEARCH_PAT.search(line)
-            if gmt_m:
-                time_str = gmt_m.group(1) + " GMT"
-
-        time_m = _TIME_SEARCH_PAT.search(line)
-        if time_m and not time_str:
-            time_str = time_m.group(1)
-
-        # Location
-        if _is_location_line(line) and not location:
-            location = line
-
-        # Broadcast
-        if line.upper().startswith("LIVE ON ") or line.upper().startswith("LIVE AND "):
-            broadcast = line
-
-    if fighter1 and fighter2:
-        return RawFight(
-            fighter1=fighter1,
-            fighter2=fighter2,
-            date_raw=fight_date or "TBD",
-            location=location or "",
-            time=time_str or "",
-            broadcast=broadcast or "",
-            is_main_event=True,
-            source="detail_page",
-        )
-
-    return None
-
-
-# ---------------------------------------------------------------------------
-# Scraping — Browser Wrappers
-# ---------------------------------------------------------------------------
-
-
-def scrape_main_page(page: Page) -> list[RawFight]:
-    """Scrape fights from the main schedule page."""
-    body = page.inner_text("body")
-    lines = [line.strip() for line in body.split("\n") if line.strip()]
-    return parse_main_page_text(lines)
-
-
-def scrape_fight_detail(page: Page, url: str) -> RawFight | None:
-    """Scrape details from an individual fight page."""
     try:
-        page.goto(url, timeout=DETAIL_PAGE_TIMEOUT)
-        page.wait_for_timeout(DETAIL_PAGE_WAIT)
-        body = page.inner_text("body")
-        lines = [line.strip() for line in body.split("\n") if line.strip()]
-        return parse_fight_detail_text(lines)
-    except Exception as e:
-        log.warning("Error scraping %s: %s", url, e)
-    return None
+        start_utc = _parse_iso_utc(start_raw)
+    except ValueError:
+        log.warning("Skipping event %s: unparsable eventStart %r",
+                    raw.get("id"), start_raw)
+        return None
 
-
-# ---------------------------------------------------------------------------
-# Scraping — Orchestrator
-# ---------------------------------------------------------------------------
-
-
-def scrape_all_fights() -> list[RawFight]:
-    """Launch browser, scrape main page + detail pages, return all fights."""
-    all_fights: list[RawFight] = []
-    seen_slugs: set[str] = set()
-
-    with sync_playwright() as p:
-        log.info("Launching browser")
-        browser = p.chromium.launch(
-            headless=True,
-            args=[
-                "--disable-blink-features=AutomationControlled",
-                "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/131.0.0.0 Safari/537.36",
-            ],
-        )
-        page = browser.new_page()
-
+    end_raw = raw.get("eventEnd")
+    end_utc: datetime | None = None
+    if end_raw:
         try:
-            log.info("Loading schedule page")
-            page.goto(SCHEDULE_URL, timeout=PAGE_LOAD_TIMEOUT)
-            page.wait_for_timeout(5000)
+            end_utc = _parse_iso_utc(end_raw)
+        except ValueError:
+            log.debug("Event %s has unparsable eventEnd %r", raw.get("id"),
+                      end_raw)
 
-            # Expand full schedule
-            for i in range(LOAD_MORE_CLICKS):
-                try:
-                    btn = page.locator("text=Load More")
-                    if btn.count() > 0 and btn.first.is_visible():
-                        log.info("Clicking Load More (%d/%d)", i + 1, LOAD_MORE_CLICKS)
-                        btn.first.click()
-                        page.wait_for_timeout(2000)
-                    else:
-                        break
-                except Exception as e:
-                    log.debug("Load More click %d failed: %s", i + 1, e)
-                    break
+    fights = tuple(
+        f for f in (parse_fight(rf) for rf in raw.get("fights") or [])
+        if f.fighter_a and f.fighter_b
+    )
+    if not fights:
+        log.debug("Skipping event %s: no named fights", raw.get("id"))
+        return None
 
-            # Pass 1: Main page (preserves casing for main event detection)
-            log.info("Scraping main page")
-            main_fights = scrape_main_page(page)
-            all_fights.extend(main_fights)
-            for fight in main_fights:
-                tag = "[MAIN]" if fight.is_main_event else "[card]"
-                log.info(
-                    "  %s %s vs %s — %s",
-                    tag, fight.fighter1, fight.fighter2, fight.date_raw,
-                )
+    location = raw.get("eventLocation") or {}
+    return Event(
+        id=str(raw.get("id") or ""),
+        start_utc=start_utc,
+        end_utc=end_utc,
+        venue=(location.get("venueName") or None),
+        city=(location.get("city") or None),
+        country=(location.get("country") or None),
+        fights=fights,
+        is_sold_out=bool(raw.get("isSoldOut")),
+    )
 
-            # Collect detail page URLs
-            html = page.content()
-            slugs = sorted(set(re.findall(r"/en/schedule/fights/([a-z0-9-]+)", html)))
-            log.info("Found %d fight detail URLs", len(slugs))
 
-            # Pass 2: Detail pages (fills in missing info)
-            for slug in slugs:
-                if slug in seen_slugs:
-                    continue
-                seen_slugs.add(slug)
-
-                url = f"https://ringmagazine.com/en/schedule/fights/{slug}"
-                log.info("  Scraping: %s", slug)
-
-                detail = scrape_fight_detail(page, url)
-                if not detail:
-                    continue
-
-                # Merge with existing or add new
-                detail_fight = detail.as_fight()
-                merged = False
-                for existing in all_fights:
-                    if fighters_match(detail_fight, existing.as_fight()):
-                        if not existing.location and detail.location:
-                            existing.location = detail.location
-                        if not existing.time and detail.time:
-                            existing.time = detail.time
-                        if not existing.broadcast and detail.broadcast:
-                            existing.broadcast = detail.broadcast
-                        if existing.date_raw == "TBD" and detail.date_raw != "TBD":
-                            existing.date_raw = detail.date_raw
-                        if detail.is_main_event:
-                            existing.is_main_event = True
-                        merged = True
-                        break
-
-                if not merged:
-                    all_fights.append(detail)
-                    log.info(
-                        "    New fight: %s vs %s — %s",
-                        detail.fighter1, detail.fighter2, detail.date_raw,
-                    )
-
-            log.info(
-                "Scraping complete: %d fights from main page, %d total",
-                len(main_fights), len(all_fights),
-            )
-
-        except Exception as e:
-            log.error("Browser error: %s", e)
-            traceback.print_exc()
-        finally:
-            browser.close()
-
-    return all_fights
+def parse_events(payload: dict) -> list[Event]:
+    """Parse the full API payload into a list of Events (lazy-failure-tolerant)."""
+    data = payload.get("data") or []
+    if not isinstance(data, list):
+        raise ValueError(f"Unexpected payload shape: data is {type(data).__name__}")
+    parsed = [event for event in (parse_event(r) for r in data) if event]
+    log.info("Parsed %d events from %d API records", len(parsed), len(data))
+    return parsed
 
 
 # ---------------------------------------------------------------------------
-# Card Assembly
+# Fetch
 # ---------------------------------------------------------------------------
 
 
-def _normalize_location_key(location: str) -> str:
-    """Normalize location for grouping (strip country/state suffix, lowercase)."""
-    loc = location.lower().strip()
-    # Strip trailing country/state suffixes (e.g., ", US" or ", NV, US")
-    loc = re.sub(r"(\s*,\s*[a-z]{2}){1,2}$", "", loc)
-    loc = re.sub(r"\s+", " ", loc)
-    return loc
+def fetch_events(url: str = EVENTS_API) -> dict:
+    """Hit the schedule API and return the parsed JSON body."""
+    log.info("Fetching %s", url)
+    req = urllib.request.Request(url, headers={
+        "User-Agent": USER_AGENT,
+        "Accept": "application/json",
+    })
+    try:
+        with urllib.request.urlopen(req, timeout=HTTP_TIMEOUT_SECONDS) as resp:
+            body = resp.read()
+    except urllib.error.URLError as e:
+        raise RuntimeError(f"Failed to fetch {url}: {e}") from e
+    # API returns UTF-8 with a BOM in some responses; tolerate it.
+    payload: dict = json.loads(body.decode("utf-8-sig"))
+    return payload
 
 
-def build_cards(raw_fights: list[RawFight]) -> list[Card]:
-    """Group raw fight dicts into Cards by date + location."""
-    cards_by_key: dict[tuple[str, str], Card] = {}
-
-    for raw in raw_fights:
-        date = parse_date(raw.date_raw)
-        date_key = date.strftime("%Y-%m-%d") if date else "TBD"
-        loc_key = _normalize_location_key(raw.location)
-        key = (date_key, loc_key)
-
-        if key not in cards_by_key:
-            cards_by_key[key] = Card(
-                date=date,
-                date_raw=raw.date_raw,
-                location=raw.location,
-                time_raw=raw.time,
-                broadcast=raw.broadcast,
-            )
-
-        card = cards_by_key[key]
-        card.add_fight(raw.as_fight())
-
-        # Fill missing card metadata
-        if not card.location and raw.location:
-            card.location = raw.location
-        if not card.time_raw and raw.time:
-            card.time_raw = raw.time
-        if not card.broadcast and raw.broadcast:
-            card.broadcast = raw.broadcast
-
-    # Infer timezone for each card
-    for card in cards_by_key.values():
-        card.timezone = infer_timezone(card.time_raw, card.location)
-
-    return list(cards_by_key.values())
+# ---------------------------------------------------------------------------
+# Filtering
+# ---------------------------------------------------------------------------
 
 
-def filter_past_events(
-    cards: list[Card], cutoff_days: int = PAST_EVENT_CUTOFF_DAYS
-) -> list[Card]:
-    """Remove events that ended more than cutoff_days ago."""
-    today = datetime.now(tz=ZoneInfo("UTC")).date()
-    cutoff = today - timedelta(days=cutoff_days)
-    result = []
-    for card in cards:
-        if card.date is None or card.date.date() >= cutoff:
-            result.append(card)
+def filter_recent(
+    events: list[Event],
+    now_utc: datetime | None = None,
+    past_cutoff: timedelta = PAST_EVENT_CUTOFF,
+) -> list[Event]:
+    """Drop events that ended more than `past_cutoff` ago."""
+    now = now_utc or datetime.now(UTC)
+    cutoff = now - past_cutoff
+    kept: list[Event] = []
+    dropped = 0
+    for ev in events:
+        if ev.start_utc >= cutoff:
+            kept.append(ev)
         else:
-            main = card.main_event
-            name = main.title if main else "unknown"
-            log.info("Filtering past event: %s (%s)", name, card.date_raw)
-    return result
+            dropped += 1
+    if dropped:
+        log.info("Filtered %d past events (older than %s)", dropped, cutoff.date())
+    return kept
 
 
 # ---------------------------------------------------------------------------
-# Calendar Generation
+# Calendar rendering
 # ---------------------------------------------------------------------------
 
 
-def create_calendar(cards: list[Card]) -> Calendar:
-    """Create an iCalendar from the list of cards."""
+def _format_summary(event: Event) -> str:
+    main = event.main_event
+    assert main is not None  # parse_event already rejected empty cards
+    summary = f"\U0001f94a {main.title.upper()}"
+    n_uc = len(event.undercards)
+    if n_uc:
+        summary += f" (+{n_uc} more)"
+    return summary
+
+
+def _format_description(event: Event) -> str:
+    main = event.main_event
+    assert main is not None
+    lines = [f"MAIN EVENT: {main.title.upper()}"]
+    if main.weight_class:
+        lines.append(f"  {main.weight_class}"
+                     + (f", {main.rounds} rounds" if main.rounds else ""))
+    if event.undercards:
+        lines.append("")
+        lines.append("Undercard:")
+        for uc in event.undercards:
+            line = f"  - {uc.title}"
+            if uc.weight_class:
+                line += f"  ({uc.weight_class})"
+            lines.append(line)
+    lines.append("")
+    if event.venue:
+        lines.append(f"Venue: {event.location_str}")
+    local = event.local_start
+    lines.append(f"Local start: {local:%a %d %b %Y, %H:%M %Z}")
+    if event.is_sold_out:
+        lines.append("Status: SOLD OUT")
+    return "\n".join(lines)
+
+
+def build_calendar(events: list[Event], now_utc: datetime | None = None) -> Calendar:
     cal = Calendar()
-    cal.add("prodid", "-//Boxing Schedule//github-action//")
+    cal.add("prodid", CALENDAR_PRODID)
     cal.add("version", "2.0")
     cal.add("calscale", "GREGORIAN")
-    cal.add("x-wr-calname", "Boxing Schedule")
     cal.add("method", "PUBLISH")
+    cal.add("x-wr-calname", CALENDAR_NAME)
 
-    now_utc = datetime.now(tz=ZoneInfo("UTC"))
+    stamp = now_utc or datetime.now(UTC)
 
-    for card in cards:
-        main = card.main_event
-        if not main:
-            continue
-
-        if not card.date:
-            log.warning("Skipping event with no date: %s", main.title)
-            continue
-
-        undercards = card.undercards
-
-        # Summary: MAIN EVENT (+N more)
-        summary = f"\U0001f94a {main.title.upper()}"
-        if undercards:
-            summary += f" (+{len(undercards)} more)"
-
-        event = Event()
-        event.add("summary", summary)
-        event.add("dtstamp", now_utc)
-        event.add("sequence", 0)
-        event.add("status", "CONFIRMED")
-
-        # Date/time with timezone
-        hour, minute = parse_time(card.time_raw)
-        try:
-            tz = ZoneInfo(card.timezone)
-        except Exception:
-            tz = ZoneInfo("America/New_York")
-        dt = card.date.replace(hour=hour, minute=minute, second=0, tzinfo=tz)
-        event.add("dtstart", dt)
-        event.add("dtend", dt + timedelta(hours=EVENT_DURATION_HOURS))
-
-        # Description
-        desc_lines = [f"MAIN EVENT: {main.title.upper()}", ""]
-        if undercards:
-            desc_lines.append("Undercard:")
-            for uc in undercards:
-                desc_lines.append(f"  - {uc.title}")
-            desc_lines.append("")
-        if card.location:
-            desc_lines.append(f"Location: {card.location}")
-        if card.broadcast:
-            desc_lines.append(f"Broadcast: {card.broadcast}")
-        if card.time_raw:
-            desc_lines.append(f"Time: {card.time_raw}")
-        event.add("description", "\n".join(desc_lines))
-
-        if card.location:
-            event.add("location", card.location)
-
-        # Stable UID using hash to avoid collisions
-        date_str = card.date.strftime("%Y%m%d")
-        uid_input = (
-            f"{normalize_name(main.fighter1)}|"
-            f"{normalize_name(main.fighter2)}|"
-            f"{date_str}"
-        )
-        uid_hash = hashlib.sha256(uid_input.encode()).hexdigest()[:12]
-        event.add("uid", f"boxing-{uid_hash}-{date_str}@boxingschedule")
-
-        cal.add_component(event)
+    for event in events:
+        ical = IcalEvent()
+        ical.add("uid", f"boxing-{event.id}@ringmagazine.com")
+        ical.add("summary", _format_summary(event))
+        ical.add("description", _format_description(event))
+        ical.add("dtstamp", stamp)
+        ical.add("sequence", 0)
+        ical.add("status", "CONFIRMED")
+        dtstart = event.local_start
+        dtend = (event.end_utc.astimezone(event.timezone)
+                 if event.end_utc else dtstart + EVENT_DURATION)
+        ical.add("dtstart", dtstart)
+        ical.add("dtend", dtend)
+        if event.venue:
+            ical.add("location", event.location_str)
+        cal.add_component(ical)
 
     return cal
 
 
+def write_ics(calendar: Calendar, path: Path = OUTPUT_FILE) -> int:
+    body = calendar.to_ical()
+    path.write_bytes(body)
+    return len(body)
+
+
 # ---------------------------------------------------------------------------
-# Main
+# Entry point
 # ---------------------------------------------------------------------------
 
 
-def main() -> None:
+def main() -> int:
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s %(levelname)s %(message)s",
         datefmt="%H:%M:%S",
     )
 
-    raw_fights = scrape_all_fights()
+    payload = fetch_events()
+    events = parse_events(payload)
+    events = filter_recent(events)
+    events.sort(key=lambda e: e.start_utc)
 
-    if not raw_fights:
-        log.error("No fights found. The website structure may have changed.")
-        sys.exit(1)
+    if not events:
+        log.error("No upcoming events to write. Aborting.")
+        return 1
 
-    cards = build_cards(raw_fights)
-    cards = filter_past_events(cards)
+    calendar = build_calendar(events)
+    n_bytes = write_ics(calendar)
+    log.info("Wrote %s (%d events, %d bytes)", OUTPUT_FILE, len(events), n_bytes)
 
-    # Sort by date (TBD at end)
-    cards.sort(key=lambda c: c.date or datetime.max)
-
-    log.info("Built %d cards from %d fights", len(cards), len(raw_fights))
-
-    cal = create_calendar(cards)
-    with open(OUTPUT_FILE, "wb") as f:
-        f.write(cal.to_ical())
-    log.info("Written %s", OUTPUT_FILE)
-
-    # Summary
-    for card in cards:
-        main = card.main_event
-        if main:
-            uc = len(card.undercards)
-            log.info("  %s (%s) +%d undercard(s)", main.title.upper(), card.date_raw, uc)
+    for ev in events:
+        main_fight = ev.main_event
+        title = main_fight.title.upper() if main_fight else "?"
+        log.info("  %s  %s  @  %s  (+%d UC)",
+                 ev.local_start.strftime("%Y-%m-%d %H:%M %Z"),
+                 title, ev.venue or "?", len(ev.undercards))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

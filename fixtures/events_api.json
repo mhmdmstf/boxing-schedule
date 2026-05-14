@@ -1,0 +1,2180 @@
+{
+  "data": [
+    {
+      "id": "lrnHUPYkF95jbL8jkEBUi",
+      "eventStart": "2026-04-29T08:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "4CGAij6NU4iid2JZLfw0no",
+          "fighterA": {
+            "name": "Skye Nicolson",
+            "firstName": "Skye",
+            "lastName": "Nicolson",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Mariah Turner",
+            "firstName": "Mariah",
+            "lastName": "Turner",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Women",
+          "weightClass": "Junior featherweight",
+          "venue": "The Melbourne Pavilion, AU",
+          "isMainEvent": true,
+          "startTime": "2026-04-29T12:00:00.000Z",
+          "noOfRounds": 10
+        }
+      ],
+      "eventEnd": "2026-04-29T14:00:00.000Z",
+      "eventLocation": {
+        "venueName": "The Melbourne Pavilion",
+        "country": "AU",
+        "city": "Melbourne"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "634Z6qrMYoGP1s4wFLcCxm",
+      "eventStart": "2026-05-02T08:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "42dFem3mLYrbUI7h5uMWi4",
+          "fighterA": {
+            "name": "Naoya Inoue",
+            "firstName": "Naoya",
+            "lastName": "Inoue",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Junto Nakatani",
+            "firstName": "Junto",
+            "lastName": "Nakatani",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior featherweight",
+          "venue": "Tokyo Dome, JP",
+          "isMainEvent": true,
+          "startTime": "2026-05-02T11:30:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "17zRD1OgXWyTscGHgHCP8J",
+          "fighterA": {
+            "name": "Takuma Inoue",
+            "firstName": "Takuma",
+            "lastName": "Inoue",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Kazuto Ioka",
+            "firstName": "Kazuto",
+            "lastName": "Ioka",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Bantamweight",
+          "venue": "Tokyo Dome, JP",
+          "isMainEvent": false,
+          "startTime": "2026-05-02T10:30:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "4pZDZsl7PWH1pxZFn4Ozqx",
+          "fighterA": {
+            "name": "Toshiki Shimomachi",
+            "firstName": "Toshiki",
+            "lastName": "Shimomachi",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Reiya Abe",
+            "firstName": "Reiya",
+            "lastName": "Abe",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Featherweight",
+          "venue": "Tokyo Dome, JP",
+          "isMainEvent": false,
+          "startTime": "2026-05-02T10:00:00.000Z",
+          "noOfRounds": 10
+        },
+        {
+          "fightId": "7iN5Ptdd0JDKK5HjQdG9cz",
+          "fighterA": {
+            "name": "Yoshiki Takei",
+            "firstName": "Yoshiki",
+            "lastName": "Takei",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "DeKang Wang",
+            "firstName": "DeKang",
+            "lastName": "Wang",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Bantamweight",
+          "venue": "Tokyo Dome, JP",
+          "isMainEvent": false,
+          "startTime": "2026-05-02T08:00:00.000Z",
+          "noOfRounds": 8
+        },
+        {
+          "fightId": "KATfN3Nbvk3qNkOMCru8w",
+          "fighterA": {
+            "name": "Sora Tanaka",
+            "firstName": "Sora",
+            "lastName": "Tanaka",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Jin Sasaki",
+            "firstName": "Jin",
+            "lastName": "Sasaki",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Welterweight",
+          "venue": "Tokyo Dome, JP",
+          "isMainEvent": false,
+          "startTime": "2026-05-02T09:00:00.000Z",
+          "noOfRounds": 10
+        }
+      ],
+      "eventEnd": "2026-05-02T14:00:00.000Z",
+      "eventLocation": {
+        "venueName": "Tokyo Dome",
+        "country": "JP",
+        "city": "Tokyo"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "zzrF2zlGQh3DWzAvOyy7E",
+      "eventStart": "2026-05-02T19:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "7A8CATyW0S7sTBM5FSvZfT",
+          "fighterA": {
+            "name": "Conah Walker",
+            "firstName": "Conah",
+            "lastName": "Walker",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Sam Eggington",
+            "firstName": "Sam",
+            "lastName": "Eggington",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Welterweight",
+          "venue": "Civic Hall, Wolverhampton, UK",
+          "isMainEvent": true,
+          "startTime": "2026-05-02T22:00:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "6zGueBG1hWqFzTeF2A4S6q",
+          "fighterA": {
+            "name": "Bilal Fawaz",
+            "firstName": "Bilal",
+            "lastName": "Fawaz",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Ryan Kelly",
+            "firstName": "Ryan",
+            "lastName": "Kelly",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior middleweight",
+          "venue": "Civic Hall, Wolverhampton, UK",
+          "isMainEvent": false,
+          "startTime": "2026-05-02T20:00:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "6Z0TOu26xp5SlgLfLJrk06",
+          "fighterA": {
+            "name": "Kieron Conway",
+            "firstName": "Kieron",
+            "lastName": "Conway",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Mark Jeffers",
+            "firstName": "Mark",
+            "lastName": "Jeffers",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Super middleweight",
+          "venue": "Civic Hall, Wolverhampton, UK",
+          "isMainEvent": false,
+          "startTime": "2026-05-02T19:00:00.000Z",
+          "noOfRounds": 10
+        },
+        {
+          "fightId": "4yVlArhuhGUgOhirR4ggn5",
+          "fighterA": {
+            "name": "Tiah Ayton",
+            "firstName": "Tiah",
+            "lastName": "Ayton",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Stevi Levy",
+            "firstName": "Stevi",
+            "lastName": "Levy",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Women",
+          "weightClass": "Junior featherweight",
+          "venue": "Civic Hall, Wolverhampton, UK",
+          "isMainEvent": false,
+          "startTime": "2026-05-02T19:00:00.000Z",
+          "noOfRounds": 8
+        }
+      ],
+      "eventEnd": "2026-05-02T23:59:00.000Z",
+      "eventLocation": {
+        "venueName": "Civic Hall, Wolverhampton",
+        "country": "UK",
+        "city": "Wolverhampton"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "3tLMzHLECkyChzXc6sqaBy",
+      "eventStart": "2026-05-02T22:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "Eig7z5FD0PSuTeWIwHvdW",
+          "fighterA": {
+            "name": "David Benavidez",
+            "firstName": "David",
+            "lastName": "Benavidez",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Gilberto Ramirez",
+            "firstName": "Gilberto",
+            "lastName": "Ramirez",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Cruiserweight",
+          "venue": "T-Mobile Arena, US",
+          "isMainEvent": true,
+          "startTime": "2026-05-03T02:00:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "7iBMYiGfZB41AvS5GqdHR2",
+          "fighterA": {
+            "name": "Jose Armando Resendiz",
+            "firstName": "Jose Armando",
+            "lastName": "Resendiz",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Jaime Munguia",
+            "firstName": "Jaime",
+            "lastName": "Munguia",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Super middleweight",
+          "venue": "T-Mobile Arena, US",
+          "isMainEvent": false,
+          "startTime": "2026-05-03T03:00:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "5I689gC9qZTOGGruc6zNqJ",
+          "fighterA": {
+            "name": "Oscar Duarte",
+            "firstName": "Oscar",
+            "lastName": "Duarte",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Angel Fierro",
+            "firstName": "Angel",
+            "lastName": "Fierro",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior welterweight",
+          "venue": "T-Mobile Arena, US",
+          "isMainEvent": false,
+          "startTime": "2026-05-03T02:00:00.000Z",
+          "noOfRounds": 10
+        }
+      ],
+      "eventEnd": "2026-05-03T06:00:00.000Z",
+      "eventLocation": {
+        "venueName": "T-Mobile Arena",
+        "country": "US",
+        "city": "Las Vegas"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "5fbV1nIAbYZmLP6eF3TEOI",
+      "eventStart": "2026-05-03T18:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "3J7aJMIgbAAMxzpwYcoidx",
+          "fighterA": {
+            "name": "Yaser Al Ghena",
+            "firstName": "Yaser",
+            "lastName": "Al Ghena",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Bradley Townsend",
+            "firstName": "Bradley",
+            "lastName": "Townsend",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior welterweight",
+          "venue": "York Hall, Bethnal Green, GB",
+          "isMainEvent": true,
+          "startTime": "2026-05-03T18:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-05-03T23:00:00.000Z",
+      "eventLocation": {
+        "venueName": "York Hall, Bethnal Green",
+        "country": "GB",
+        "city": "London"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "6uuqhf420Bi90umcHR8B2D",
+      "eventStart": "2026-05-06T06:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "2AIymWiMjR3zgDDpfQKoH5",
+          "fighterA": {
+            "name": "Nikita Tszyu",
+            "firstName": "Nikita",
+            "lastName": "Tszyu",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Oscar Diaz",
+            "firstName": "Oscar",
+            "lastName": "Diaz",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior middleweight",
+          "venue": "Newcastle Entertainment Centre, AU",
+          "isMainEvent": true,
+          "startTime": "2026-05-06T10:00:00.000Z",
+          "noOfRounds": 10
+        }
+      ],
+      "eventEnd": "2026-05-06T11:00:00.000Z",
+      "eventLocation": {
+        "venueName": "Newcastle Entertainment Centre",
+        "country": "AU",
+        "city": "Newcastle"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "7k150ImPOrIUEtXtGquqBu",
+      "eventStart": "2026-05-06T07:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "1hNJevxflXHNjhU80SseKh",
+          "fighterA": {
+            "name": "Mikito Nakano",
+            "firstName": "Mikito",
+            "lastName": "Nakano",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Lerato Dlamini",
+            "firstName": "Lerato",
+            "lastName": "Dlamini",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Featherweight",
+          "venue": "Korakuen Hall, JP",
+          "isMainEvent": true,
+          "startTime": "2026-05-06T10:30:00.000Z",
+          "noOfRounds": 10
+        }
+      ],
+      "eventEnd": "2026-05-06T13:00:00.000Z",
+      "eventLocation": {
+        "venueName": "Korakuen Hall",
+        "country": "JP",
+        "city": "Tokyo"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "40snbQfzs5ZUU4LCFKIvNK",
+      "eventStart": "2026-05-09T17:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "IA227rH1o7loQEVNhZ4Xf",
+          "fighterA": {
+            "name": "Fabio Wardley",
+            "firstName": "Fabio",
+            "lastName": "Wardley",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Daniel Dubois",
+            "firstName": "Daniel",
+            "lastName": "Dubois",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Heavyweight",
+          "venue": "Co-Op Live Arena, GB",
+          "isMainEvent": true,
+          "startTime": "2026-05-09T21:00:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "6fEcQfQG1WDwcSKxL3b0gM",
+          "fighterA": {
+            "name": "Jared Anderson",
+            "firstName": "Jared",
+            "lastName": "Anderson",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Solomon Dacres",
+            "firstName": "Solomon",
+            "lastName": "Dacres",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Heavyweight",
+          "venue": "Co-Op Live Arena, GB",
+          "isMainEvent": false,
+          "startTime": "2026-05-09T19:30:00.000Z",
+          "noOfRounds": 10
+        },
+        {
+          "fightId": "36hmkmNpVOj4CNY7Abg8tW",
+          "fighterA": {
+            "name": "Jack Rafferty",
+            "firstName": "Jack",
+            "lastName": "Rafferty",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Ekow Essuman",
+            "firstName": "Ekow",
+            "lastName": "Essuman",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior welterweight",
+          "venue": "Co-Op Live Arena, GB",
+          "isMainEvent": false,
+          "startTime": "2026-05-09T19:00:00.000Z",
+          "noOfRounds": 10
+        },
+        {
+          "fightId": "2fMyMRpRgCZ3U3KQJ7m43Z",
+          "fighterA": {
+            "name": "Liam Cameron",
+            "firstName": "Liam",
+            "lastName": "Cameron",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Bradley Rea",
+            "firstName": "Bradley",
+            "lastName": "Rea",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Light heavyweight",
+          "venue": "Co-Op Live Arena, GB",
+          "isMainEvent": false,
+          "startTime": "2026-05-09T19:00:00.000Z",
+          "noOfRounds": 10
+        },
+        {
+          "fightId": "2zlMDf9d5pYnxak9AymH6R",
+          "fighterA": {
+            "name": "Khaleel Majid",
+            "firstName": "Khaleel",
+            "lastName": "Majid",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Gavin Gwynne",
+            "firstName": "Gavin",
+            "lastName": "Gwynne",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior welterweight",
+          "venue": "Co-Op Live Arena, GB",
+          "isMainEvent": false,
+          "startTime": "2026-05-09T18:00:00.000Z",
+          "noOfRounds": 10
+        }
+      ],
+      "eventEnd": "2026-05-09T23:59:00.000Z",
+      "eventLocation": {
+        "venueName": "Co-Op Live Arena",
+        "country": "GB",
+        "city": "Manchester"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "3Q0yM8IoLkl9BN1bbRxEw2",
+      "eventStart": "2026-05-10T01:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "42JRQT4MCgqUxdwCX7Njb1",
+          "fighterA": {
+            "name": "Angelo Leo",
+            "firstName": "Angelo",
+            "lastName": "Leo",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Ra'eese Aleem",
+            "firstName": "Ra'eese ",
+            "lastName": "Aleem",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Featherweight",
+          "venue": "Gateway Center Arena, US",
+          "isMainEvent": true,
+          "startTime": "2026-05-10T02:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-05-10T05:00:00.000Z",
+      "eventLocation": {
+        "venueName": "Gateway Center Arena",
+        "country": "US",
+        "city": "Atlanta"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "2xowj6GFY5H6WiAVMjj4RS",
+      "eventStart": "2026-05-15T17:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "4coHn5OfkQcdCXXnJFnkWE",
+          "fighterA": {
+            "name": "Paddy Donovan",
+            "firstName": "Paddy",
+            "lastName": "Donovan",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Karen Chukhadzhian",
+            "firstName": "Karen",
+            "lastName": "Chukhadzhian",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Welterweight",
+          "venue": "SAP-Arena, DE",
+          "isMainEvent": true,
+          "startTime": "2026-05-15T20:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-05-15T22:30:00.000Z",
+      "eventLocation": {
+        "venueName": "SAP-Arena",
+        "country": "DE",
+        "city": "Mannheim"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "5hWhhN3LXRgQIsHyhGlDVg",
+      "eventStart": "2026-05-16T16:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "3AvtSY0PhfGeevDh5r1UUN",
+          "fighterA": {
+            "name": "Melvin Jerusalem",
+            "firstName": "Melvin",
+            "lastName": "Jerusalem",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Siyakholwa Kuse",
+            "firstName": "Siyakholwa",
+            "lastName": "Kuse",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Strawweight",
+          "venue": "Emperors Palace, ZA",
+          "isMainEvent": true,
+          "startTime": "2026-05-16T16:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-05-16T23:00:00.000Z",
+      "eventLocation": {
+        "venueName": "Emperors Palace",
+        "country": "ZA",
+        "city": "Johannesburg"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "1Npcx2R1jW84Uq6K4V2OIH",
+      "eventStart": "2026-05-16T19:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "135F06kE0Dg5g4EZyHJCOj",
+          "fighterA": {
+            "name": "Dave Allen",
+            "firstName": "David",
+            "lastName": "Allen",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Filip Hrgovic",
+            "firstName": "Filip",
+            "lastName": "Hrgovic",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Heavyweight",
+          "venue": "Eco-Power Stadium, GB",
+          "isMainEvent": true,
+          "startTime": "2026-05-16T22:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-05-16T23:59:00.000Z",
+      "eventLocation": {
+        "venueName": "Eco-Power Stadium",
+        "country": "GB",
+        "city": "Doncaster"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "1rb23IebQNnmqji6B0Vhjo",
+      "eventStart": "2026-05-16T22:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "2S2CJ9qPpgDNLIecMMQmrD",
+          "fighterA": {
+            "name": "Keyshawn Davis",
+            "firstName": "Keyshawn",
+            "lastName": "Davis",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Nahir Albright",
+            "firstName": "Nahir",
+            "lastName": "Albright",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior welterweight",
+          "venue": "Scope Arena, Norfolk, US",
+          "isMainEvent": true,
+          "startTime": "2026-05-17T02:00:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "5xsdaEdnZfuOX49im0BqEw",
+          "fighterA": {
+            "name": "Brian Norman ",
+            "firstName": "Brian",
+            "lastName": "Norman ",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Josh Wagner",
+            "firstName": "Josh",
+            "lastName": "Wagner",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Welterweight",
+          "venue": "Scope Arena, Norfolk, US",
+          "isMainEvent": false,
+          "startTime": "2026-05-17T01:00:00.000Z",
+          "noOfRounds": 10
+        }
+      ],
+      "eventEnd": "2026-05-17T04:00:00.000Z",
+      "eventLocation": {
+        "venueName": "Scope Arena, Norfolk",
+        "country": "US",
+        "city": "Norfolk"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "577uCS3Vn63N9qg5h2JLSy",
+      "eventStart": "2026-05-22T21:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "6rUpIUtvZR3xWvL8TbCn3c",
+          "fighterA": {
+            "name": "Amari Jones",
+            "firstName": "Amari",
+            "lastName": "Jones",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Vincenzo Gualtieri",
+            "firstName": "Vincenzo",
+            "lastName": "Gualtieri",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Middleweight",
+          "venue": "SAP Arena, US",
+          "isMainEvent": true,
+          "startTime": "2026-05-23T00:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-05-23T03:00:00.000Z",
+      "eventLocation": {
+        "venueName": "SAP Arena",
+        "country": "US",
+        "city": "San Jose"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "YD8U9tGpAR5OkSa4pVYca",
+      "eventStart": "2026-05-23T18:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "70HfolFO5xJ6G8sSIVQ5fR",
+          "fighterA": {
+            "name": "Oleksandr Usyk",
+            "firstName": "Oleksandr",
+            "lastName": "Usyk",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Rico Verhoeven",
+            "firstName": "Rico",
+            "lastName": "Verhoeven",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Heavyweight",
+          "venue": "Pyramids of Giza, EG",
+          "isMainEvent": true,
+          "startTime": "2026-05-23T22:00:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "2rsmKPr7vcFWefyVgCXRGN",
+          "fighterA": {
+            "name": "Hamzah Sheeraz",
+            "firstName": "Hamzah",
+            "lastName": "Sheeraz",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Alem Begic",
+            "firstName": "Alem",
+            "lastName": "Begic",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Super middleweight",
+          "venue": "Pyramids of Giza, EG",
+          "isMainEvent": false,
+          "startTime": "2026-05-23T20:00:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "3erGao4mv6wqb6VnJZl8eT",
+          "fighterA": {
+            "name": "Shakhram Giyasov",
+            "firstName": "Shakhram",
+            "lastName": "Giyasov",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Jack Catterall",
+            "firstName": "Jack",
+            "lastName": "Catterall",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Welterweight",
+          "venue": "Pyramids of Giza, EG",
+          "isMainEvent": false,
+          "startTime": "2026-05-23T19:00:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "5srzknC5eCopxaVGX8c8yI",
+          "fighterA": {
+            "name": "Frank Sanchez",
+            "firstName": "Frank",
+            "lastName": "Sanchez",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Richard Torrez",
+            "firstName": "Richard",
+            "lastName": "Torrez",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Heavyweight",
+          "venue": "Pyramids of Giza, EG",
+          "isMainEvent": false,
+          "startTime": "2026-05-23T17:30:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "3OyuJFSmHr2B7FLgQWp8cb",
+          "fighterA": {
+            "name": "Mizuki Hiruta",
+            "firstName": "Mizuki",
+            "lastName": "Hiruta",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Mai Soliman",
+            "firstName": "Mai",
+            "lastName": "Soliman",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Women",
+          "weightClass": "Junior bantamweight",
+          "venue": "Pyramids of Giza, EG",
+          "isMainEvent": false,
+          "startTime": "2026-05-23T17:00:00.000Z",
+          "noOfRounds": 10
+        }
+      ],
+      "eventEnd": "2026-05-23T23:30:00.000Z",
+      "eventLocation": {
+        "venueName": "Pyramids of Giza",
+        "country": "EG",
+        "city": "Giza"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "4AX34W5Dw3CUUoycJalqtk",
+      "eventStart": "2026-05-24T16:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "5ct8cRynn2GtXNCHkOQcOm",
+          "fighterA": {
+            "name": "David Jimenez",
+            "firstName": "David",
+            "lastName": "Jimenez",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Ayumu Sano",
+            "firstName": "Ayumu",
+            "lastName": "Sano",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior bantamweight",
+          "venue": "Gazprom Sports Complex, KG",
+          "isMainEvent": true,
+          "startTime": "2026-05-24T17:00:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "7ifMxGZCfBWMnJs2T3mG5v",
+          "fighterA": {
+            "name": "Kyonosuke Kameda",
+            "firstName": "Kyonosuke",
+            "lastName": "Kameda",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Luis Reynaldo Nunez",
+            "firstName": "Luis Reynaldo",
+            "lastName": "Nunez",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Featherweight",
+          "venue": "Gazprom Sports Complex, KG",
+          "isMainEvent": false,
+          "startTime": "2026-05-24T16:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-05-24T21:00:00.000Z",
+      "eventLocation": {
+        "venueName": "Gazprom Sports Complex",
+        "country": "KG",
+        "city": "Bishkek"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "6QrmANT23ufpctSWcHfz0O",
+      "eventStart": "2026-05-29T17:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "34oFO64tIQs8ptsrrfFgKr",
+          "fighterA": {
+            "name": "Charlie Edwards",
+            "firstName": "Charlie",
+            "lastName": "Edwards",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Sikho Nqothole",
+            "firstName": "Sikho",
+            "lastName": "Nqothole",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior bantamweight",
+          "venue": "York Hall, Bethnal Green, GB",
+          "isMainEvent": true,
+          "startTime": "2026-05-29T20:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-05-29T22:30:00.000Z",
+      "eventLocation": {
+        "venueName": "York Hall, Bethnal Green",
+        "country": "GB",
+        "city": "London"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "4PBlC2GGq6sJ4WiyEufZr",
+      "eventStart": "2026-05-30T17:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "6wyAR2yKISdaFyatX066Ui",
+          "fighterA": {
+            "name": "Dmitry Bivol",
+            "firstName": "Dmitry",
+            "lastName": "Bivol",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Michael Eifert",
+            "firstName": "Michael",
+            "lastName": "Eifert",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Light heavyweight",
+          "venue": "Yekaterinburg Arena, RU",
+          "isMainEvent": true,
+          "startTime": "2026-05-30T20:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-05-30T22:30:00.000Z",
+      "eventLocation": {
+        "venueName": "Yekaterinburg Arena",
+        "country": "RU",
+        "city": "Yekaterinburg"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "4v1Mh2lorCJFhdUdXZpMUk",
+      "eventStart": "2026-05-30T18:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "38IBLwG37IUU91dznzwcH6",
+          "fighterA": {
+            "name": "Roman Fress",
+            "firstName": "Roman",
+            "lastName": "Fress",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Tahir Kahrovic",
+            "firstName": "Tahir",
+            "lastName": "Kahrovic",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Cruiserweight",
+          "venue": "Messehalle, DE",
+          "isMainEvent": true,
+          "startTime": "2026-05-30T18:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-05-30T23:59:00.000Z",
+      "eventLocation": {
+        "venueName": "Messehalle",
+        "country": "DE",
+        "city": "Magdeburg"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "6NqplsrqiFe8TRFQYNGvmU",
+      "eventStart": "2026-05-30T21:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "2E6UBfYWlQJ7pmFxMeyD8e",
+          "fighterA": {
+            "name": "O'Shaquie Foster",
+            "firstName": "O'Shaquie",
+            "lastName": "Foster",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Raymond Ford",
+            "firstName": "Raymond",
+            "lastName": "Ford",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior lightweight",
+          "venue": "Fertitta Center, US",
+          "isMainEvent": true,
+          "startTime": "2026-05-31T01:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-05-31T04:00:00.000Z",
+      "eventLocation": {
+        "venueName": "Fertitta Center",
+        "country": "US",
+        "city": "TX"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "5ooXqUWJ1d8IDVmu953URK",
+      "eventStart": "2026-05-31T01:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "31Id3nZI8zZE98I2ZdODqk",
+          "fighterA": {
+            "name": "Stephanie Han",
+            "firstName": "Stephanie",
+            "lastName": "Han",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Holly Holm",
+            "firstName": "Holly",
+            "lastName": "Holm",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Women",
+          "weightClass": "Lightweight",
+          "venue": "El Paso County Coliseum, US",
+          "isMainEvent": true,
+          "startTime": "2026-05-30T23:00:00.000Z",
+          "noOfRounds": 10
+        },
+        {
+          "fightId": "16csAd6tyNLnn5LLBBEmt7",
+          "fighterA": {
+            "name": "Amanda Serrano",
+            "firstName": "Amanda",
+            "lastName": "Serrano",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Cheyenne Hanson",
+            "firstName": "Cheyenne",
+            "lastName": "Hanson",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Women",
+          "weightClass": "Featherweight",
+          "venue": "El Paso County Coliseum, US",
+          "isMainEvent": false,
+          "startTime": "2026-05-31T01:00:00.000Z",
+          "noOfRounds": 10
+        },
+        {
+          "fightId": "3clcghMPxB9Qq4PBkKXiW3",
+          "fighterA": {
+            "name": "Lourdes Juarez",
+            "firstName": "Lourdes",
+            "lastName": "Juarez",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Yokasta Valle",
+            "firstName": "Yokasta",
+            "lastName": "Valle",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Women",
+          "weightClass": "Junior flyweight",
+          "venue": "El Paso County Coliseum, US",
+          "isMainEvent": false,
+          "startTime": "2026-05-31T00:00:00.000Z",
+          "noOfRounds": 10
+        },
+        {
+          "fightId": "6WVBAOKrMQMiDtVQmuSIWc",
+          "fighterA": {
+            "name": "Desley Robinson",
+            "firstName": "Desley",
+            "lastName": "Robinson",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Mary Spencer",
+            "firstName": "Mary",
+            "lastName": "Spencer",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Women",
+          "weightClass": "Middleweight",
+          "venue": "El Paso County Coliseum, US",
+          "isMainEvent": false,
+          "startTime": "2026-05-31T00:00:00.000Z",
+          "noOfRounds": 10
+        }
+      ],
+      "eventEnd": "2026-05-31T05:00:00.000Z",
+      "eventLocation": {
+        "venueName": "El Paso County Coliseum",
+        "country": "US",
+        "city": "Texas"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "5bbrlQ9MCl5RJbO9Nl1jup",
+      "eventStart": "2026-06-04T23:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "6fVAY9oeNi3UYWypwQk0ta",
+          "fighterA": {
+            "name": "Albert Ramirez",
+            "firstName": "Albert",
+            "lastName": "Ramirez",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Lerrone Richards",
+            "firstName": "Lerrone",
+            "lastName": "Richards",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Light heavyweight",
+          "venue": "Montreal Casino, CA",
+          "isMainEvent": true,
+          "startTime": "2026-06-05T01:00:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "1c3YThkHds5ATvVUJeRK8g",
+          "fighterA": {
+            "name": "Dzmitry Asanau",
+            "firstName": "Dzmitry",
+            "lastName": "Asanau",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Roger Gutierrez",
+            "firstName": "Roger",
+            "lastName": "Gutierrez",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Lightweight",
+          "venue": "Montreal Casino, CA",
+          "isMainEvent": false,
+          "startTime": "2026-06-05T00:00:00.000Z",
+          "noOfRounds": 10
+        },
+        {
+          "fightId": "4cKaCjHj8taiTdwjvdPwhs",
+          "fighterA": {
+            "name": "Jhon Orobio",
+            "firstName": "Jhon",
+            "lastName": "Orobio",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Agustin Quintana",
+            "firstName": "Agustin Ezequiel",
+            "lastName": "Quintana",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior welterweight",
+          "venue": "Montreal Casino, CA",
+          "isMainEvent": false,
+          "startTime": "2026-06-05T00:00:00.000Z",
+          "noOfRounds": 10
+        },
+        {
+          "fightId": "3S0Tn1SU6CKVt6H4wXwmOk",
+          "fighterA": {
+            "name": "Christopher Guerrero",
+            "firstName": "Christopher",
+            "lastName": "Guerrero",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Samuel Rodriguez",
+            "firstName": "Samuel",
+            "lastName": "Rodriguez",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Welterweight",
+          "venue": "Capitole de Quebec, CA",
+          "isMainEvent": false,
+          "startTime": "2026-06-12T00:00:00.000Z",
+          "noOfRounds": 10
+        }
+      ],
+      "eventEnd": "2026-06-05T05:00:00.000Z",
+      "eventLocation": {
+        "venueName": "Montreal Casino",
+        "country": "CA",
+        "city": "Montreal"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "6EMRqh3wjqj6LknPdCUvRX",
+      "eventStart": "2026-06-06T07:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "5ikxE2ciEJadptmqmShLPl",
+          "fighterA": {
+            "name": "Masamichi Yabuki",
+            "firstName": "Masamichi",
+            "lastName": "Yabuki",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Rene Calixto",
+            "firstName": "Rene",
+            "lastName": "Calixto",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Flyweight",
+          "venue": "Aichi Sky Expo, Japan, JP",
+          "isMainEvent": true,
+          "startTime": "2026-06-06T10:00:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "1jRkqa7pW0z2T0HlQRBolF",
+          "fighterA": {
+            "name": "Willibaldo Garcia Perez",
+            "firstName": "Willibaldo Garcia",
+            "lastName": "Perez",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Andrew Moloney",
+            "firstName": "Andrew",
+            "lastName": "Moloney",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior bantamweight",
+          "venue": "Aichi Sky Expo, Japan, JP",
+          "isMainEvent": false,
+          "startTime": "2026-06-06T09:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-06-06T13:00:00.000Z",
+      "eventLocation": {
+        "venueName": "Aichi Sky Expo, Japan",
+        "country": "JP",
+        "city": "Nagoya"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "8jqVPUh2LQQbcen6CVGvN",
+      "eventStart": "2026-06-06T18:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "1W9Bj03xFS13ufXiphTSr2",
+          "fighterA": {
+            "name": "Dalton Smith",
+            "firstName": "Dalton",
+            "lastName": "Smith",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Alberto Puello",
+            "firstName": "Alberto",
+            "lastName": "Puello",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior welterweight",
+          "venue": "Utilta Arena, UK",
+          "isMainEvent": true,
+          "startTime": "2026-06-06T22:00:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "1BnabQacriM2ZQPlOSkS4A",
+          "fighterA": {
+            "name": "Ricardo Rafael Sandoval",
+            "firstName": "Ricardo Rafael",
+            "lastName": "Sandoval",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Galal Yafai",
+            "firstName": "Galal",
+            "lastName": "Yafai",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Flyweight",
+          "venue": "Utilta Arena, UK",
+          "isMainEvent": false,
+          "startTime": "2026-06-06T20:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-06-06T23:59:00.000Z",
+      "eventLocation": {
+        "venueName": "Utilta Arena",
+        "country": "UK",
+        "city": "Sheffield"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "5a6vAWIgjwuI9MnISARsZd",
+      "eventStart": "2026-06-11T22:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "4kLQAbFhEmFjh3KU9NPgcY",
+          "fighterA": {
+            "name": "Wilkens Mathieu",
+            "firstName": "Wilkens",
+            "lastName": "Mathieu",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Esquiva Falcao",
+            "firstName": "Esquiva",
+            "lastName": "Falcao",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Super middleweight",
+          "venue": "Capitole de Quebec, CA",
+          "isMainEvent": true,
+          "startTime": "2026-06-11T02:00:00.000Z",
+          "noOfRounds": 10
+        }
+      ],
+      "eventEnd": "2026-06-12T04:00:00.000Z",
+      "eventLocation": {
+        "venueName": "Capitole de Quebec",
+        "country": "CA",
+        "city": "Quebec"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "2OewXLmxYrOWJRZEsTdfie",
+      "eventStart": "2026-06-13T21:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "7LwbpghRlXvLA3uoTA3VYV",
+          "fighterA": {
+            "name": "Antonio Vargas",
+            "firstName": "Antonio",
+            "lastName": "Vargas",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Jesse Rodriguez",
+            "firstName": "Jesse",
+            "lastName": "Rodriguez",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Bantamweight",
+          "venue": "Desert Diamond Arena, US",
+          "isMainEvent": true,
+          "startTime": "2026-06-14T01:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-06-14T04:00:00.000Z",
+      "eventLocation": {
+        "venueName": "Desert Diamond Arena",
+        "country": "US",
+        "city": "Glendale"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "5c3v4wCt0Sg5Ef9FpZBgOv",
+      "eventStart": "2026-06-20T17:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "3jXkVZPD1qEAc3SBSVvqS7",
+          "fighterA": {
+            "name": "Ryan Garner",
+            "firstName": "Ryan",
+            "lastName": "Garner",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Michael Magnesi",
+            "firstName": "Michael",
+            "lastName": "Magnesi",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior lightweight",
+          "venue": "St. Mary's Stadium, UK",
+          "isMainEvent": true,
+          "startTime": "2026-06-20T21:00:00.000Z",
+          "noOfRounds": 12
+        },
+        {
+          "fightId": "3GP6wACNV5jbaBqY6G3o3F",
+          "fighterA": {
+            "name": "Lewis Edmondson",
+            "firstName": "Lewis",
+            "lastName": "Edmondson",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Lyndon Arthur",
+            "firstName": "Lyndon",
+            "lastName": "Arthur",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Light heavyweight",
+          "venue": "St. Mary's Stadium, UK",
+          "isMainEvent": false,
+          "startTime": "2026-06-20T20:00:00.000Z",
+          "noOfRounds": 10
+        }
+      ],
+      "eventEnd": "2026-06-20T22:30:00.000Z",
+      "eventLocation": {
+        "venueName": "St. Mary's Stadium",
+        "country": "UK",
+        "city": "Southampton"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "3dnkLUCS7yr6YLIUTXkH0I",
+      "eventStart": "2026-06-27T23:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "5CEOdhnkWZ5PWQ8UDvOL1Z",
+          "fighterA": {
+            "name": "Xander Zayas",
+            "firstName": "Xander",
+            "lastName": "Zayas",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Jaron Ennis",
+            "firstName": "Jaron",
+            "lastName": "Ennis",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Junior middleweight",
+          "venue": "Barclays Center, US",
+          "isMainEvent": true,
+          "startTime": "2026-06-28T02:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-06-28T05:00:00.000Z",
+      "eventLocation": {
+        "venueName": "Barclays Center",
+        "country": "US",
+        "city": "New York City"
+      },
+      "isSoldOut": false
+    },
+    {
+      "id": "60oWSgVf0fzRVWVZZxvhZV",
+      "eventStart": "2026-07-04T23:00:00.000Z",
+      "fights": [
+        {
+          "fightId": "6bfgR5zPDthUJxf5gUsffN",
+          "fighterA": {
+            "name": "Abdullah Mason",
+            "firstName": "Abdullah",
+            "lastName": "Mason",
+            "isChampion": true,
+            "isLegend": false
+          },
+          "fighterB": {
+            "name": "Joe Cordina",
+            "firstName": "Joe",
+            "lastName": "Cordina",
+            "isChampion": false,
+            "isLegend": false
+          },
+          "gender": "Men",
+          "weightClass": "Lightweight",
+          "venue": "Rocket Arena, US",
+          "isMainEvent": true,
+          "startTime": "2026-07-05T03:00:00.000Z",
+          "noOfRounds": 12
+        }
+      ],
+      "eventEnd": "2026-07-05T05:00:00.000Z",
+      "eventLocation": {
+        "venueName": "Rocket Arena",
+        "country": "US",
+        "city": "OH"
+      },
+      "isSoldOut": false
+    }
+  ],
+  "pagination": {
+    "total": 29,
+    "hasNextPage": false,
+    "limit": 50
+  },
+  "facets": {
+    "code": {},
+    "gender": {
+      "values": [
+        {
+          "key": "men",
+          "value": "Men",
+          "count": 27
+        },
+        {
+          "key": "women",
+          "value": "Women",
+          "count": 2
+        }
+      ]
+    },
+    "broadcaster": {},
+    "manWeightClass": {
+      "values": [
+        {
+          "key": "0",
+          "value": "Heavyweight",
+          "count": 3
+        },
+        {
+          "key": "200",
+          "value": "Cruiserweight",
+          "count": 2
+        },
+        {
+          "key": "175",
+          "value": "Light heavyweight",
+          "count": 2
+        },
+        {
+          "key": "168",
+          "value": "Super middleweight",
+          "count": 1
+        },
+        {
+          "key": "160",
+          "value": "Middleweight",
+          "count": 1
+        },
+        {
+          "key": "154",
+          "value": "Junior middleweight",
+          "count": 2
+        },
+        {
+          "key": "147",
+          "value": "Welterweight",
+          "count": 2
+        },
+        {
+          "key": "140",
+          "value": "Junior welterweight",
+          "count": 3
+        },
+        {
+          "key": "135",
+          "value": "Lightweight",
+          "count": 1
+        },
+        {
+          "key": "130",
+          "value": "Junior lightweight",
+          "count": 2
+        },
+        {
+          "key": "126",
+          "value": "Featherweight",
+          "count": 2
+        },
+        {
+          "key": "122",
+          "value": "Junior featherweight",
+          "count": 1
+        },
+        {
+          "key": "118",
+          "value": "Bantamweight",
+          "count": 1
+        },
+        {
+          "key": "115",
+          "value": "Junior bantamweight",
+          "count": 2
+        },
+        {
+          "key": "112",
+          "value": "Flyweight",
+          "count": 1
+        },
+        {
+          "key": "105",
+          "value": "Strawweight",
+          "count": 1
+        }
+      ]
+    },
+    "titleBelt": {},
+    "womanWeightClass": {
+      "values": [
+        {
+          "key": "135",
+          "value": "Lightweight",
+          "count": 1
+        },
+        {
+          "key": "122",
+          "value": "Junior featherweight",
+          "count": 1
+        }
+      ]
+    },
+    "referee": {},
+    "weightClass": {
+      "values": [
+        {
+          "key": "heavyweight",
+          "value": "Heavyweight",
+          "count": 3
+        },
+        {
+          "key": "junior-welterweight",
+          "value": "Junior welterweight",
+          "count": 3
+        },
+        {
+          "key": "cruiserweight",
+          "value": "Cruiserweight",
+          "count": 2
+        },
+        {
+          "key": "featherweight",
+          "value": "Featherweight",
+          "count": 2
+        },
+        {
+          "key": "junior-bantamweight",
+          "value": "Junior bantamweight",
+          "count": 2
+        },
+        {
+          "key": "junior-featherweight",
+          "value": "Junior featherweight",
+          "count": 2
+        },
+        {
+          "key": "junior-lightweight",
+          "value": "Junior lightweight",
+          "count": 2
+        },
+        {
+          "key": "junior-middleweight",
+          "value": "Junior middleweight",
+          "count": 2
+        },
+        {
+          "key": "light-heavyweight",
+          "value": "Light heavyweight",
+          "count": 2
+        },
+        {
+          "key": "lightweight",
+          "value": "Lightweight",
+          "count": 2
+        },
+        {
+          "key": "welterweight",
+          "value": "Welterweight",
+          "count": 2
+        },
+        {
+          "key": "bantamweight",
+          "value": "Bantamweight",
+          "count": 1
+        },
+        {
+          "key": "flyweight",
+          "value": "Flyweight",
+          "count": 1
+        },
+        {
+          "key": "middleweight",
+          "value": "Middleweight",
+          "count": 1
+        },
+        {
+          "key": "strawweight",
+          "value": "Strawweight",
+          "count": 1
+        },
+        {
+          "key": "super-middleweight",
+          "value": "Super middleweight",
+          "count": 1
+        }
+      ]
+    },
+    "division": {
+      "values": [
+        {
+          "key": "ring-heavyweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Heavyweight \u00e2\u0080\u0093 Men",
+          "count": 3
+        },
+        {
+          "key": "ring-junior-welterweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Junior welterweight \u00e2\u0080\u0093 Men",
+          "count": 3
+        },
+        {
+          "key": "ring-cruiserweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Cruiserweight \u00e2\u0080\u0093 Men",
+          "count": 2
+        },
+        {
+          "key": "ring-junior-bantamweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Junior bantamweight \u00e2\u0080\u0093 Men",
+          "count": 2
+        },
+        {
+          "key": "ring-junior-lightweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Junior Lightweight \u00e2\u0080\u0093 Men",
+          "count": 2
+        },
+        {
+          "key": "ring-junior-middleweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Junior middleweight \u00e2\u0080\u0093 Men",
+          "count": 2
+        },
+        {
+          "key": "ring-light-heavyweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Light heavyweight \u00e2\u0080\u0093 Men",
+          "count": 2
+        },
+        {
+          "key": "ring-welterweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Welterweight \u00e2\u0080\u0093 Men",
+          "count": 2
+        },
+        {
+          "key": "ibf-featherweight-men",
+          "value": "IBF \u00e2\u0080\u0093 Featherweight \u00e2\u0080\u0093 Men",
+          "count": 1
+        },
+        {
+          "key": "ring-bantamweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Bantamweight \u00e2\u0080\u0093 Men",
+          "count": 1
+        },
+        {
+          "key": "ring-featherweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Featherweight \u00e2\u0080\u0093 Men",
+          "count": 1
+        },
+        {
+          "key": "ring-flyweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Flyweight \u00e2\u0080\u0093 Men",
+          "count": 1
+        },
+        {
+          "key": "ring-junior-featherweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Junior featherweight \u00e2\u0080\u0093 Men",
+          "count": 1
+        },
+        {
+          "key": "ring-junior-featherweight-women",
+          "value": "Ring \u00e2\u0080\u0093 Junior featherweight \u00e2\u0080\u0093 Women",
+          "count": 1
+        },
+        {
+          "key": "ring-lightweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Lightweight \u00e2\u0080\u0093 Men",
+          "count": 1
+        },
+        {
+          "key": "ring-lightweight-women",
+          "value": "Ring \u00e2\u0080\u0093 Lightweight \u00e2\u0080\u0093 Women",
+          "count": 1
+        },
+        {
+          "key": "ring-middleweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Middleweight \u00e2\u0080\u0093 Men ",
+          "count": 1
+        },
+        {
+          "key": "ring-strawweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Strawweight \u00e2\u0080\u0093 Men",
+          "count": 1
+        },
+        {
+          "key": "ring-super-middleweight-men",
+          "value": "Ring \u00e2\u0080\u0093 Super middleweight \u00e2\u0080\u0093 Men",
+          "count": 1
+        }
+      ]
+    },
+    "month": {
+      "values": [
+        {
+          "key": "202604",
+          "value": "202604",
+          "count": 1
+        },
+        {
+          "key": "202605",
+          "value": "202605",
+          "count": 20
+        },
+        {
+          "key": "202606",
+          "value": "202606",
+          "count": 7
+        },
+        {
+          "key": "202607",
+          "value": "202607",
+          "count": 1
+        }
+      ]
+    },
+    "partner": {},
+    "roundEnded": {
+      "values": [
+        {
+          "key": "12",
+          "value": "12",
+          "count": 24
+        },
+        {
+          "key": "10",
+          "value": "10",
+          "count": 5
+        }
+      ]
+    },
+    "promoter": {},
+    "location": {
+      "values": [
+        {
+          "key": "sap-arena",
+          "value": "SAP Arena",
+          "count": 2
+        },
+        {
+          "key": "york-hall-bethnal-green",
+          "value": "York Hall, Bethnal Green",
+          "count": 2
+        },
+        {
+          "key": "aichi-sky-expo-japan",
+          "value": "Aichi Sky Expo, Japan",
+          "count": 1
+        },
+        {
+          "key": "barclays-center",
+          "value": "Barclays Center",
+          "count": 1
+        },
+        {
+          "key": "capitole-de-quebec",
+          "value": "Capitole de Quebec",
+          "count": 1
+        },
+        {
+          "key": "civic-hall-wolverhampton",
+          "value": "Civic Hall, Wolverhampton",
+          "count": 1
+        },
+        {
+          "key": "co-op-live-arena",
+          "value": "Co-Op Live Arena",
+          "count": 1
+        },
+        {
+          "key": "desert-diamond-arena",
+          "value": "Desert Diamond Arena",
+          "count": 1
+        },
+        {
+          "key": "eco-power-stadium",
+          "value": "Eco-Power Stadium",
+          "count": 1
+        },
+        {
+          "key": "el-paso-county-coliseum",
+          "value": "El Paso County Coliseum",
+          "count": 1
+        },
+        {
+          "key": "emperors-palace",
+          "value": "Emperors Palace",
+          "count": 1
+        },
+        {
+          "key": "fertitta-center",
+          "value": "Fertitta Center",
+          "count": 1
+        },
+        {
+          "key": "gateway-center-arena",
+          "value": "Gateway Center Arena",
+          "count": 1
+        },
+        {
+          "key": "gazprom-sports-complex",
+          "value": "Gazprom Sports Complex",
+          "count": 1
+        },
+        {
+          "key": "korakuen-hall",
+          "value": "Korakuen Hall",
+          "count": 1
+        },
+        {
+          "key": "messehalle",
+          "value": "Messehalle",
+          "count": 1
+        },
+        {
+          "key": "montreal-casino",
+          "value": "Montreal Casino",
+          "count": 1
+        },
+        {
+          "key": "newcastle-entertainment-centre",
+          "value": "Newcastle Entertainment Centre",
+          "count": 1
+        },
+        {
+          "key": "pyramids-of-giza",
+          "value": "Pyramids of Giza",
+          "count": 1
+        },
+        {
+          "key": "rocket-arena",
+          "value": "Rocket Arena",
+          "count": 1
+        },
+        {
+          "key": "scope-arena-norfolk",
+          "value": "Scope Arena, Norfolk",
+          "count": 1
+        },
+        {
+          "key": "st-marys-stadium",
+          "value": "St. Mary's Stadium",
+          "count": 1
+        },
+        {
+          "key": "t-mobile-arena",
+          "value": "T-Mobile Arena",
+          "count": 1
+        },
+        {
+          "key": "the-melbourne-pavilion",
+          "value": "The Melbourne Pavilion",
+          "count": 1
+        },
+        {
+          "key": "tokyo-dome",
+          "value": "Tokyo Dome",
+          "count": 1
+        },
+        {
+          "key": "utilta-arena",
+          "value": "Utilta Arena",
+          "count": 1
+        },
+        {
+          "key": "yekaterinburg-arena",
+          "value": "Yekaterinburg Arena",
+          "count": 1
+        }
+      ]
+    },
+    "judge": {},
+    "resultType": {},
+    "status": {}
+  }
+}

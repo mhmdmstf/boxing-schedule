@@ -4,4 +4,389 @@ PRODID:-//Boxing Schedule//github-action//
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Boxing Schedule
+BEGIN:VEVENT
+SUMMARY:🥊 PADDY DONOVAN VS KAREN CHUKHADZHIAN
+DTSTART;TZID=Europe/Berlin:20260515T190000
+DTEND;TZID=Europe/Berlin:20260516T003000
+DTSTAMP:20260514T084931Z
+UID:boxing-2xowj6GFY5H6WiAVMjj4RS@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: PADDY DONOVAN VS KAREN CHUKHADZHIAN\n  Welterweigh
+ t\, 12 rounds\n\nVenue: SAP-Arena\, Mannheim\, DE\nLocal start: Fri 15 May
+  2026\, 19:00 CEST
+LOCATION:SAP-Arena\, Mannheim\, DE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 MELVIN JERUSALEM VS SIYAKHOLWA KUSE
+DTSTART;TZID=Africa/Johannesburg:20260516T180000
+DTEND;TZID=Africa/Johannesburg:20260517T010000
+DTSTAMP:20260514T084931Z
+UID:boxing-5hWhhN3LXRgQIsHyhGlDVg@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: MELVIN JERUSALEM VS SIYAKHOLWA KUSE\n  Strawweight
+ \, 12 rounds\n\nVenue: Emperors Palace\, Johannesburg\, ZA\nLocal start: S
+ at 16 May 2026\, 18:00 SAST
+LOCATION:Emperors Palace\, Johannesburg\, ZA
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 DAVE ALLEN VS FILIP HRGOVIC
+DTSTART;TZID=Europe/London:20260516T200000
+DTEND;TZID=Europe/London:20260517T005900
+DTSTAMP:20260514T084931Z
+UID:boxing-1Npcx2R1jW84Uq6K4V2OIH@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: DAVE ALLEN VS FILIP HRGOVIC\n  Heavyweight\, 12 ro
+ unds\n\nVenue: Eco-Power Stadium\, Doncaster\, GB\nLocal start: Sat 16 May
+  2026\, 20:00 BST
+LOCATION:Eco-Power Stadium\, Doncaster\, GB
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 KEYSHAWN DAVIS VS NAHIR ALBRIGHT (+1 more)
+DTSTART;TZID=America/New_York:20260516T180000
+DTEND;TZID=America/New_York:20260517T000000
+DTSTAMP:20260514T084931Z
+UID:boxing-1rb23IebQNnmqji6B0Vhjo@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: KEYSHAWN DAVIS VS NAHIR ALBRIGHT\n  Junior welterw
+ eight\, 12 rounds\n\nUndercard:\n  - Brian Norman vs Josh Wagner  (Welterw
+ eight)\n\nVenue: Scope Arena\, Norfolk\, Norfolk\, US\nLocal start: Sat 16
+  May 2026\, 18:00 EDT
+LOCATION:Scope Arena\, Norfolk\, Norfolk\, US
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 AMARI JONES VS VINCENZO GUALTIERI (+1 more)
+DTSTART;TZID=America/Los_Angeles:20260522T140000
+DTEND;TZID=America/Los_Angeles:20260522T200000
+DTSTAMP:20260514T084931Z
+UID:boxing-577uCS3Vn63N9qg5h2JLSy@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: AMARI JONES VS VINCENZO GUALTIERI\n  Middleweight\
+ , 12 rounds\n\nUndercard:\n  - Robin Safar vs Yamil Peralta  (Cruiserweigh
+ t)\n\nVenue: SAP Arena\, San Jose\, US\nLocal start: Fri 22 May 2026\, 14:
+ 00 PDT
+LOCATION:SAP Arena\, San Jose\, US
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 OLEKSANDR USYK VS RICO VERHOEVEN (+4 more)
+DTSTART;TZID=Africa/Cairo:20260523T210000
+DTEND;TZID=Africa/Cairo:20260524T023000
+DTSTAMP:20260514T084931Z
+UID:boxing-YD8U9tGpAR5OkSa4pVYca@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: OLEKSANDR USYK VS RICO VERHOEVEN\n  Heavyweight\, 
+ 12 rounds\n\nUndercard:\n  - Hamzah Sheeraz vs Alem Begic  (Super middlewe
+ ight)\n  - Shakhram Giyasov vs Jack Catterall  (Welterweight)\n  - Frank S
+ anchez vs Richard Torrez  (Heavyweight)\n  - Mizuki Hiruta vs Mai Soliman 
+  (Junior bantamweight)\n\nVenue: Pyramids of Giza\, Giza\, EG\nLocal start
+ : Sat 23 May 2026\, 21:00 EEST
+LOCATION:Pyramids of Giza\, Giza\, EG
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 DAVID JIMENEZ VS AYUMU SANO (+1 more)
+DTSTART;TZID=Asia/Bishkek:20260524T220000
+DTEND;TZID=Asia/Bishkek:20260525T030000
+DTSTAMP:20260514T084931Z
+UID:boxing-4AX34W5Dw3CUUoycJalqtk@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: DAVID JIMENEZ VS AYUMU SANO\n  Junior bantamweight
+ \, 12 rounds\n\nUndercard:\n  - Kyonosuke Kameda vs Luis Reynaldo Nunez  (
+ Featherweight)\n\nVenue: Gazprom Sports Complex\, Bishkek\, KG\nLocal star
+ t: Sun 24 May 2026\, 22:00 +06
+LOCATION:Gazprom Sports Complex\, Bishkek\, KG
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 CHARLIE EDWARDS VS SIKHO NQOTHOLE
+DTSTART;TZID=Europe/London:20260529T180000
+DTEND;TZID=Europe/London:20260529T233000
+DTSTAMP:20260514T084931Z
+UID:boxing-6QrmANT23ufpctSWcHfz0O@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: CHARLIE EDWARDS VS SIKHO NQOTHOLE\n  Junior bantam
+ weight\, 12 rounds\n\nVenue: York Hall\, Bethnal Green\, London\, GB\nLoca
+ l start: Fri 29 May 2026\, 18:00 BST
+LOCATION:York Hall\, Bethnal Green\, London\, GB
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 ADAM AZIM VS STEVE CLAGGETT
+DTSTART;TZID=Europe/London:20260530T180000
+DTEND;TZID=Europe/London:20260530T233000
+DTSTAMP:20260514T084931Z
+UID:boxing-46R5XmG022D4YOXtdeNT2f@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: ADAM AZIM VS STEVE CLAGGETT\n  Junior welterweight
+ \, 12 rounds\n\nVenue: OVO Wembley Arena\, London\, GB\nLocal start: Sat 3
+ 0 May 2026\, 18:00 BST
+LOCATION:OVO Wembley Arena\, London\, GB
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 DMITRY BIVOL VS MICHAEL EIFERT
+DTSTART;TZID=Asia/Yekaterinburg:20260530T220000
+DTEND;TZID=Asia/Yekaterinburg:20260531T033000
+DTSTAMP:20260514T084931Z
+UID:boxing-4PBlC2GGq6sJ4WiyEufZr@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: DMITRY BIVOL VS MICHAEL EIFERT\n  Light heavyweigh
+ t\, 12 rounds\n\nVenue: Yekaterinburg Arena\, Yekaterinburg\, RU\nLocal st
+ art: Sat 30 May 2026\, 22:00 +05
+LOCATION:Yekaterinburg Arena\, Yekaterinburg\, RU
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 ROMAN FRESS VS TAHIR KAHROVIC
+DTSTART;TZID=Europe/Berlin:20260530T200000
+DTEND;TZID=Europe/Berlin:20260531T015900
+DTSTAMP:20260514T084931Z
+UID:boxing-4v1Mh2lorCJFhdUdXZpMUk@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: ROMAN FRESS VS TAHIR KAHROVIC\n  Cruiserweight\, 1
+ 2 rounds\n\nVenue: Messehalle\, Magdeburg\, DE\nLocal start: Sat 30 May 20
+ 26\, 20:00 CEST
+LOCATION:Messehalle\, Magdeburg\, DE
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 O'SHAQUIE FOSTER VS RAYMOND FORD
+DTSTART;TZID=America/Chicago:20260530T160000
+DTEND;TZID=America/Chicago:20260530T230000
+DTSTAMP:20260514T084931Z
+UID:boxing-6NqplsrqiFe8TRFQYNGvmU@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: O'SHAQUIE FOSTER VS RAYMOND FORD\n  Junior lightwe
+ ight\, 12 rounds\n\nVenue: Fertitta Center\, TX\, US\nLocal start: Sat 30 
+ May 2026\, 16:00 CDT
+LOCATION:Fertitta Center\, TX\, US
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 STEPHANIE HAN VS HOLLY HOLM (+3 more)
+DTSTART;TZID=America/Chicago:20260530T200000
+DTEND;TZID=America/Chicago:20260531T000000
+DTSTAMP:20260514T084931Z
+UID:boxing-5ooXqUWJ1d8IDVmu953URK@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: STEPHANIE HAN VS HOLLY HOLM\n  Lightweight\, 10 ro
+ unds\n\nUndercard:\n  - Amanda Serrano vs Cheyenne Hanson  (Featherweight)
+ \n  - Lourdes Juarez vs Yokasta Valle  (Junior flyweight)\n  - Desley Robi
+ nson vs Mary Spencer  (Middleweight)\n\nVenue: El Paso County Coliseum\, T
+ exas\, US\nLocal start: Sat 30 May 2026\, 20:00 CDT
+LOCATION:El Paso County Coliseum\, Texas\, US
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 ALBERT RAMIREZ VS LERRONE RICHARDS (+3 more)
+DTSTART;TZID=America/Toronto:20260604T190000
+DTEND;TZID=America/Toronto:20260605T010000
+DTSTAMP:20260514T084931Z
+UID:boxing-5bbrlQ9MCl5RJbO9Nl1jup@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: ALBERT RAMIREZ VS LERRONE RICHARDS\n  Light heavyw
+ eight\, 12 rounds\n\nUndercard:\n  - Dzmitry Asanau vs Roger Gutierrez  (L
+ ightweight)\n  - Imam Khataev vs Mickael Diallo  (Light heavyweight)\n  - 
+ Christopher Guerrero vs Samuel Rodriguez  (Welterweight)\n\nVenue: Montrea
+ l Casino\, Montreal\, CA\nLocal start: Thu 04 Jun 2026\, 19:00 EDT
+LOCATION:Montreal Casino\, Montreal\, CA
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 MASAMICHI YABUKI VS RENE CALIXTO (+1 more)
+DTSTART;TZID=Asia/Tokyo:20260606T160000
+DTEND;TZID=Asia/Tokyo:20260606T220000
+DTSTAMP:20260514T084931Z
+UID:boxing-6EMRqh3wjqj6LknPdCUvRX@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: MASAMICHI YABUKI VS RENE CALIXTO\n  Flyweight\, 12
+  rounds\n\nUndercard:\n  - Willibaldo Garcia Perez vs Andrew Moloney  (Jun
+ ior bantamweight)\n\nVenue: Aichi Sky Expo\, Japan\, Nagoya\, JP\nLocal st
+ art: Sat 06 Jun 2026\, 16:00 JST
+LOCATION:Aichi Sky Expo\, Japan\, Nagoya\, JP
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 CHRIS BILLAM-SMITH VS RYAN ROZICKI (+1 more)
+DTSTART;TZID=Europe/London:20260606T190000
+DTEND;TZID=Europe/London:20260606T233000
+DTSTAMP:20260514T084931Z
+UID:boxing-7yP2jZ2qFWwOapXV9zf5wa@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: CHRIS BILLAM-SMITH VS RYAN ROZICKI\n  Cruiserweigh
+ t\, 10 rounds\n\nUndercard:\n  - Jack Massey vs Cheavon Clarke  (Cruiserwe
+ ight)\n\nVenue: Bournemouth International Centre\, Bournemouth\, GB\nLocal
+  start: Sat 06 Jun 2026\, 19:00 BST
+LOCATION:Bournemouth International Centre\, Bournemouth\, GB
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 RICARDO RAFAEL SANDOVAL VS GALAL YAFAI (+1 more)
+DTSTART;TZID=Europe/London:20260606T190000
+DTEND;TZID=Europe/London:20260607T005900
+DTSTAMP:20260514T084931Z
+UID:boxing-8jqVPUh2LQQbcen6CVGvN@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: RICARDO RAFAEL SANDOVAL VS GALAL YAFAI\n  Flyweigh
+ t\, 12 rounds\n\nUndercard:\n  - Josh Padley vs Aqib Fiaz  (Junior lightwe
+ ight)\n\nVenue: Utilta Arena\, Sheffield\, UK\nLocal start: Sat 06 Jun 202
+ 6\, 19:00 BST
+LOCATION:Utilta Arena\, Sheffield\, UK
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 WILKENS MATHIEU VS ESQUIVA FALCAO
+DTSTART;TZID=America/Toronto:20260611T180000
+DTEND;TZID=America/Toronto:20260612T000000
+DTSTAMP:20260514T084931Z
+UID:boxing-5a6vAWIgjwuI9MnISARsZd@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: WILKENS MATHIEU VS ESQUIVA FALCAO\n  Super middlew
+ eight\, 10 rounds\n\nVenue: Capitole de Quebec\, Quebec\, CA\nLocal start:
+  Thu 11 Jun 2026\, 18:00 EDT
+LOCATION:Capitole de Quebec\, Quebec\, CA
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 ANTONIO VARGAS VS JESSE RODRIGUEZ
+DTSTART;TZID=America/Phoenix:20260613T140000
+DTEND;TZID=America/Phoenix:20260613T210000
+DTSTAMP:20260514T084931Z
+UID:boxing-2OewXLmxYrOWJRZEsTdfie@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: ANTONIO VARGAS VS JESSE RODRIGUEZ\n  Bantamweight\
+ , 12 rounds\n\nVenue: Desert Diamond Arena\, Glendale\, US\nLocal start: S
+ at 13 Jun 2026\, 14:00 MST
+LOCATION:Desert Diamond Arena\, Glendale\, US
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 OSHAE JONES VS ELIA CARRANZA (+2 more)
+DTSTART;TZID=America/New_York:20260613T190000
+DTEND;TZID=America/New_York:20260613T230000
+DTSTAMP:20260514T084931Z
+UID:boxing-6BquEyeeO4aXi5AnRZFisY@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: OSHAE JONES VS ELIA CARRANZA\n  Junior middleweigh
+ t\, 10 rounds\n\nUndercard:\n  - Evelyn Bermudez vs Estefany Alegria  (Jun
+ ior flyweight)\n  - Tiara Brown vs Hannah Rapp  (Featherweight)\n\nVenue: 
+ Caribe Royale Orlando\, Orlando\, US\nLocal start: Sat 13 Jun 2026\, 19:00
+  EDT
+LOCATION:Caribe Royale Orlando\, Orlando\, US
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 RYAN GARNER VS MICHAEL MAGNESI (+1 more)
+DTSTART;TZID=Europe/London:20260620T180000
+DTEND;TZID=Europe/London:20260620T233000
+DTSTAMP:20260514T084931Z
+UID:boxing-5c3v4wCt0Sg5Ef9FpZBgOv@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: RYAN GARNER VS MICHAEL MAGNESI\n  Junior lightweig
+ ht\, 12 rounds\n\nUndercard:\n  - Lewis Edmondson vs Lyndon Arthur  (Light
+  heavyweight)\n\nVenue: St. Mary's Stadium\, Southampton\, UK\nLocal start
+ : Sat 20 Jun 2026\, 18:00 BST
+LOCATION:St. Mary's Stadium\, Southampton\, UK
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 LEWIS CROCKER VS LIAM PARO
+DTSTART;TZID=Australia/Brisbane:20260624T170000
+DTEND;TZID=Australia/Brisbane:20260624T220000
+DTSTAMP:20260514T084931Z
+UID:boxing-vYySIMy15tAa6jWvgqqnh@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: LEWIS CROCKER VS LIAM PARO\n  Welterweight\, 12 ro
+ unds\n\nVenue: Pat Rafter Arena\, Brisbane\, AU\nLocal start: Wed 24 Jun 2
+ 026\, 17:00 AEST
+LOCATION:Pat Rafter Arena\, Brisbane\, AU
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 XANDER ZAYAS VS JARON ENNIS (+3 more)
+DTSTART;TZID=America/New_York:20260627T190000
+DTEND;TZID=America/New_York:20260628T010000
+DTSTAMP:20260514T084931Z
+UID:boxing-3dnkLUCS7yr6YLIUTXkH0I@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: XANDER ZAYAS VS JARON ENNIS\n  Junior middleweight
+ \, 12 rounds\n\nUndercard:\n  - Emiliano Vargas vs Bryce Mills  (Junior we
+ lterweight)\n  - Ben Whittaker vs Richard Rivera  (Light heavyweight)\n  -
+  Jahi Tucker vs Euri Cedeno  (Middleweight)\n\nVenue: Barclays Center\, Ne
+ w York City\, US\nLocal start: Sat 27 Jun 2026\, 19:00 EDT
+LOCATION:Barclays Center\, New York City\, US
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 EDWIN DE LOS SANTOS VS JOSE VALENZUELA (+2 more)
+DTSTART;TZID=America/Los_Angeles:20260628T170000
+DTEND;TZID=America/Los_Angeles:20260628T210000
+DTSTAMP:20260514T084931Z
+UID:boxing-r1NBDJWAYNlQp8zWwKKwr@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: EDWIN DE LOS SANTOS VS JOSE VALENZUELA\n  Lightwei
+ ght\, 10 rounds\n\nUndercard:\n  - Omar Cande Trinidad vs Jerwin Ancajas  
+ (Featherweight)\n  - Cain Sandoval vs Brandun Lee  (Welterweight)\n\nVenue
+ : The Cosmopolitan\, Las Vegas\, Las Vegas\, US\nLocal start: Sun 28 Jun 2
+ 026\, 17:00 PDT
+LOCATION:The Cosmopolitan\, Las Vegas\, Las Vegas\, US
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 ABDULLAH MASON VS JOE CORDINA (+2 more)
+DTSTART;TZID=America/New_York:20260704T190000
+DTEND;TZID=America/New_York:20260705T010000
+DTSTAMP:20260514T084931Z
+UID:boxing-60oWSgVf0fzRVWVZZxvhZV@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: ABDULLAH MASON VS JOE CORDINA\n  Lightweight\, 12 
+ rounds\n\nUndercard:\n  - Bruce Carrington vs Rene Palacios  (Featherweigh
+ t)\n  - Tiger Johnson vs Christopher Guerrero  (Welterweight)\n\nVenue: Wo
+ lstein Center\, Cleveland\, US\nLocal start: Sat 04 Jul 2026\, 19:00 EDT
+LOCATION:Wolstein Center\, Cleveland\, US
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 ANTHONY OLASCUAGA VS ANDY DOMINGUEZ (+2 more)
+DTSTART;TZID=America/Los_Angeles:20260711T160000
+DTEND;TZID=America/Los_Angeles:20260711T210000
+DTSTAMP:20260514T084931Z
+UID:boxing-P4FHcM5sQwksnCtRDJOPY@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: ANTHONY OLASCUAGA VS ANDY DOMINGUEZ\n  Flyweight\,
+  12 rounds\n\nUndercard:\n  - Charly Suarez vs Manuel Avila  (Junior light
+ weight)\n  - Vito Mielnicki vs Gerardo Vergara  (Middleweight)\n\nVenue: C
+ ivic Center\, San Francisco\, San Francisco\, US\nLocal start: Sat 11 Jul 
+ 2026\, 16:00 PDT
+LOCATION:Civic Center\, San Francisco\, San Francisco\, US
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 ERROL SPENCE VS TIM TSZYU
+DTSTART;TZID=America/New_York:20260725T230000
+DTEND;TZID=America/New_York:20260726T070000
+DTSTAMP:20260514T084931Z
+UID:boxing-1MqO8cATbdkPRm8psJFp6F@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: ERROL SPENCE VS TIM TSZYU\n  Middleweight\, 12 rou
+ nds\n\nLocal start: Sat 25 Jul 2026\, 23:00 EDT
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:🥊 PIERCE O'LEARY VS MARK CHAMBERLAIN
+DTSTART;TZID=Europe/Dublin:20260801T180000
+DTEND;TZID=Europe/Dublin:20260801T223000
+DTSTAMP:20260514T084931Z
+UID:boxing-6yyZw476oNiRQ9BH0f1Wy2@ringmagazine.com
+SEQUENCE:0
+DESCRIPTION:MAIN EVENT: PIERCE O'LEARY VS MARK CHAMBERLAIN\n  Junior welte
+ rweight\, 12 rounds\n\nVenue: 3Arena\, Dublin\, IE\nLocal start: Sat 01 Au
+ g 2026\, 18:00 IST
+LOCATION:3Arena\, Dublin\, IE
+STATUS:CONFIRMED
+END:VEVENT
 END:VCALENDAR

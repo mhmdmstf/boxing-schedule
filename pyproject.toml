@@ -1,10 +1,9 @@
 [project]
 name = "boxing-schedule"
-version = "2.1.0"
+version = "3.0.0"
 description = "Self-updating iCal feed for upcoming boxing matches"
 requires-python = ">=3.11"
 dependencies = [
-    "playwright>=1.40.0",
     "icalendar>=5.0.0",
     "tzdata>=2024.1",
 ]
@@ -31,7 +30,7 @@ disallow_untyped_defs = true
 check_untyped_defs = true
 
 [[tool.mypy.overrides]]
-module = ["icalendar.*", "playwright.*"]
+module = ["icalendar.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

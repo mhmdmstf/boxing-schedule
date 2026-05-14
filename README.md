@@ -28,7 +28,7 @@ The description lists the full card with venue, broadcast, and start time. Event
 
 ## How It Works
 
-A Python script scrapes The Ring Magazine schedule via Playwright, groups fights into cards by date and venue, detects main events from page formatting, and generates a timezone-aware `.ics` file. GitHub Actions runs this daily at 06:00 UTC.
+A Python script fetches The Ring Magazine's public schedule API, parses the JSON into typed events, and renders a timezone-aware RFC 5545 `.ics` file. GitHub Actions runs this daily at 06:00 UTC. No browser, no HTML scraping — one HTTP call.
 
 ## Self-Host
 

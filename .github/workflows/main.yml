@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: update-calendar
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,15 +28,6 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
-
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
-
-      - name: Install Playwright browsers
-        run: playwright install chromium && playwright install-deps
 
       - name: Lint
         run: ruff check scraper.py tests.py
@@ -51,4 +46,9 @@ jobs:
           git config --global user.name 'Boxing Bot'
           git config --global user.email 'bot@noreply.github.com'
           git add boxing_schedule.ics
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update calendar feed" && git push)
+          if git diff --staged --quiet; then
+            echo "No calendar changes to commit."
+          else
+            git commit -m "Update calendar feed"
+            git push
+          fi
